@@ -1,10 +1,10 @@
 use serde::Serialize;
 
-mod codes;
 mod types;
+mod codes;
 
-#[derive(Serialize)]
 /// A list of possible HTTP errors.
+#[derive(Serialize)]
 pub enum HTTPCodes {
   /// Something went wrong.
   None,
@@ -30,6 +30,7 @@ pub enum HTTPCodes {
 
 impl HTTPCodes {
   /// Get the correct enumeration by `input`.
+  /// * `input` - The HTTP status value from Stripe's response
   pub fn from_status(input: u16) -> Self {
     match input {
       200 => Self::Ok,
@@ -62,10 +63,10 @@ impl HTTPCodes {
   }
 }
 
-#[derive(Serialize)]
 /// All available error codes from 01/08/2023
 /// 
 /// [Official Stripe error code list](https://stripe.com/docs/error-codes)
+#[derive(Serialize)]
 pub enum Codes {
   None,
   AccountCountryInvalidAddress,
@@ -213,6 +214,7 @@ pub enum Codes {
 
 impl Codes {
   /// Get the correct enumeration by `input`.
+  /// * `input` - The "code" value from Stripe's response
   pub fn from_str(input: &str) -> Self {
     match input {
       codes::ACCOUNT_COUNTRY_INVALID_ADDRESS => Self::AccountCountryInvalidAddress,
@@ -509,6 +511,9 @@ impl Codes {
   }
 }
 
+/// All available error types from 01/08/2023
+/// 
+/// [Official Stripe error types list](https://stripe.com/docs/api/errors)
 #[derive(Serialize)]
 pub enum Types {
   /// ?
@@ -525,6 +530,7 @@ pub enum Types {
 
 impl Types {
   /// Get the correct enumeration by `input`.
+  /// * `input` - The "type" value from Stripe's response
   pub fn from_str(input: &str) -> Self {
     match input {
       types::API_ERROR => Self::API,
@@ -547,11 +553,16 @@ impl Types {
   }
 }
 
+/// All the important information about the error from Stripe.
 #[derive(Serialize)]
 pub struct Info {
+  /// The HTTP status code.
   pub http_code: HTTPCodes,
+  /// The "type" value from the error response.
   pub r#type: Types,
+  /// The "code" value from the error response.
   pub code: Codes,
+  /// The "message" value from the error response.
   pub message: String
 }
 

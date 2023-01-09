@@ -5,10 +5,10 @@ pub mod capture;
 pub mod retrieve;
 pub mod cancel;
 
-#[derive(Deserialize)]
 /// Payment intent object from 01/08/2023
 /// 
 /// [Payment intent object](https://stripe.com/docs/api/payment_intents/create#payment_intent_object)
+#[derive(Deserialize)]
 pub struct StripeResponse {
   pub id: String,
   pub object: String,

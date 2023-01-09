@@ -29,7 +29,6 @@ pub unsafe fn set_secret(key: &str) -> Result<(), ()> {
   Ok(())
 }
 
-#[macro_export]
 /// Create an easy body format for API requests.
 /// 
 /// # Example
@@ -39,15 +38,14 @@ pub unsafe fn set_secret(key: &str) -> Result<(), ()> {
 /// 
 /// fn main() {
 ///   let body = ezbody!(
-///       "amount": 2000,
-///       "currency": "eur"
+///       "amount" => 2000,
+///       "currency" => "eur"
 ///     );
 /// 
 ///   println!("{}", body); // amount=2000;currency=eur;
 /// }
-/// 
-/// 
 /// ```
+#[macro_export]
 macro_rules! ezbody {
   {$($k: expr => $v: expr),* $(,)?} => {
     {
