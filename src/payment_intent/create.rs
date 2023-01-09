@@ -1,11 +1,11 @@
 pub struct Info {
-  /// All [Parameters](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-parameters).
+  /// [Look at all possible parameters of this request](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-parameters).
   pub body: String
 }
 
 impl Info {
   /// Make a request to Stripe's API.
-  pub async fn go(self) -> Result<super::StripeResponse, Option<crate::error::Info>> {
+  pub async fn send(self) -> Result<super::StripeResponse, Option<crate::error::Info>> {
     let url = format!("https://api.stripe.com/v1/payment_intents");
     let response = reqwest::Client::new()
       .post(url)

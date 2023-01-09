@@ -5,7 +5,7 @@ pub struct Info {
 
 impl Info {
   /// Make a request to Stripe's API.
-  pub async fn go(self) -> Result<super::StripeResponse, Option<crate::error::Info>> {
+  pub async fn send(self) -> Result<super::StripeResponse, Option<crate::error::Info>> {
     let url = format!("https://api.stripe.com/v1/payment_intents/{}/capture", self.id);
     let response = reqwest::Client::new()
       .post(url)

@@ -1,52 +1,62 @@
-<h1 align="center">ezstripe</h1>
+<h1 align="center">ezstripe 💳</h1>
 <div align="center">
  <strong>
-   A easy SDK for Stripe (Rust)
+   A ezStripe SDK for Rustlang
  </strong>
+ <p>Use ezstripe to easily communicate with Stripe's API.</p>
 </div>
 
 <div align="center">
   <h4>
-    <a href="#install">
-      Install
+    <a href="https://crates.io/crates/ezstripe">
+      Crate
     </a>
     <span> | </span>
-    <a href="#example">
-      Example
+    <a href="https://docs.rs/ezstripe/latest/ezstripe/">
+      Docs
     </a>
   </h4>
 </div>
 
-## Install
-Add ezstripe to your project:
+# Usage
+### Installation
 ```toml
 # Cargo.toml
 [dependencies]
 ezstripe = "*" # Latest version
 ```
+or
+`cargo add ezstripe`
 
-# Example
+### Example
+```toml
+# Cargo.toml
+[dependencies]
+tokio = { version = "1.24.1", features = ["full"] }
+ezstripe = "0.1.0"
+```
+
 ```Rust
-#[macro_use]
-extern crate ezstripe;
+// Required to use the `ezbody!` macro
+#[macro_use] extern crate ezstripe;
 
 #[tokio::main]
 async fn main() {
   // Be sure to set your secret key before making a request
   unsafe {
-    ezstripe::set_secret("SECRET_KEY").ok();
+    ezstripe::set_secret("SECRET_KEY");
   };
   
   let stripe_order = ezstripe::payment_intent::create::Info {
-    body: ezbody!(
+    body: ezbody!( // Returns "amount=1500;currency=eur;payment_method_types[]=card;capture_method=manual;"
       "amount" => 1500,
       "currency" => "eur",
       "payment_method_types[]" => "card",
       "capture_method" => "manual"
     )
   };
-
-  let stripe_order_go = match stripe_order.go().await {
+  
+  let stripe_order_res = match stripe_order.send().await {
     Ok(r) => r,
     Err(e) => {
       if let Some(r) = e {
@@ -58,6 +68,6 @@ async fn main() {
     }
   };
   
-  println!("Created: {}", stripe_order_go.id);
+  println!("Created: {}", stripe_order_res.id);
 }
 ```
