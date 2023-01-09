@@ -1,6 +1,7 @@
 use serde::Serialize;
 
 mod codes;
+mod types;
 
 #[derive(Serialize)]
 /// A list of possible HTTP errors.
@@ -526,10 +527,10 @@ impl Types {
   /// Get the correct enumeration by `input`.
   pub fn from_str(input: &str) -> Self {
     match input {
-      "api_error" => Self::API,
-      "card_error" => Self::Card,
-      "idempotency_error" => Self::Idempotency,
-      "invalid_request_error" => Self::InvalidRequest,
+      types::API_ERROR => Self::API,
+      types::CARD_ERROR => Self::Card,
+      types::IDEMPOTENCY_ERROR => Self::Idempotency,
+      types::INVALID_REQUEST_ERROR => Self::InvalidRequest,
       _ => Self::None
     }
   }
@@ -537,10 +538,10 @@ impl Types {
   /// Returns the original value.
   pub const fn original_str(&self) -> &'static str {
     match self {
-      Self::API => "api_error",
-      Self::Card => "card_error",
-      Self::Idempotency => "idempotency_error",
-      Self::InvalidRequest => "invalid_request_error",
+      Self::API => types::API_ERROR,
+      Self::Card => types::CARD_ERROR,
+      Self::Idempotency => types::IDEMPOTENCY_ERROR,
+      Self::InvalidRequest => types::INVALID_REQUEST_ERROR,
       Self::None => ""
     }
   }
