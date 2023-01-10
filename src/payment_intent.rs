@@ -1,5 +1,34 @@
 use serde::{ Serialize, Deserialize };
 
+#[derive(Serialize, Deserialize)]
+pub struct AmountDetailsTip {
+  pub amount: Option<u32>
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct AmountDetails {
+  pub tip: AmountDetailsTip
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct AutomaticPaymentMethods {
+  pub enabled: bool
+}
+
+/// Has to be tested! May crash as some values ​​may be null
+#[derive(Serialize, Deserialize)]
+pub struct LastPaymentError {
+  pub charge: String,
+  pub code: String,
+  pub decline_code: String,
+  pub doc_url: String,
+  pub message: String,
+  pub param: String,
+  //pub payment_method: ?,
+  pub payment_method_type: String,
+  pub r#type: String
+}
+
 /// Payment intent object from 01/08/2023
 /// 
 /// [Payment intent object](https://stripe.com/docs/api/payment_intents/create#payment_intent_object)
@@ -9,11 +38,11 @@ pub struct Response {
   pub object: String,
   pub amount: u32,
   pub amount_capturable: u32,
-  //pub amount_details: ?,
+  pub amount_details: Option<AmountDetails>,
   pub amount_received: u32,
   pub application: Option<String>,
   pub application_fee_amount: Option<u32>,
-  //pub automatic_payment_methods: ?,
+  pub automatic_payment_methods: Option<AutomaticPaymentMethods>,
   pub canceled_at: Option<i64>,
   pub cancellation_reason: Option<String>,
   pub capture_method: String,
@@ -24,7 +53,7 @@ pub struct Response {
   pub customer: Option<String>,
   pub description: Option<String>,
   pub invoice: Option<String>,
-  //pub last_payment_error: ?,
+  pub last_payment_error: Option<LastPaymentError>,
   pub latest_charge: Option<String>,
   pub livemode: bool,
   //pub metadata: ?,
@@ -116,8 +145,12 @@ impl Info {
   
     let response = request.unwrap();
     if response.status().is_success() {
-      if let Ok(r) = response.json::<crate::payment_intent::Response>().await {
-        return Ok(r);
+      match response.json::<crate::payment_intent::Response>().await {
+        Ok(r) => return Ok(r),
+        Err(e) => {
+          println!("{}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
+          println!("{}", e);
+        }
       }
     } else {
       let status = response.status().as_u16();
