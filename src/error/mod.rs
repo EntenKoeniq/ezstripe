@@ -563,7 +563,8 @@ pub struct Info {
   /// The "code" value from the error response.
   pub code: Codes,
   /// The "message" value from the error response.
-  pub message: String
+  pub message: String,
+  pub full_json: String
 }
 
 #[doc(hidden)]
@@ -584,7 +585,8 @@ impl Info {
       http_code: HTTPCodes::from_status(status),
       r#type: Types::from_str(json["type"].as_str().unwrap_or("")),
       code: Codes::from_str(json["code"].as_str().unwrap_or("")),
-      message: json["message"].as_str().unwrap_or("").to_string()
+      message: json["message"].as_str().unwrap_or("").to_string(),
+      full_json: json_text.to_string()
     })
   }
 }

@@ -1,7 +1,7 @@
 <h1 align="center">ezstripe 💳</h1>
 <div align="center">
  <strong>
-   A ezStripe SDK for Rustlang
+   A Stripe-SDK for Rustlang
  </strong>
  <p>Use ezstripe to easily communicate with Stripe's API.</p>
 </div>
@@ -23,7 +23,7 @@
 ```toml
 # Cargo.toml
 [dependencies]
-ezstripe = "*" # Latest version
+ezstripe = "0.2.0"
 ```
 or
 `cargo add ezstripe`
@@ -33,7 +33,7 @@ or
 # Cargo.toml
 [dependencies]
 tokio = { version = "1.24.1", features = ["full"] }
-ezstripe = "0.1.0"
+ezstripe = "0.2.0"
 ```
 
 ```Rust
@@ -42,32 +42,33 @@ ezstripe = "0.1.0"
 
 #[tokio::main]
 async fn main() {
-  // Be sure to set your secret key before making a request
-  unsafe {
-    ezstripe::set_secret("SECRET_KEY");
+  let client = ezstripe::Client {
+    secret_key: "YOUR_SECRET_KEY".to_string()
   };
   
-  let stripe_order = ezstripe::payment_intent::create::Info {
-    body: ezbody!( // Returns "amount=1500;currency=eur;payment_method_types[]=card;capture_method=manual;"
+  // Returns: String("amount=1500;currency=eur;payment_method_types[]=card;capture_method=manual;")
+  let stripe_body = ezbody!(
       "amount" => 1500,
       "currency" => "eur",
       "payment_method_types[]" => "card",
       "capture_method" => "manual"
-    )
-  };
+    );
   
-  let stripe_order_res = match stripe_order.send().await {
-    Ok(r) => r,
-    Err(e) => {
-      if let Some(r) = e {
-        println!("{} | {} | {}", r.r#type.original_str(), r.code.original_str(), r.message);
-      } else { // Should never happen!
-        println!("Unknown error!");
-      }
-      std::process::exit(1);
+  // Now send a request to Stripe's API
+  let stripe_response = client.create_payment_intent(stripe_body).send().await;
+  
+  if let Err(e) = stripe_response {
+    if let Some(r) = e {
+      println!("{} | {} | {}", r.r#type.original_str(), r.code.original_str(), r.message);
+    } else { // Such an error only occurs when a request to Stripe failed
+      println!("Unknown error!");
     }
-  };
+    std::process::exit(1);
+  }
   
-  println!("Created: {}", stripe_order_res.id);
+  // No error, so let's unpack the answer
+  let stripe_result = stripe_response.unwrap();
+  
+  println!("Created: {}", stripe_result.id);
 }
 ```
