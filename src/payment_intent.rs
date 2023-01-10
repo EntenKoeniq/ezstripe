@@ -1,9 +1,9 @@
-use serde::Deserialize;
+use serde::{ Serialize, Deserialize };
 
 /// Payment intent object from 01/08/2023
 /// 
 /// [Payment intent object](https://stripe.com/docs/api/payment_intents/create#payment_intent_object)
-#[derive(Deserialize)]
+#[derive(Serialize, Deserialize)]
 pub struct Response {
   pub id: String,
   pub object: String,
@@ -43,6 +43,16 @@ pub struct Response {
   pub status: String,
   //pub transfer_data: ?,
   pub transfer_group: Option<String>
+}
+
+impl Response {
+  /// Get the complete Response as String.
+  pub fn to_string(&self) -> Result<String, ()> {
+    match serde_json::to_string(self) {
+      Ok(r) => Ok(r),
+      Err(_) => Err(())
+    }
+  }
 }
 
 pub enum Types {

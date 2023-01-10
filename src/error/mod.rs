@@ -563,12 +563,11 @@ pub struct Info {
   /// The "code" value from the error response.
   pub code: Codes,
   /// The "message" value from the error response.
-  pub message: String,
-  pub full_json: String
+  pub message: String
 }
 
-#[doc(hidden)]
 impl Info {
+  #[doc(hidden)]
   pub fn create(status: u16, json_text: &str) -> Option<Self> {
     let json = match serde_json::from_str::<serde_json::Value>(json_text) {
       Ok(r) => {
@@ -585,8 +584,15 @@ impl Info {
       http_code: HTTPCodes::from_status(status),
       r#type: Types::from_str(json["type"].as_str().unwrap_or("")),
       code: Codes::from_str(json["code"].as_str().unwrap_or("")),
-      message: json["message"].as_str().unwrap_or("").to_string(),
-      full_json: json_text.to_string()
+      message: json["message"].as_str().unwrap_or("").to_string()
     })
+  }
+
+  /// Get the complete Info as String.
+  pub fn to_string(&self) -> Result<String, ()> {
+    match serde_json::to_string(self) {
+      Ok(r) => Ok(r),
+      Err(_) => Err(())
+    }
   }
 }
