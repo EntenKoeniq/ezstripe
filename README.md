@@ -69,6 +69,7 @@ async fn main() {
   // No error, so let's unpack the answer
   let stripe_result = stripe_response.unwrap();
   
+  // Print the unique ID from the created PaymentIntent
   println!("Created: {}", stripe_result.id);
 }
 ```
