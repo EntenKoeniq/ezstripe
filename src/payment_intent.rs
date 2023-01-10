@@ -217,6 +217,9 @@ pub enum Types {
 }
 
 #[doc(hidden)]
+const PAYMENT_INTENT_URL: &str = "https://api.stripe.com/v1/payment_intents";
+
+#[doc(hidden)]
 impl Types {
   pub fn create_request(&self, secret: &str)-> reqwest::RequestBuilder {
     let mut result = reqwest::Client::new()
@@ -233,11 +236,11 @@ impl Types {
 
   fn _get_url(&self) -> String {
     match self {
-      Self::CREATE(_) => format!("https://api.stripe.com/v1/payment_intents"),
-      Self::RETRIEVE(id) => format!("https://api.stripe.com/v1/payment_intents/{}", id),
-      Self::CONFIRM(id, body) => format!("https://api.stripe.com/v1/payment_intents/{}/confirm", id),
-      Self::CANCEL(id, _) => format!("https://api.stripe.com/v1/payment_intents/{}/cancel", id),
-      Self::CAPTURE(id) => format!("https://api.stripe.com/v1/payment_intents/{}/capture", id)
+      Self::CREATE(_) => format!("{}", PAYMENT_INTENT_URL),
+      Self::RETRIEVE(id) => format!("{}/{}", PAYMENT_INTENT_URL, id),
+      Self::CONFIRM(id, _) => format!("{}/{}/confirm", PAYMENT_INTENT_URL, id),
+      Self::CANCEL(id, _) => format!("{}/{}/cancel", PAYMENT_INTENT_URL, id),
+      Self::CAPTURE(id) => format!("{}/{}/capture", PAYMENT_INTENT_URL, id)
     }
   }
 

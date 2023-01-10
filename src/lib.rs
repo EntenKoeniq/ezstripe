@@ -62,6 +62,26 @@ impl Client {
     }
   }
 
+    /// # Example
+  /// ```
+  /// #[tokio::main]
+  /// async fn main() {
+  ///   let client = ezstripe::Client {
+  ///     secret_key: "KEY".to_string()
+  ///   };
+  /// 
+  ///   let stripe_response = client.confirm_payment_intent("PAYMENT_INTENT_ID".to_string(), None).send().await;
+  /// 
+  ///   // ...
+  /// }
+  /// ```
+  pub fn confirm_payment_intent(&self, id: String, body: Option<String>) -> crate::payment_intent::Info {
+    crate::payment_intent::Info {
+      r#type: crate::payment_intent::Types::CONFIRM(id, body.unwrap_or(String::default())),
+      secret_key: self.secret_key.clone()
+    }
+  }
+
   /// # Example
   /// ```
   /// #[tokio::main]
