@@ -208,6 +208,7 @@ impl Response {
   }
 }
 
+#[derive(PartialEq)]
 pub enum Types {
   CREATE(String),
   RETRIEVE(String),
@@ -221,9 +222,22 @@ const PAYMENT_INTENT_URL: &str = "https://api.stripe.com/v1/payment_intents";
 
 #[doc(hidden)]
 impl Types {
-  pub fn create_request(&self, secret: &str)-> reqwest::RequestBuilder {
+  pub fn create_send_request(&self, secret: &str)-> reqwest::RequestBuilder {
     let mut result = reqwest::Client::new()
       .post(self._get_url())
+      .basic_auth(secret, None::<&str>)
+      .header("Content-Type", "application/x-www-form-urlencoded");
+    
+    if let Some(r) = self._get_body() {
+      result = result.body(r);
+    }
+
+    result
+  }
+
+  pub fn create_get_request(&self, secret: &str)-> reqwest::RequestBuilder {
+    let mut result = reqwest::Client::new()
+      .get(self._get_url())
       .basic_auth(secret, None::<&str>)
       .header("Content-Type", "application/x-www-form-urlencoded");
     
@@ -266,9 +280,46 @@ pub struct Info {
 }
 
 impl Info {
-  /// Send a request to Stripe's API.
+  /// Send a `post` request to Stripe's API.
   pub async fn send(&self) -> Result<crate::payment_intent::Response, Option<crate::error::Info>> {
-    let request = self.r#type.create_request(&self.secret_key).send().await;
+    if matches!(self.r#type, Types::RETRIEVE(_)) {
+      println!("[ezstripe]: {}Please use the `get()` function for `RETRIEVE`{}", "\x1b[0;31m", "\x1b[0m");
+    }
+
+    let request = self.r#type.create_send_request(&self.secret_key).send().await;
+    if request.is_err() {
+      return Err(None);
+    }
+  
+    let response = request.unwrap();
+    if response.status().is_success() {
+      match response.json::<crate::payment_intent::Response>().await {
+        Ok(r) => return Ok(r),
+        Err(e) => {
+          println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
+          println!("{}", e);
+        }
+      }
+    } else {
+      let status = response.status().as_u16();
+      let body_response = response.text().await;
+      if body_response.is_ok() {
+        if let Some(r) = crate::error::Info::create(status, &body_response.unwrap()) {
+          return Err(Some(r));
+        }
+      }
+    }
+    
+    Err(None)
+  }
+
+  /// Send a `get` request to Stripe's API.
+  pub async fn get(&self) -> Result<crate::payment_intent::Response, Option<crate::error::Info>> {
+    if !matches!(self.r#type, Types::RETRIEVE(_)) {
+      println!("[ezstripe]: {}Please use the `send()` function for types other than `RETRIEVE`{}", "\x1b[0;31m", "\x1b[0m");
+    }
+
+    let request = self.r#type.create_get_request(&self.secret_key).send().await;
     if request.is_err() {
       return Err(None);
     }
