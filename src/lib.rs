@@ -8,10 +8,16 @@ pub mod error;
 /// 
 /// Use this Client to send requests to Stripe's API.
 pub struct Client {
+  /// The Stripe API uses API keys to authenticate requests.
+  /// You can view and manage your API keys in the [Stripe Dashboard](https://stripe.com/login?redirect=/account/apikeys).
   pub secret_key: String
 }
 
 impl Client {
+  /// # Arguments
+  /// 
+  /// * `body` - The content that provides details for Stripe, e.g. B. Currency
+  /// 
   /// # Example
   /// ```
   /// #[macro_use] extern crate ezstripe;
@@ -42,6 +48,10 @@ impl Client {
     }
   }
 
+  /// # Arguments
+  /// 
+  /// * `id` - The unique ID you received when you created it
+  /// 
   /// # Example
   /// ```
   /// #[tokio::main]
@@ -62,7 +72,12 @@ impl Client {
     }
   }
 
-    /// # Example
+  /// # Arguments
+  /// 
+  /// * `id` - The unique ID you received when you created it
+  /// * `body` - The content that provides details for Stripe, e.g. B. Currency
+  /// 
+  /// # Example
   /// ```
   /// #[tokio::main]
   /// async fn main() {
@@ -82,6 +97,11 @@ impl Client {
     }
   }
 
+  /// # Arguments
+  /// 
+  /// * `id` - The unique ID you received when you created it
+  /// * `body` - The content that provides details for Stripe, e.g. B. Currency
+  /// 
   /// # Example
   /// ```
   /// #[tokio::main]
