@@ -211,6 +211,7 @@ impl Response {
 pub enum Types {
   CREATE(String),
   RETRIEVE(String),
+  CONFIRM(String, String),
   CANCEL(String, String),
   CAPTURE(String)
 }
@@ -234,6 +235,7 @@ impl Types {
     match self {
       Self::CREATE(_) => format!("https://api.stripe.com/v1/payment_intents"),
       Self::RETRIEVE(id) => format!("https://api.stripe.com/v1/payment_intents/{}", id),
+      Self::CONFIRM(id, body) => format!("https://api.stripe.com/v1/payment_intents/{}/confirm", id),
       Self::CANCEL(id, _) => format!("https://api.stripe.com/v1/payment_intents/{}/cancel", id),
       Self::CAPTURE(id) => format!("https://api.stripe.com/v1/payment_intents/{}/capture", id)
     }
@@ -242,6 +244,7 @@ impl Types {
   fn _get_body(&self) -> Option<String> {
     let body = match self {
       Self::CREATE(body) => body,
+      Self::CONFIRM(_, body) => body,
       Self::CANCEL(_, body) => body,
       _ => ""
     };
