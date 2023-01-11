@@ -1,23 +1,6 @@
-/// Portion of the amount that corresponds to a tip.
-#[derive(Serialize, Deserialize, Debug)]
-pub struct AmountDetailsTip {
-  /// Portion of the amount that corresponds to a tip.
-  pub amount: Option<u32>
-}
+include!("amount_details.rs");
 
-/// Details about items included in the amount
-#[derive(Serialize, Deserialize, Debug)]
-pub struct AmountDetails {
-  /// Portion of the amount that corresponds to a tip.
-  pub tip: AmountDetailsTip
-}
-
-/// Settings to configure compatible payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods)
-#[derive(Serialize, Deserialize, Debug)]
-pub struct AutomaticPaymentMethods {
-  /// Automatically calculates compatible payment methods
-  pub enabled: bool
-}
+include!("automatic_payment_methods.rs");
 
 include!("last_payment_error.rs");
 
@@ -27,17 +10,7 @@ include!("processing.rs");
 
 include!("shipping.rs");
 
-/// The data with which to automatically create a Transfer when the payment is finalized. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
-#[derive(Serialize, Deserialize, Debug)]
-pub struct TransferData {
-  ///Amount intended to be collected by this PaymentIntent.
-  /// A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).
-  /// The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts).
-  /// The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
-  pub amount: u32,
-  /// The account (if any) the payment will be attributed to for tax reporting, and where funds from the payment will be transferred to upon payment success.
-  pub destination: Option<String>
-}
+include!("transfer_data.rs");
 
 /// Payment intent object from 01/08/2023
 /// 
