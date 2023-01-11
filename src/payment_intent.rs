@@ -97,6 +97,32 @@ pub struct PaymentMethodOptions {
   //pub us_bank_account: ?
 }
 
+/// /// For recurring payments of Indian cards, this hash contains details on whether customer approval is required, and until when the payment will be in `processing` state
+#[derive(Serialize, Deserialize, Debug)]
+pub struct ProcessingCardCustomerNotification {
+  /// Whether customer approval has been requested for this payment.
+  /// For payments greater than INR 15000 or mandate amount, the customer must provide explicit approval of the payment with their bank.
+  pub approval_requested: bool,
+  /// If customer approval is required, they need to provide approval before this time.
+  pub completes_at: i64
+}
+
+/// If the PaymentIntent’s payment_method_types includes `card`, this hash contains the details on the `processing` state of the payment.
+#[derive(Serialize, Deserialize, Debug)]
+pub struct ProcessingCard {
+  /// For recurring payments of Indian cards, this hash contains details on whether customer approval is required, and until when the payment will be in `processing` state
+  pub customer_notification: ProcessingCardCustomerNotification
+}
+
+/// If present, this property tells you about the processing state of the payment.
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Processing {
+  /// If the PaymentIntent’s payment_method_types includes `card`, this hash contains the details on the `processing` state of the payment.
+  pub card: ProcessingCard,
+  /// Type of the payment method for which payment is in `processing` state, one of `card`.
+  pub r#type: String
+}
+
 /// Shipping address.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ShippingAddress {
@@ -226,7 +252,8 @@ pub struct Response {
   pub payment_method_options: Option<PaymentMethodOptions>,
   /// The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
   pub payment_method_types: Vec<String>,
-  //pub processing: ?,
+  /// /// If present, this property tells you about the processing state of the payment.
+  pub processing: Option<Processing>,
   /// Email address that the receipt for the resulting payment will be sent to.
   /// If `receipt_email` is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
   pub receipt_email: Option<String>,
