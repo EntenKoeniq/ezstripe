@@ -87,7 +87,7 @@ async fn main() {
 This SDK for Stripe is still in a very early version, which is why there can be many changes with each update.
 
 The following is expected from version `1.0.0`: <br>
-Full and stabil ...
+Complete and stable ...
 
 - [ ] ... PaymentIntent
 - [ ] ... SetupIntent
