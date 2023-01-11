@@ -3,7 +3,7 @@
 pub struct ProcessingCardCustomerNotification {
   /// Whether customer approval has been requested for this payment.
   /// For payments greater than INR 15000 or mandate amount, the customer must provide explicit approval of the payment with their bank.
-  pub approval_requested: bool,
+  pub approval_requested: bool, // TODO: Check if `Option<>` required
   /// If customer approval is required, they need to provide approval before this time.
   pub completes_at: Option<i64> // TODO: Check if `Option<>` required
 }
@@ -19,7 +19,7 @@ pub struct ProcessingCard {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Processing {
   /// If the PaymentIntent’s payment_method_types includes `card`, this hash contains the details on the `processing` state of the payment.
-  pub card: ProcessingCard,
+  pub card: Option<ProcessingCard>,
   /// Type of the payment method for which payment is in `processing` state, one of `card`.
   pub r#type: String
 }
