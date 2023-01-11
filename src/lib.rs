@@ -60,7 +60,7 @@ impl Client {
   ///     secret_key: "KEY".to_string()
   ///   };
   /// 
-  ///   let stripe_response = client.retrieve_payment_intent("PAYMENT_INTENT_ID".to_string()).send().await;
+  ///   let stripe_response = client.retrieve_payment_intent("PAYMENT_INTENT_ID".to_string()).get().await;
   /// 
   ///   // ...
   /// }
@@ -118,6 +118,31 @@ impl Client {
   pub fn cancel_payment_intent(&self, id: String, body: Option<String>) -> crate::payment_intent::Info {
     crate::payment_intent::Info {
       r#type: crate::payment_intent::Types::CANCEL(id, body.unwrap_or(String::default())),
+      secret_key: self.secret_key.clone()
+    }
+  }
+
+  /// # Arguments
+  /// 
+  /// * `id` - The unique ID you received when you created it
+  /// * `body` - The content that provides details for Stripe, e.g. B. Currency
+  /// 
+  /// # Example
+  /// ```
+  /// #[tokio::main]
+  /// async fn main() {
+  ///   let client = ezstripe::Client {
+  ///     secret_key: "KEY".to_string()
+  ///   };
+  /// 
+  ///   let stripe_response = client.update_payment_intent("PAYMENT_INTENT_ID".to_string(), None).send().await;
+  /// 
+  ///   // ...
+  /// }
+  /// ```
+  pub fn update_payment_intent(&self, id: String, body: String) -> crate::payment_intent::Info {
+    crate::payment_intent::Info {
+      r#type: crate::payment_intent::Types::UPDATE(id, body),
       secret_key: self.secret_key.clone()
     }
   }

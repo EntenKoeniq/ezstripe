@@ -214,6 +214,7 @@ pub enum Types {
   RETRIEVE(String),
   CONFIRM(String, String),
   CANCEL(String, String),
+  UPDATE(String, String),
   CAPTURE(String)
 }
 
@@ -254,6 +255,7 @@ impl Types {
       Self::RETRIEVE(id) => format!("{}/{}", PAYMENT_INTENT_URL, id),
       Self::CONFIRM(id, _) => format!("{}/{}/confirm", PAYMENT_INTENT_URL, id),
       Self::CANCEL(id, _) => format!("{}/{}/cancel", PAYMENT_INTENT_URL, id),
+      Self::UPDATE(id, _) => format!("{}/{}", PAYMENT_INTENT_URL, id),
       Self::CAPTURE(id) => format!("{}/{}/capture", PAYMENT_INTENT_URL, id)
     }
   }
@@ -263,6 +265,7 @@ impl Types {
       Self::CREATE(body) => body,
       Self::CONFIRM(_, body) => body,
       Self::CANCEL(_, body) => body,
+      Self::UPDATE(_, body) => body,
       _ => ""
     };
 
