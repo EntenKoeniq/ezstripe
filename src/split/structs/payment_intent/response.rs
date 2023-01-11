@@ -4,7 +4,9 @@ include!("automatic_payment_methods.rs");
 
 include!("last_payment_error.rs");
 
-include!("last_payment_method_options.rs");
+include!("next_action.rs");
+
+include!("payment_method_options.rs");
 
 include!("processing.rs");
 
@@ -84,7 +86,7 @@ pub struct Response {
   /// This can be useful for storing additional information about the object in a structured format.
   /// For more information, see the [documentation](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#storing-information-in-metadata).
   pub metadata: HashMap<String, String>,
-  //pub next_action: ?,
+  pub next_action: Option<NextAction>,
   /// The account (if any) for which the funds of the PaymentIntent are intended.
   /// See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
   pub on_behalf_of: Option<String>,
