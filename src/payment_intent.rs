@@ -280,6 +280,8 @@ impl Types {
   }
 }
 
+
+#[doc(hidden)]
 pub struct Info {
   pub r#type: Types,
   pub secret_key: String
