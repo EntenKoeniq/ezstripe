@@ -42,6 +42,11 @@ ezstripe = "0.2.0"
 
 #[tokio::main]
 async fn main() {
+  // Enable debug to show possible errors in our console
+  unsafe {
+    ezstripe::set_debug(true);
+  };
+
   let client = ezstripe::Client {
     secret_key: "YOUR_SECRET_KEY".to_string()
   };
@@ -61,7 +66,7 @@ async fn main() {
     if let Some(r) = e_info {
       println!("{}: {} | {} | {}", e_msg, r.r#type.original_str(), r.code.original_str(), r.message);
     } else { // Such an error only occurs when a request to Stripe failed
-      println!("Unknown error!");
+      println!("{}", e_msg);
     }
     std::process::exit(1);
   }
