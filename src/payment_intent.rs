@@ -294,7 +294,7 @@ impl Info {
       Types::RETRIEVE(_) | Types::LIST(_) => false,
       _ => true
     };
-    if !allowed {
+    if !allowed && crate::get_debug() {
       println!("[ezstripe]: {}Please use the `get()` function for `RETRIEVE` or `LIST`{}", "\x1b[0;31m", "\x1b[0m")
     }
 
@@ -308,8 +308,10 @@ impl Info {
     let body_response = match response.text().await {
       Ok(r) => r,
       Err(e) => {
-        println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
-        println!("{}", e);
+        if crate::get_debug() {
+          println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
+          println!("{}", e);
+        }
         return Err(("Body could not be unwrapped".to_string(), None));
       }
     };
@@ -324,8 +326,10 @@ impl Info {
           }
         },
         Err(e) => {
-          println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
-          println!("{}", e);
+          if crate::get_debug() {
+            println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
+            println!("{}", e);
+          }
         }
       };
     } else {
@@ -343,7 +347,7 @@ impl Info {
       Types::RETRIEVE(_) | Types::LIST(_) => true,
       _ => false
     };
-    if !allowed {
+    if !allowed && crate::get_debug() {
       println!("[ezstripe]: {}Please use the `send()` function for types other than `RETRIEVE` and `LIST`{}", "\x1b[0;31m", "\x1b[0m");
     }
 
@@ -357,8 +361,10 @@ impl Info {
     let body_response = match response.text().await {
       Ok(r) => r,
       Err(e) => {
-        println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
-        println!("{}", e);
+        if crate::get_debug() {
+          println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
+          println!("{}", e);
+        }
         return Err(("Body could not be unwrapped".to_string(), None));
       }
     };
@@ -377,8 +383,10 @@ impl Info {
           }
         },
         Err(e) => {
-          println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
-          println!("{}", e);
+          if crate::get_debug() {
+            println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
+            println!("{}", e);
+          }
         }
       };
     } else {
@@ -396,8 +404,10 @@ fn _value_to_response(val: serde_json::Value) -> Option<crate::payment_intent::R
   match serde_json::from_value::<crate::payment_intent::Response>(val) {
     Ok(r) => return Some(r),
     Err(e) => {
-      println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
-      println!("{}", e);
+      if crate::get_debug() {
+        println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
+        println!("{}", e);
+      }
     }
   };
 
@@ -409,8 +419,10 @@ fn _value_to_response_list(val: serde_json::Value) -> Option<Vec<crate::payment_
   match serde_json::from_value::<Vec<crate::payment_intent::Response>>(val) {
     Ok(r) => return Some(r),
     Err(e) => {
-      println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
-      println!("{}", e);
+      if crate::get_debug() {
+        println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
+        println!("{}", e);
+      }
     }
   };
 

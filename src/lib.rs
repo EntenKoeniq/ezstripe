@@ -4,6 +4,37 @@ extern crate serde_json;
 pub mod payment_intent;
 pub mod error;
 
+#[doc(hidden)]
+pub static mut DEBUG: bool = false;
+#[doc(hidden)]
+pub fn get_debug() -> bool {
+  unsafe {
+    DEBUG
+  }
+}
+
+/// **(STRONGLY RECOMMENDED IN DEVELOPMENT)**
+/// 
+/// Writes errors (if any) to your console.
+/// 
+/// # Arguments
+/// 
+/// * `val` - "true" if you want to enable it, "false" otherwise. (default: false)
+/// 
+/// # Example
+/// ```
+/// fn main() {
+///   unsafe {
+///     ezstripe::set_debug(true);
+///   };
+/// 
+///   // ...
+/// }
+/// ```
+pub unsafe fn set_debug(val: bool) {
+  DEBUG = val;
+}
+
 /// Tip: Store this client in a lifetime variable
 /// 
 /// Use this Client to send requests to Stripe's API.
