@@ -58,7 +58,7 @@ pub struct Response {
   /// 
   /// Refer to our docs to accept a payment and learn about how client_secret should be handled.
   pub client_secret: String,
-  /// ?
+  /// MISSING DOCUMENTATION
   pub confirmation_method: String,
   /// Time at which the object was created. Measured in seconds since the Unix epoch.
   pub created: i64,
@@ -96,7 +96,7 @@ pub struct Response {
   pub payment_method_options: Option<PaymentMethodOptions>,
   /// The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
   pub payment_method_types: Vec<String>,
-  /// /// If present, this property tells you about the processing state of the payment.
+  /// If present, this property tells you about the processing state of the payment.
   pub processing: Option<Processing>,
   /// Email address that the receipt for the resulting payment will be sent to.
   /// If `receipt_email` is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).

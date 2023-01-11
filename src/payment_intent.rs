@@ -6,7 +6,7 @@ use std::collections::HashMap;
 
 use serde::{ Serialize, Deserialize };
 
-include!("payment_intent_structs/response.rs");
+include!("split/structs/payment_intent/response.rs");
 
 #[derive(PartialEq)]
 pub enum Types {
@@ -79,7 +79,6 @@ impl Types {
     }
   }
 }
-
 
 /// MISSING DOCUMENTATION
 pub struct Info {

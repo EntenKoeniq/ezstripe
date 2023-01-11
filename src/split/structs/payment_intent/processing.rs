@@ -1,4 +1,4 @@
-/// /// For recurring payments of Indian cards, this hash contains details on whether customer approval is required, and until when the payment will be in `processing` state
+/// For recurring payments of Indian cards, this hash contains details on whether customer approval is required, and until when the payment will be in `processing` state
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ProcessingCardCustomerNotification {
   /// Whether customer approval has been requested for this payment.

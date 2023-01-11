@@ -71,7 +71,7 @@ include!("codes_enum.rs");
 #[derive(Deserialize, Serialize, Debug)]
 #[serde(rename_all = "snake_case")]
 pub enum Types {
-  /// ?
+  /// MISSING DOCUMENTATION
   None,
   /// API errors cover any other type of problem (e.g., a temporary problem with Stripe's servers), and are extremely uncommon.
   ApiError,
