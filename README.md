@@ -27,7 +27,7 @@
 ```toml
 # Cargo.toml
 [dependencies]
-ezstripe = "0.2.0"
+ezstripe = "0.2.2"
 ```
 or
 `cargo add ezstripe`
@@ -37,7 +37,7 @@ or
 # Cargo.toml
 [dependencies]
 tokio = { version = "1.24.1", features = ["full"] }
-ezstripe = "0.2.0"
+ezstripe = "0.2.2"
 ```
 
 ```Rust
