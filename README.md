@@ -18,6 +18,10 @@
   </h4>
 </div>
 
+> **Warning** <br>
+> Up to version `1.0.0` a lot of the structure can change with each new version! <br>
+> Therefore, with every new version, pay attention to the changes in the changelogs on [Github](https://github.com/xEntenKoeniqx/ezstripe)!
+
 # Usage
 ### Installation
 ```toml
