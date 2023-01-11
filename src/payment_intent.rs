@@ -172,7 +172,7 @@ pub struct TransferData {
 /// 
 /// [Payment intent object](https://stripe.com/docs/api/payment_intents/create#payment_intent_object)
 /// 
-/// MISSING DETAILS: `next_action`, `processing` and `setup_future_usage`
+/// MISSING DETAILS: `next_action` and `setup_future_usage`
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Response {
   /// Unique identifier for the object.
