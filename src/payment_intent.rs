@@ -29,6 +29,8 @@ pub struct AutomaticPaymentMethods {
 /// 
 /// The payment error encountered in the previous PaymentIntent confirmation.
 /// It will be cleared if the PaymentIntent is later updated for any reason.
+/// 
+/// MISSING DETAILS: `payment_method`
 #[derive(Serialize, Deserialize, Debug)]
 pub struct LastPaymentError {
   /// For card errors, the ID of the failed charge.
@@ -54,6 +56,9 @@ pub struct LastPaymentError {
   pub r#type: String
 }
 
+/// If the SetupIntent’s payment_method_types includes `card`, this hash contains the configurations that will be applied to each setup attempt of that type.
+/// 
+/// MISSING DETAILS: `mandate_options`
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsCard {
   //pub mandate_options: ?,
@@ -68,6 +73,7 @@ pub struct PaymentMethodOptionsCard {
   pub request_three_d_secure: String
 }
 
+/// If the SetupIntent’s payment_method_types includes `link`, this hash contains the configurations that will be applied to each setup attempt of that type.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsLink {
   /// Token used for persistent Link logins.
@@ -75,6 +81,8 @@ pub struct PaymentMethodOptionsLink {
 }
 
 /// Payment-method-specific configuration for this SetupIntent.
+/// 
+/// MISSING DETAILS: `acss_debit`, `blik`, `sepa_debit` and `us_bank_account`
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptions {
   //pub acss_debit: ?,
@@ -135,6 +143,8 @@ pub struct TransferData {
 /// Payment intent object from 01/08/2023
 /// 
 /// [Payment intent object](https://stripe.com/docs/api/payment_intents/create#payment_intent_object)
+/// 
+/// MISSING DETAILS: `metadata`, `next_action`, `processing` and `setup_future_usage`
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Response {
   /// Unique identifier for the object.
@@ -206,6 +216,8 @@ pub struct Response {
   /// ID of the payment method used in this PaymentIntent.
   pub payment_method: Option<String>,
   /// Payment-method-specific configuration for this SetupIntent.
+  /// 
+  /// ONLY `card` AND `link` ARE CURRENTLY SUPPORTED!
   pub payment_method_options: Option<PaymentMethodOptions>,
   /// The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
   pub payment_method_types: Vec<String>,
@@ -319,9 +331,11 @@ impl Types {
 }
 
 
-#[doc(hidden)]
+/// MISSING DOCUMENTATION
 pub struct Info {
+  /// MISSING DOCUMENTATION
   pub r#type: Types,
+  /// MISSING DOCUMENTATION
   pub secret_key: String
 }
 
