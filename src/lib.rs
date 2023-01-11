@@ -147,6 +147,10 @@ impl Client {
     }
   }
 
+  /// # Arguments
+  /// 
+  /// * `id` - The unique ID you received when you created it
+  /// 
   /// # Example
   /// ```
   /// #[tokio::main]
@@ -163,6 +167,30 @@ impl Client {
   pub fn capture_payment_intent(&self, id: String) -> crate::payment_intent::Info {
     crate::payment_intent::Info {
       r#type: crate::payment_intent::Types::CAPTURE(id),
+      secret_key: self.secret_key.clone()
+    }
+  }
+
+  /// # Arguments
+  /// 
+  /// * `body` - The content that provides details for Stripe, e.g. B. Currency
+  /// 
+  /// # Example
+  /// ```
+  /// #[tokio::main]
+  /// async fn main() {
+  ///   let client = ezstripe::Client {
+  ///     secret_key: "KEY".to_string()
+  ///   };
+  /// 
+  ///   let stripe_response = client.list_payment_intent("limit=3;").get().await;
+  /// 
+  ///   // ...
+  /// }
+  /// ```
+  pub fn list_payment_intent(&self, body: String) -> crate::payment_intent::Info {
+    crate::payment_intent::Info {
+      r#type: crate::payment_intent::Types::LIST(body),
       secret_key: self.secret_key.clone()
     }
   }

@@ -215,7 +215,8 @@ pub enum Types {
   CONFIRM(String, String),
   CANCEL(String, String),
   UPDATE(String, String),
-  CAPTURE(String)
+  CAPTURE(String),
+  LIST(String)
 }
 
 #[doc(hidden)]
@@ -256,7 +257,8 @@ impl Types {
       Self::CONFIRM(id, _) => format!("{}/{}/confirm", PAYMENT_INTENT_URL, id),
       Self::CANCEL(id, _) => format!("{}/{}/cancel", PAYMENT_INTENT_URL, id),
       Self::UPDATE(id, _) => format!("{}/{}", PAYMENT_INTENT_URL, id),
-      Self::CAPTURE(id) => format!("{}/{}/capture", PAYMENT_INTENT_URL, id)
+      Self::CAPTURE(id) => format!("{}/{}/capture", PAYMENT_INTENT_URL, id),
+      Self::LIST(_) => format!("{}", PAYMENT_INTENT_URL)
     }
   }
 
@@ -266,6 +268,7 @@ impl Types {
       Self::CONFIRM(_, body) => body,
       Self::CANCEL(_, body) => body,
       Self::UPDATE(_, body) => body,
+      Self::LIST(body) => body,
       _ => ""
     };
 
@@ -284,68 +287,130 @@ pub struct Info {
 
 impl Info {
   /// Send a `post` request to Stripe's API.
-  pub async fn send(&self) -> Result<crate::payment_intent::Response, Option<crate::error::Info>> {
-    if matches!(self.r#type, Types::RETRIEVE(_)) {
-      println!("[ezstripe]: {}Please use the `get()` function for `RETRIEVE`{}", "\x1b[0;31m", "\x1b[0m");
+  pub async fn send(&self) -> Result<crate::payment_intent::Response, (String, Option<crate::error::Info>)> {
+    let allowed = match self.r#type {
+      Types::RETRIEVE(_) | Types::LIST(_) => false,
+      _ => true
+    };
+    if !allowed {
+      println!("[ezstripe]: {}Please use the `get()` function for `RETRIEVE` or `LIST`{}", "\x1b[0;31m", "\x1b[0m")
     }
 
     let request = self.r#type.create_send_request(&self.secret_key).send().await;
     if request.is_err() {
-      return Err(None);
+      return Err(("Request failed".to_string(), None));
     }
   
     let response = request.unwrap();
-    if response.status().is_success() {
-      match response.json::<crate::payment_intent::Response>().await {
-        Ok(r) => return Ok(r),
+    let status = response.status();
+    let body_response = match response.text().await {
+      Ok(r) => r,
+      Err(e) => {
+        println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
+        println!("{}", e);
+        return Err(("Body could not be unwrapped".to_string(), None));
+      }
+    };
+
+    if status.is_success() {
+      match serde_json::from_str::<serde_json::Value>(&body_response) {
+        Ok(r) => {
+          if r["object"] == "payment_intent" {
+            if let Some(r2) = _value_to_response(r) {
+              return Ok(r2);
+            }
+          }
+        },
         Err(e) => {
           println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
           println!("{}", e);
         }
-      }
+      };
     } else {
-      let status = response.status().as_u16();
-      let body_response = response.text().await;
-      if body_response.is_ok() {
-        if let Some(r) = crate::error::Info::create(status, &body_response.unwrap()) {
-          return Err(Some(r));
-        }
+      if let Some(r) = crate::error::Info::create(status.as_u16(), &body_response) {
+        return Err(("Status is not success".to_string(), Some(r)));
       }
     }
     
-    Err(None)
+    Err(("Something went wrong".to_string(), None))
   }
 
   /// Send a `get` request to Stripe's API.
-  pub async fn get(&self) -> Result<crate::payment_intent::Response, Option<crate::error::Info>> {
-    if !matches!(self.r#type, Types::RETRIEVE(_)) {
-      println!("[ezstripe]: {}Please use the `send()` function for types other than `RETRIEVE`{}", "\x1b[0;31m", "\x1b[0m");
+  pub async fn get(&self) -> Result<Vec<crate::payment_intent::Response>, (String, Option<crate::error::Info>)> {
+    let allowed = match self.r#type {
+      Types::RETRIEVE(_) | Types::LIST(_) => true,
+      _ => false
+    };
+    if !allowed {
+      println!("[ezstripe]: {}Please use the `send()` function for types other than `RETRIEVE` and `LIST`{}", "\x1b[0;31m", "\x1b[0m");
     }
 
     let request = self.r#type.create_get_request(&self.secret_key).send().await;
     if request.is_err() {
-      return Err(None);
+      return Err(("Request failed".to_string(), None));
     }
   
     let response = request.unwrap();
-    if response.status().is_success() {
-      match response.json::<crate::payment_intent::Response>().await {
-        Ok(r) => return Ok(r),
+    let status = response.status();
+    let body_response = match response.text().await {
+      Ok(r) => r,
+      Err(e) => {
+        println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
+        println!("{}", e);
+        return Err(("Body could not be unwrapped".to_string(), None));
+      }
+    };
+
+    if status.is_success() {
+      match serde_json::from_str::<serde_json::Value>(&body_response) {
+        Ok(r) => {
+          if r["object"] == "payment_intent" {
+            if let Some(r2) = _value_to_response(r) {
+              return Ok(vec![r2]);
+            }
+          } else if r["object"] == "list" {
+            if let Some(r2) = _value_to_response_list(r["data"].clone()) {
+              return Ok(r2);
+            }
+          }
+        },
         Err(e) => {
-          println!("{}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
+          println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
           println!("{}", e);
         }
-      }
+      };
     } else {
-      let status = response.status().as_u16();
-      let body_response = response.text().await;
-      if body_response.is_ok() {
-        if let Some(r) = crate::error::Info::create(status, &body_response.unwrap()) {
-          return Err(Some(r));
-        }
+      if let Some(r) = crate::error::Info::create(status.as_u16(), &body_response) {
+        return Err(("Status is not success".to_string(), Some(r)));
       }
     }
     
-    Err(None)
+    Err(("Something went wrong".to_string(), None))
   }
+}
+
+#[doc(hidden)]
+fn _value_to_response(val: serde_json::Value) -> Option<crate::payment_intent::Response> {
+  match serde_json::from_value::<crate::payment_intent::Response>(val) {
+    Ok(r) => return Some(r),
+    Err(e) => {
+      println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
+      println!("{}", e);
+    }
+  };
+
+  None
+}
+
+#[doc(hidden)]
+fn _value_to_response_list(val: serde_json::Value) -> Option<Vec<crate::payment_intent::Response>> {
+  match serde_json::from_value::<Vec<crate::payment_intent::Response>>(val) {
+    Ok(r) => return Some(r),
+    Err(e) => {
+      println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
+      println!("{}", e);
+    }
+  };
+
+  None
 }
