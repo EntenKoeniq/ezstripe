@@ -166,7 +166,7 @@ impl Client {
   ///     secret_key: "KEY".to_string()
   ///   };
   /// 
-  ///   let stripe_response = client.update_payment_intent("PAYMENT_INTENT_ID".to_string(), None).send().await;
+  ///   let stripe_response = client.update_payment_intent("PAYMENT_INTENT_ID".to_string(), "metadata[order_id]=2;").send().await;
   /// 
   ///   // ...
   /// }
@@ -214,7 +214,7 @@ impl Client {
   ///     secret_key: "KEY".to_string()
   ///   };
   /// 
-  ///   let stripe_response = client.list_payment_intent("limit=3;").get().await;
+  ///   let stripe_response = client.list_payment_intent("limit=3;".to_string()).get().await;
   /// 
   ///   // ...
   /// }
