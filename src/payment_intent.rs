@@ -1,3 +1,7 @@
+//! The response details are incomplete!
+//! 
+//! Help us to complete the response details on [Github](https://github.com/xEntenKoeniqx/ezstripe/pulls) <3
+
 use serde::{ Serialize, Deserialize };
 
 /// Portion of the amount that corresponds to a tip.
@@ -324,12 +328,12 @@ pub struct Info {
 impl Info {
   /// Send a `post` request to Stripe's API.
   pub async fn send(&self) -> Result<crate::payment_intent::Response, (String, Option<crate::error::Info>)> {
-    let allowed = match self.r#type {
-      Types::RETRIEVE(_) | Types::LIST(_) => false,
-      _ => true
-    };
-    if !allowed && crate::get_debug() {
-      println!("[ezstripe]: {}Please use the `get()` function for `RETRIEVE` or `LIST`{}", "\x1b[0;31m", "\x1b[0m")
+    if crate::get_debug() {
+      match self.r#type {
+        Types::RETRIEVE(_) => println!("[ezstripe]: {}Please use the `get()` function for `RETRIEVE`{}", "\x1b[0;31m", "\x1b[0m"),
+        Types::LIST(_) => println!("[ezstripe]: {}Please use the `get()` function for `LIST`{}", "\x1b[0;31m", "\x1b[0m"),
+        _ => ()
+      };
     }
 
     let request = self.r#type.create_send_request(&self.secret_key).send().await;
@@ -377,12 +381,11 @@ impl Info {
 
   /// Send a `get` request to Stripe's API.
   pub async fn get(&self) -> Result<Vec<crate::payment_intent::Response>, (String, Option<crate::error::Info>)> {
-    let allowed = match self.r#type {
-      Types::RETRIEVE(_) | Types::LIST(_) => true,
-      _ => false
-    };
-    if !allowed && crate::get_debug() {
-      println!("[ezstripe]: {}Please use the `send()` function for types other than `RETRIEVE` and `LIST`{}", "\x1b[0;31m", "\x1b[0m");
+    if crate::get_debug() {
+      match self.r#type {
+        Types::RETRIEVE(_) | Types::LIST(_) => (),
+        _ => println!("[ezstripe]: {}Please use the `send()` function for types other than `RETRIEVE` or `LIST`{}", "\x1b[0;31m", "\x1b[0m")
+      };
     }
 
     let request = self.r#type.create_get_request(&self.secret_key).send().await;
