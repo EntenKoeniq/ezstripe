@@ -168,20 +168,6 @@ pub struct TransferData {
   pub destination: Option<String>
 }
 
-/// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
-/// 
-/// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
-/// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
-/// 
-/// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
-#[derive(Serialize, Deserialize, Debug)]
-pub enum SetupFutureUsage {
-  #[serde(rename="on_session")]
-  OnSession,
-  #[serde(rename="off_session")]
-  OffSession
-}
-
 /// Payment intent object from 01/08/2023
 /// 
 /// [Payment intent object](https://stripe.com/docs/api/payment_intents/create#payment_intent_object)
@@ -273,7 +259,13 @@ pub struct Response {
   pub receipt_email: Option<String>,
   /// ID of the review associated with this PaymentIntent, if any.
   pub review: Option<String>,
-  pub setup_future_usage: Option<SetupFutureUsage>,
+  /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+  /// 
+  /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+  /// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+  /// 
+  /// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+  pub setup_future_usage: Option<String>,
   /// Shipping information for this PaymentIntent.
   pub shipping: Option<Shipping>,
   /// For non-card charges, you can use this value as the complete description that appears on your customers’ statements.
