@@ -166,7 +166,7 @@ impl Client {
   ///     secret_key: "KEY".to_string()
   ///   };
   /// 
-  ///   let stripe_response = client.update_payment_intent("PAYMENT_INTENT_ID".to_string(), "metadata[order_id]=2;").send().await;
+  ///   let stripe_response = client.update_payment_intent("PAYMENT_INTENT_ID".to_string(), "metadata[order_id]=2;".to_string()).send().await;
   /// 
   ///   // ...
   /// }
