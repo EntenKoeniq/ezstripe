@@ -30,6 +30,9 @@ pub enum HTTPCodes {
 
 impl HTTPCodes {
   /// Get the correct enumeration by `input`.
+  /// 
+  /// # Arguments
+  /// 
   /// * `input` - The HTTP status value from Stripe's response
   pub fn from_status(input: u16) -> Self {
     match input {
@@ -214,6 +217,9 @@ pub enum Codes {
 
 impl Codes {
   /// Get the correct enumeration by `input`.
+  /// 
+  /// # Arguments
+  /// 
   /// * `input` - The "code" value from Stripe's response
   pub fn from_str(input: &str) -> Self {
     match input {
@@ -530,6 +536,9 @@ pub enum Types {
 
 impl Types {
   /// Get the correct enumeration by `input`.
+  /// 
+  /// # Arguments
+  /// 
   /// * `input` - The "type" value from Stripe's response
   pub fn from_str(input: &str) -> Self {
     match input {
