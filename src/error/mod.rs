@@ -1,10 +1,7 @@
-use serde::Serialize;
-
-mod types;
-mod codes;
+use serde::{ Serialize, Deserialize };
 
 /// A list of possible HTTP errors.
-#[derive(Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum HTTPCodes {
   /// Something went wrong.
   None,
@@ -71,50 +68,39 @@ include!("codes_enum.rs");
 /// All available error types from 01/08/2023
 /// 
 /// [Official Stripe error types list](https://stripe.com/docs/api/errors)
-#[derive(Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
+#[serde(rename_all = "snake_case")]
 pub enum Types {
   /// ?
   None,
   /// API errors cover any other type of problem (e.g., a temporary problem with Stripe's servers), and are extremely uncommon.
-  API,
+  ApiError,
   /// Card errors are the most common type of error you should expect to handle. They result when the user enters a card that can't be charged for some reason.
-  Card,
+  CardError,
   /// Idempotency errors occur when an Idempotency-Key is re-used on a request that does not match the first request's API endpoint and parameters.
-  Idempotency,
+  IdempotencyError,
   /// Invalid request errors arise when your request has invalid parameters.
-  InvalidRequest
+  InvalidRequestError
 }
 
-impl Types {
-  /// Get the correct enumeration by `input`.
-  /// 
-  /// # Arguments
-  /// 
-  /// * `input` - The "type" value from Stripe's response
-  pub fn from_str(input: &str) -> Self {
-    match input {
-      types::API_ERROR => Self::API,
-      types::CARD_ERROR => Self::Card,
-      types::IDEMPOTENCY_ERROR => Self::Idempotency,
-      types::INVALID_REQUEST_ERROR => Self::InvalidRequest,
-      _ => Self::None
-    }
-  }
+impl std::fmt::Display for Types {
+  fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    let mut result = String::new();
 
-  /// Returns the original value.
-  pub const fn original_str(&self) -> &'static str {
-    match self {
-      Self::API => types::API_ERROR,
-      Self::Card => types::CARD_ERROR,
-      Self::Idempotency => types::IDEMPOTENCY_ERROR,
-      Self::InvalidRequest => types::INVALID_REQUEST_ERROR,
-      Self::None => ""
+    let self_to_string = format!("{:?}", self);
+    for (i, c) in self_to_string.chars().enumerate() {
+      if i > 0 && c.is_uppercase() {
+        result.push('_');
+      }
+      result.push(c);
     }
+
+    write!(f, "{}", result.to_lowercase())
   }
 }
 
 /// All the important information about the error from Stripe.
-#[derive(Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Info {
   /// The HTTP response status code.
   pub http_code: HTTPCodes,
@@ -147,24 +133,22 @@ impl Info {
       Err(_) => return None
     };
 
-    let mut payment_intent: Option<crate::payment_intent::Response> = None;
     let payment_intent_json = json["payment_intent"].clone();
-    if !payment_intent_json.is_null() {
-      match serde_json::from_value::<crate::payment_intent::Response>(payment_intent_json) {
-        Ok(r) => payment_intent = Some(r),
-        Err(e) => {
-          if crate::get_debug() {
-            println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
-            println!("{}", e);
-          }
-        }
-      }
-    }
+    let payment_intent = serde_json::from_value::<Option<crate::payment_intent::Response>>(payment_intent_json)
+      .unwrap_or(None);
+
+    let type_json = json["type"].clone();
+    let r#type = serde_json::from_value::<Types>(type_json)
+      .unwrap_or(Types::None);
+
+    let code_json = json["code"].clone();
+    let code = serde_json::from_value::<Codes>(code_json)
+      .unwrap_or(Codes::None);
 
     Some(Self {
       http_code: HTTPCodes::from_status(status),
-      r#type: Types::from_str(json["type"].as_str().unwrap_or("")),
-      code: Codes::from_str(json["code"].as_str().unwrap_or("")),
+      r#type,
+      code,
       message: json["message"].as_str().unwrap_or("").to_string(),
       param: json["param"].as_str().unwrap_or("").to_string(),
       payment_intent
