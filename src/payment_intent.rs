@@ -2,6 +2,8 @@
 //! 
 //! Help us to complete the response details on [Github](https://github.com/xEntenKoeniqx/ezstripe/pulls) <3
 
+use std::collections::HashMap;
+
 use serde::{ Serialize, Deserialize };
 
 /// Portion of the amount that corresponds to a tip.
@@ -64,7 +66,7 @@ pub struct PaymentMethodOptionsCard {
   //pub mandate_options: ?,
   /// Selected network to process this SetupIntent on. Depends on the available networks of the card attached to the setup intent.
   /// Can be only set confirm-time.
-  pub network: String,
+  pub network: Option<String>,
   /// We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication).
   /// However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option.
   /// Permitted values include: `automatic` or `any`.
@@ -77,7 +79,7 @@ pub struct PaymentMethodOptionsCard {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsLink {
   /// Token used for persistent Link logins.
-  pub persistent_token: String
+  pub persistent_token: Option<String>
 }
 
 /// Payment-method-specific configuration for this SetupIntent.
@@ -208,7 +210,10 @@ pub struct Response {
   pub latest_charge: Option<String>,
   /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
   pub livemode: bool,
-  //pub metadata: ?,
+  /// Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object.
+  /// This can be useful for storing additional information about the object in a structured format.
+  /// For more information, see the [documentation](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#storing-information-in-metadata).
+  pub metadata: HashMap<String, String>,
   //pub next_action: ?,
   /// The account (if any) for which the funds of the PaymentIntent are intended.
   /// See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
