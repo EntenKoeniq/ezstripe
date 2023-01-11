@@ -5,21 +5,21 @@
 use serde::{ Serialize, Deserialize };
 
 /// Portion of the amount that corresponds to a tip.
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct AmountDetailsTip {
   /// Portion of the amount that corresponds to a tip.
   pub amount: Option<u32>
 }
 
 /// Details about items included in the amount
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct AmountDetails {
   /// Portion of the amount that corresponds to a tip.
   pub tip: AmountDetailsTip
 }
 
 /// Settings to configure compatible payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods)
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct AutomaticPaymentMethods {
   /// Automatically calculates compatible payment methods
   pub enabled: bool
@@ -29,7 +29,7 @@ pub struct AutomaticPaymentMethods {
 /// 
 /// The payment error encountered in the previous PaymentIntent confirmation.
 /// It will be cleared if the PaymentIntent is later updated for any reason.
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct LastPaymentError {
   /// For card errors, the ID of the failed charge.
   pub charge: String,
@@ -54,7 +54,7 @@ pub struct LastPaymentError {
   pub r#type: String
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsCard {
   //pub mandate_options: ?,
   /// Selected network to process this SetupIntent on. Depends on the available networks of the card attached to the setup intent.
@@ -68,14 +68,14 @@ pub struct PaymentMethodOptionsCard {
   pub request_three_d_secure: String
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsLink {
   /// Token used for persistent Link logins.
   pub persistent_token: String
 }
 
 /// Payment-method-specific configuration for this SetupIntent.
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptions {
   //pub acss_debit: ?,
   //pub blik: ?,
@@ -88,7 +88,7 @@ pub struct PaymentMethodOptions {
 }
 
 /// Shipping address.
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct ShippingAddress {
   /// City, district, suburb, town, or village.
   pub city: String,
@@ -105,7 +105,7 @@ pub struct ShippingAddress {
 }
 
 /// Shipping information for this PaymentIntent.
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Shipping {
   /// Shipping address.
   pub address: ShippingAddress,
@@ -121,7 +121,7 @@ pub struct Shipping {
 }
 
 /// The data with which to automatically create a Transfer when the payment is finalized. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct TransferData {
   ///Amount intended to be collected by this PaymentIntent.
   /// A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).
@@ -135,7 +135,7 @@ pub struct TransferData {
 /// Payment intent object from 01/08/2023
 /// 
 /// [Payment intent object](https://stripe.com/docs/api/payment_intents/create#payment_intent_object)
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Response {
   /// Unique identifier for the object.
   pub id: String,

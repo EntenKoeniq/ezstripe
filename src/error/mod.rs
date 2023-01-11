@@ -4,7 +4,7 @@ mod types;
 mod codes;
 
 /// A list of possible HTTP errors.
-#[derive(Serialize)]
+#[derive(Serialize, Debug)]
 pub enum HTTPCodes {
   /// Something went wrong.
   None,
@@ -66,7 +66,7 @@ impl HTTPCodes {
 /// All available error codes from 01/08/2023
 /// 
 /// [Official Stripe error code list](https://stripe.com/docs/error-codes)
-#[derive(Serialize)]
+#[derive(Serialize, Debug)]
 pub enum Codes {
   None,
   AccountCountryInvalidAddress,
@@ -514,7 +514,7 @@ impl Codes {
 /// All available error types from 01/08/2023
 /// 
 /// [Official Stripe error types list](https://stripe.com/docs/api/errors)
-#[derive(Serialize)]
+#[derive(Serialize, Debug)]
 pub enum Types {
   /// ?
   None,
@@ -554,16 +554,23 @@ impl Types {
 }
 
 /// All the important information about the error from Stripe.
-#[derive(Serialize)]
+#[derive(Serialize, Debug)]
 pub struct Info {
-  /// The HTTP status code.
+  /// The HTTP response status code.
   pub http_code: HTTPCodes,
-  /// The "type" value from the error response.
+  /// The type of error returned.
+  /// One of `api_error`, `card_error`, `idempotency_error`, or `invalid_request_error`
   pub r#type: Types,
-  /// The "code" value from the error response.
+  /// For some errors that could be handled programmatically, a short string indicating the [error code](https://stripe.com/docs/error-codes) reported.
   pub code: Codes,
-  /// The "message" value from the error response.
-  pub message: String
+  /// A human-readable message providing more details about the error.
+  /// For card errors, these messages can be shown to your users.
+  pub message: String,
+  /// If the error is parameter-specific, the parameter related to the error.
+  /// For example, you can use this to display a message near the correct form field.
+  pub param: String,
+  /// The PaymentIntent object for errors returned on a request involving a PaymentIntent.
+  pub payment_intent: Option<crate::payment_intent::Response>
 }
 
 impl Info {
@@ -571,7 +578,7 @@ impl Info {
   pub fn create(status: u16, json_text: &str) -> Option<Self> {
     let json = match serde_json::from_str::<serde_json::Value>(json_text) {
       Ok(r) => {
-        if r["error"] == json!(null) {
+        if r["error"].is_null() {
           r
         } else {
           r["error"].clone()
@@ -580,11 +587,27 @@ impl Info {
       Err(_) => return None
     };
 
+    let mut payment_intent: Option<crate::payment_intent::Response> = None;
+    let payment_intent_json = json["payment_intent"].clone();
+    if !payment_intent_json.is_null() {
+      match serde_json::from_value::<crate::payment_intent::Response>(payment_intent_json) {
+        Ok(r) => payment_intent = Some(r),
+        Err(e) => {
+          if crate::get_debug() {
+            println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
+            println!("{}", e);
+          }
+        }
+      }
+    }
+
     Some(Self {
       http_code: HTTPCodes::from_status(status),
       r#type: Types::from_str(json["type"].as_str().unwrap_or("")),
       code: Codes::from_str(json["code"].as_str().unwrap_or("")),
-      message: json["message"].as_str().unwrap_or("").to_string()
+      message: json["message"].as_str().unwrap_or("").to_string(),
+      param: json["param"].as_str().unwrap_or("").to_string(),
+      payment_intent
     })
   }
 

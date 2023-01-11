@@ -1,6 +1,3 @@
-#[macro_use]
-extern crate serde_json;
-
 pub mod payment_intent;
 pub mod error;
 
