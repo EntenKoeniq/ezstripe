@@ -145,7 +145,7 @@ pub struct ProcessingCardCustomerNotification {
   /// For payments greater than INR 15000 or mandate amount, the customer must provide explicit approval of the payment with their bank.
   pub approval_requested: bool,
   /// If customer approval is required, they need to provide approval before this time.
-  pub completes_at: i64
+  pub completes_at: Option<i64> // TODO: Check if `Option<>` required
 }
 
 /// If the PaymentIntent’s payment_method_types includes `card`, this hash contains the details on the `processing` state of the payment.
