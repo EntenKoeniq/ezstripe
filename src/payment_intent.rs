@@ -99,17 +99,17 @@ pub struct PaymentMethodOptions {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ShippingAddress {
   /// City, district, suburb, town, or village.
-  pub city: String,
+  pub city: Option<String>,
   /// Two-letter country code [(ISO 3166-1 alpha-2)](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-  pub country: String,
+  pub country: Option<String>,
   /// Address line 1 (e.g., street, PO Box, or company name).
-  pub line1: String,
+  pub line1: Option<String>,
   /// Address line 2 (e.g., apartment, suite, unit, or building).
   pub line2: Option<String>, // can be null?
   /// ZIP or postal code.
-  pub postal_code: String,
+  pub postal_code: Option<String>,
   /// State, county, province, or region.
-  pub state: String
+  pub state: Option<String>
 }
 
 /// Shipping information for this PaymentIntent.
@@ -118,9 +118,9 @@ pub struct Shipping {
   /// Shipping address.
   pub address: ShippingAddress,
   /// The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.
-  pub carrier: String,
+  pub carrier: Option<String>,
   /// Recipient name.
-  pub name: String,
+  pub name: Option<String>,
   /// Recipient phone (including extension).
   pub phone: Option<String>, // can be null?
   /// The tracking number for a physical product, obtained from the delivery service.
