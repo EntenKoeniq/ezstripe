@@ -50,6 +50,39 @@ pub struct LastPaymentError {
   pub r#type: String
 }
 
+#[derive(Serialize, Deserialize)]
+pub struct PaymentMethodOptionsCard {
+  //pub mandate_options: ?,
+  /// Selected network to process this SetupIntent on. Depends on the available networks of the card attached to the setup intent.
+  /// Can be only set confirm-time.
+  pub network: String,
+  /// We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication).
+  /// However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option.
+  /// Permitted values include: `automatic` or `any`.
+  /// If not provided, defaults to `automatic`.
+  /// Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
+  pub request_three_d_secure: String
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct PaymentMethodOptionsLink {
+  /// Token used for persistent Link logins.
+  pub persistent_token: String
+}
+
+/// Payment-method-specific configuration for this SetupIntent.
+#[derive(Serialize, Deserialize)]
+pub struct PaymentMethodOptions {
+  //pub acss_debit: ?,
+  //pub blik: ?,
+  /// If the SetupIntent’s payment_method_types includes `card`, this hash contains the configurations that will be applied to each setup attempt of that type.
+  pub card: Option<PaymentMethodOptionsCard>,
+  /// If the SetupIntent’s payment_method_types includes `link`, this hash contains the configurations that will be applied to each setup attempt of that type.
+  pub link: Option<PaymentMethodOptionsLink>,
+  //pub sepa_debit: ?,
+  //pub us_bank_account: ?
+}
+
 /// Shipping address.
 #[derive(Serialize, Deserialize)]
 pub struct ShippingAddress {
@@ -168,7 +201,8 @@ pub struct Response {
   pub on_behalf_of: Option<String>,
   /// ID of the payment method used in this PaymentIntent.
   pub payment_method: Option<String>,
-  //pub payment_method_options: ?,
+  /// Payment-method-specific configuration for this SetupIntent.
+  pub payment_method_options: Option<PaymentMethodOptions>,
   /// The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
   pub payment_method_types: Vec<String>,
   //pub processing: ?,
