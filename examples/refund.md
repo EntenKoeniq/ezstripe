@@ -47,11 +47,10 @@ async fn main() {
 
   // Returns: String("amount=1500;currency=eur;")
   let stripe_body = ezbody!(
-    "amount" => 1500,
-    "currency" => "eur"
+    "charge" => "ID..."
   );
 
-  let stripe_response = client.create_payout(stripe_body).send().await;
+  let stripe_response = client.create_refund(stripe_body).send().await;
   if let Err((e_msg, e_info)) = stripe_response {
     if let Some(r) = e_info {
       println!("{}: {} | {} | {}", e_msg, r.r#type, r.code, r.message);
