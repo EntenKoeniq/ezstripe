@@ -97,4 +97,4 @@ Complete and stable ...
 - [ ] ... Mandates
 - [ ] ... Disputes
 - [ ] ... Charges
-- [ ] ... Balance
+- [X] ... Balance

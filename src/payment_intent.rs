@@ -90,7 +90,7 @@ pub struct Info {
 
 impl Info {
   /// Send a `post` request to Stripe's API.
-  pub async fn send(&self) -> Result<crate::payment_intent::Response, (String, Option<crate::error::Info>)> {
+  pub async fn send(&self) -> Result<Response, (String, Option<crate::error::Info>)> {
     if crate::get_debug() {
       match self.r#type {
         Types::RETRIEVE(_) => println!("[ezstripe]: {}Please use the `get()` function for `RETRIEVE`{}", "\x1b[0;31m", "\x1b[0m"),
@@ -121,7 +121,7 @@ impl Info {
       match serde_json::from_str::<serde_json::Value>(&body_response) {
         Ok(r) => {
           if r["object"] == "payment_intent" {
-            if let Some(r2) = _value_to_response(r) {
+            if let Some(r2) = crate::helper::value_to_response::<Response>(r) {
               return Ok(r2);
             }
           }
@@ -143,7 +143,7 @@ impl Info {
   }
 
   /// Send a `get` request to Stripe's API.
-  pub async fn get(&self) -> Result<Vec<crate::payment_intent::Response>, (String, Option<crate::error::Info>)> {
+  pub async fn get(&self) -> Result<Vec<Response>, (String, Option<crate::error::Info>)> {
     if crate::get_debug() {
       match self.r#type {
         Types::RETRIEVE(_) | Types::LIST(_) => (),
@@ -173,11 +173,11 @@ impl Info {
       match serde_json::from_str::<serde_json::Value>(&body_response) {
         Ok(r) => {
           if r["object"] == "payment_intent" {
-            if let Some(r2) = _value_to_response(r) {
+            if let Some(r2) = crate::helper::value_to_response::<Response>(r) {
               return Ok(vec![r2]);
             }
           } else if r["object"] == "list" {
-            if let Some(r2) = _value_to_response_list(r["data"].clone()) {
+            if let Some(r2) = crate::helper::value_to_response_list::<Response>(r["data"].clone()) {
               return Ok(r2);
             }
           }
@@ -197,34 +197,4 @@ impl Info {
     
     Err(("Something went wrong".to_string(), None))
   }
-}
-
-#[doc(hidden)]
-fn _value_to_response(val: serde_json::Value) -> Option<crate::payment_intent::Response> {
-  match serde_json::from_value::<crate::payment_intent::Response>(val) {
-    Ok(r) => return Some(r),
-    Err(e) => {
-      if crate::get_debug() {
-        println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
-        println!("{}", e);
-      }
-    }
-  };
-
-  None
-}
-
-#[doc(hidden)]
-fn _value_to_response_list(val: serde_json::Value) -> Option<Vec<crate::payment_intent::Response>> {
-  match serde_json::from_value::<Vec<crate::payment_intent::Response>>(val) {
-    Ok(r) => return Some(r),
-    Err(e) => {
-      if crate::get_debug() {
-        println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
-        println!("{}", e);
-      }
-    }
-  };
-
-  None
 }
