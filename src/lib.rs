@@ -1,6 +1,7 @@
 #[doc(hidden)]
 pub mod helper;
 pub mod balance;
+pub mod mandate;
 pub mod payment_intent;
 pub mod payout;
 pub mod refund;

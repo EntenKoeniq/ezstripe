@@ -139,7 +139,7 @@ impl Info {
     if status.is_success() {
       match serde_json::from_str::<serde_json::Value>(&body_response) {
         Ok(r) => {
-          if r["object"] == "payout" {
+          if r["object"] == "refund" {
             if let Some(r2) = crate::helper::value_to_response::<Response>(r) {
               return Ok(r2);
             }
@@ -191,7 +191,7 @@ impl Info {
     if status.is_success() {
       match serde_json::from_str::<serde_json::Value>(&body_response) {
         Ok(r) => {
-          if r["object"] == "payout" {
+          if r["object"] == "refund" {
             if let Some(r2) = crate::helper::value_to_response::<Response>(r) {
               return Ok(vec![r2]);
             }
