@@ -12,3 +12,5 @@ include!("split/implementations/client/payment_intent.rs");
 include!("split/implementations/client/balance.rs");
 
 include!("split/implementations/client/payout.rs");
+
+include!("split/implementations/client/refund.rs");

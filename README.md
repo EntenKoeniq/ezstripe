@@ -46,7 +46,7 @@ Complete and stable ...
 - [ ] ... SetupIntent
 - [ ] ... SetupAttempts
 - [X] ... Payouts
-- [ ] ... Refunds
+- [X] ... Refunds
 - [ ] ... Mandates
 - [ ] ... Disputes
 - [ ] ... Charges

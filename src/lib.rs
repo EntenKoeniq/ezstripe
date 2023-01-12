@@ -3,6 +3,7 @@ pub mod helper;
 pub mod balance;
 pub mod payment_intent;
 pub mod payout;
+pub mod refund;
 pub mod error;
 
 #[doc(hidden)]

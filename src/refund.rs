@@ -5,26 +5,19 @@ use serde::{ Serialize, Deserialize };
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Response {
   pub id: String,
-  pub object: String, // payout
+  pub object: String, // refund
   pub amount: u32,
-  pub arrival_date: i64,
-  pub automatic: bool,
-  pub balance_transaction: String,
+  pub balance_transaction: Option<String>,
+  pub charge: String,
   pub created: i64,
   pub currency: String,
-  pub description: String,
-  pub destination: String,
-  pub failure_balance_transaction: Option<String>,
-  pub failure_code: Option<String>,
-  pub livemode: bool,
   pub metadata: HashMap<String, String>,
-  pub method: String,
-  pub original_payout: Option<String>,
-  pub reversed_by: Option<String>,
-  pub source_type: String,
-  pub statement_descriptor: Option<String>,
+  pub payment_intent: String,
+  pub reason: Option<String>,
+  pub receipt_number: Option<String>,
+  pub source_transfer_reversal: Option<String>,
   pub status: String,
-  pub r#type: String
+  pub transfer_reversal: Option<String>
 }
 
 impl Response {
@@ -48,7 +41,7 @@ pub enum Types {
 }
 
 #[doc(hidden)]
-const PAYOUT_URL: &str = "https://api.stripe.com/v1/payouts";
+const REFUND_URL: &str = "https://api.stripe.com/v1/refunds";
 
 #[doc(hidden)]
 impl Types {
@@ -80,12 +73,12 @@ impl Types {
 
   fn _get_url(&self) -> String {
     match self {
-      Self::CREATE(_) => format!("{}", PAYOUT_URL),
-      Self::RETRIEVE(id) => format!("{}/{}", PAYOUT_URL, id),
-      Self::UPDATE(id, _) => format!("{}/{}", PAYOUT_URL, id),
-      Self::LIST(_) => format!("{}", PAYOUT_URL),
-      Self::CANCEL(id) => format!("{}/{}/cancel", PAYOUT_URL, id),
-      Self::REVERSE(id, _) => format!("{}/{}/reverse", PAYOUT_URL, id)
+      Self::CREATE(_) => format!("{}", REFUND_URL),
+      Self::RETRIEVE(id) => format!("{}/{}", REFUND_URL, id),
+      Self::UPDATE(id, _) => format!("{}/{}", REFUND_URL, id),
+      Self::LIST(_) => format!("{}", REFUND_URL),
+      Self::CANCEL(id) => format!("{}/{}/cancel", REFUND_URL, id),
+      Self::REVERSE(id, _) => format!("{}/{}/reverse", REFUND_URL, id)
     }
   }
 
