@@ -15,6 +15,10 @@
     <a href="https://docs.rs/ezstripe/latest/ezstripe/">
       Docs
     </a>
+    <span> | </span>
+    <a href="https://github.com/xEntenKoeniqx/ezstripe/tree/main/examples">
+      Examples
+    </a>
   </h4>
 </div>
 
@@ -31,57 +35,6 @@ ezstripe = "0.2.2"
 ```
 or
 `cargo add ezstripe`
-
-### Example
-```toml
-# Cargo.toml
-[dependencies]
-tokio = { version = "1.24.1", features = ["full"] }
-ezstripe = "0.2.2"
-```
-
-```Rust
-// Required to use the `ezbody!` macro
-#[macro_use] extern crate ezstripe;
-
-#[tokio::main]
-async fn main() {
-  // Enable debug to show possible errors in our console
-  unsafe {
-    ezstripe::set_debug(true);
-  };
-
-  let client = ezstripe::Client {
-    secret_key: "YOUR_SECRET_KEY".to_string()
-  };
-  
-  // Returns: String("amount=1500;currency=eur;payment_method_types[]=card;capture_method=manual;")
-  let stripe_body = ezbody!(
-      "amount" => 1500,
-      "currency" => "eur",
-      "payment_method_types[]" => "card",
-      "capture_method" => "manual"
-    );
-  
-  // Now send a request to Stripe's API
-  let stripe_response = client.create_payment_intent(stripe_body).send().await;
-  
-  if let Err((e_msg, e_info)) = stripe_response {
-    if let Some(r) = e_info {
-      println!("{}: {} | {} | {}", e_msg, r.r#type, r.code, r.message);
-    } else { // Such an error only occurs when a request to Stripe failed
-      println!("{}", e_msg);
-    }
-    std::process::exit(1);
-  }
-  
-  // No error, so let's unpack the answer
-  let stripe_result = stripe_response.unwrap();
-  
-  // Print the unique ID from the created PaymentIntent
-  println!("Created: {}", stripe_result.id);
-}
-```
 
 # Status
 This SDK for Stripe is still in a very early version, which is why there can be many changes with each update.
