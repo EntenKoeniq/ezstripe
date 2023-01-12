@@ -8,7 +8,7 @@ use serde::{ Serialize, Deserialize };
 pub struct Available {
   /// Balance amount.
   pub amount: u32,
-  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](Three-letter ISO currency code, in lowercase. Must be a supported currency.).
+  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
   pub currency: String,
   /// Breakdown of balance by source types.
   pub source_types: HashMap<String, u32>
@@ -20,7 +20,7 @@ pub struct Available {
 pub struct Pending {
   /// Balance amount.
   pub amount: u32,
-  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](Three-letter ISO currency code, in lowercase. Must be a supported currency.).
+  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
   pub currency: String,
   /// Breakdown of balance by source types.
   pub source_types: HashMap<String, u32>
@@ -32,7 +32,7 @@ pub struct Pending {
 pub struct ConnectReserved {
   /// Balance amount.
   pub amount: u32,
-  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](Three-letter ISO currency code, in lowercase. Must be a supported currency.).
+  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
   pub currency: String,
   /// Breakdown of balance by source types.
   pub source_types: HashMap<String, u32>
@@ -43,7 +43,7 @@ pub struct ConnectReserved {
 pub struct InstantAvailable {
   /// Balance amount.
   pub amount: u32,
-  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](Three-letter ISO currency code, in lowercase. Must be a supported currency.).
+  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
   pub currency: String,
   /// Breakdown of balance by source types.
   pub source_types: HashMap<String, u32>
@@ -53,7 +53,7 @@ pub struct InstantAvailable {
 pub struct IssuingAvailable {
   /// Balance amount.
   pub amount: u32,
-  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](Three-letter ISO currency code, in lowercase. Must be a supported currency.).
+  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
   pub currency: String,
   /// Breakdown of balance by source types.
   pub source_types: HashMap<String, u32>

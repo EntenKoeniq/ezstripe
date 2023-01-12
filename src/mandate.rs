@@ -149,6 +149,9 @@ pub struct SingleUse {
   pub currency: String
 }
 
+/// Mandate object from 01/12/2023
+/// 
+/// [Mandate object](https://stripe.com/docs/api/mandates/object)
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Response {
   /// Unique identifier for the object.
