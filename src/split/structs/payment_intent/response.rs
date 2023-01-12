@@ -16,7 +16,7 @@ include!("transfer_data.rs");
 
 /// Payment intent object from 01/08/2023
 /// 
-/// [Payment intent object](https://stripe.com/docs/api/payment_intents/create#payment_intent_object)
+/// [Payment intent object](https://stripe.com/docs/api/payment_intents/object)
 /// 
 /// MISSING DETAILS: `next_action`
 #[derive(Serialize, Deserialize, Debug)]
