@@ -1,3 +1,4 @@
+#[doc(hidden)]
 pub mod helper;
 pub mod payment_intent;
 pub mod balance;

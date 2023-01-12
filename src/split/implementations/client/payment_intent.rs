@@ -10,9 +10,9 @@ impl Client {
   /// #[tokio::main]
   /// async fn main() {
   ///   let client = ezstripe::Client {
-  ///     secret_key: "KEY".to_string()
+  ///     secret_key: "YOUR_SECRET_KEY".to_string()
   ///   };
-  ///     
+  ///   
   ///   // Returns: String("amount=1500;currency=eur;payment_method_types[]=card;capture_method=manual;")
   ///   let stripe_body = ezbody!(
   ///       "amount" => 1500,
@@ -20,7 +20,7 @@ impl Client {
   ///       "payment_method_types[]" => "card",
   ///       "capture_method" => "manual"
   ///     );
-  ///     
+  ///   
   ///   let stripe_response = client.create_payment_intent(stripe_body).send().await;
   ///   
   ///   // ...
@@ -42,11 +42,11 @@ impl Client {
   /// #[tokio::main]
   /// async fn main() {
   ///   let client = ezstripe::Client {
-  ///     secret_key: "KEY".to_string()
+  ///     secret_key: "YOUR_SECRET_KEY".to_string()
   ///   };
-  /// 
+  ///   
   ///   let stripe_response = client.retrieve_payment_intent("PAYMENT_INTENT_ID".to_string()).get().await;
-  /// 
+  ///   
   ///   // ...
   /// }
   /// ```
@@ -67,11 +67,11 @@ impl Client {
   /// #[tokio::main]
   /// async fn main() {
   ///   let client = ezstripe::Client {
-  ///     secret_key: "KEY".to_string()
+  ///     secret_key: "YOUR_SECRET_KEY".to_string()
   ///   };
-  /// 
+  ///   
   ///   let stripe_response = client.confirm_payment_intent("PAYMENT_INTENT_ID".to_string(), None).send().await;
-  /// 
+  ///   
   ///   // ...
   /// }
   /// ```
@@ -92,11 +92,11 @@ impl Client {
   /// #[tokio::main]
   /// async fn main() {
   ///   let client = ezstripe::Client {
-  ///     secret_key: "KEY".to_string()
+  ///     secret_key: "YOUR_SECRET_KEY".to_string()
   ///   };
-  /// 
+  ///   
   ///   let stripe_response = client.cancel_payment_intent("PAYMENT_INTENT_ID".to_string(), None).send().await;
-  /// 
+  ///   
   ///   // ...
   /// }
   /// ```
@@ -117,11 +117,11 @@ impl Client {
   /// #[tokio::main]
   /// async fn main() {
   ///   let client = ezstripe::Client {
-  ///     secret_key: "KEY".to_string()
+  ///     secret_key: "YOUR_SECRET_KEY".to_string()
   ///   };
-  /// 
+  ///   
   ///   let stripe_response = client.update_payment_intent("PAYMENT_INTENT_ID".to_string(), "metadata[order_id]=2;".to_string()).send().await;
-  /// 
+  ///   
   ///   // ...
   /// }
   /// ```
@@ -141,11 +141,11 @@ impl Client {
   /// #[tokio::main]
   /// async fn main() {
   ///   let client = ezstripe::Client {
-  ///     secret_key: "KEY".to_string()
+  ///     secret_key: "YOUR_SECRET_KEY".to_string()
   ///   };
-  /// 
+  ///   
   ///   let stripe_response = client.capture_payment_intent("PAYMENT_INTENT_ID".to_string()).send().await;
-  /// 
+  ///   
   ///   // ...
   /// }
   /// ```
@@ -165,11 +165,11 @@ impl Client {
   /// #[tokio::main]
   /// async fn main() {
   ///   let client = ezstripe::Client {
-  ///     secret_key: "KEY".to_string()
+  ///     secret_key: "YOUR_SECRET_KEY".to_string()
   ///   };
-  /// 
+  ///   
   ///   let stripe_response = client.list_payment_intent("limit=3;".to_string()).get().await;
-  /// 
+  ///   
   ///   // ...
   /// }
   /// ```
