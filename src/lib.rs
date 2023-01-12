@@ -1,7 +1,8 @@
 #[doc(hidden)]
 pub mod helper;
-pub mod payment_intent;
 pub mod balance;
+pub mod payment_intent;
+pub mod payout;
 pub mod error;
 
 #[doc(hidden)]
