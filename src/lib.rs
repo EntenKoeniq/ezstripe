@@ -1,4 +1,5 @@
 pub mod payment_intent;
+pub mod balance;
 pub mod error;
 
 #[doc(hidden)]

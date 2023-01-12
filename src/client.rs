@@ -8,3 +8,5 @@ pub struct Client {
 }
 
 include!("split/implementations/client/payment_intent.rs");
+
+include!("split/implementations/client/balance.rs");
