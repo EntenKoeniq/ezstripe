@@ -31,7 +31,7 @@
 # Cargo.toml
 [dependencies]
 tokio = { version = "1.24.1", features = ["full"] }
-ezstripe = "0.2.2"
+ezstripe = "0.3.0"
 ```
 
 ```Rust

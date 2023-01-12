@@ -31,7 +31,7 @@
 ```toml
 # Cargo.toml
 [dependencies]
-ezstripe = "0.2.2"
+ezstripe = "0.3.0"
 ```
 or
 `cargo add ezstripe`
