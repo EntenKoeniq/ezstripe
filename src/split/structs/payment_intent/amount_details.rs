@@ -9,5 +9,5 @@ pub struct AmountDetailsTip {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct AmountDetails {
   /// Portion of the amount that corresponds to a tip.
-  pub tip: AmountDetailsTip
+  pub tip: Option<AmountDetailsTip>
 }

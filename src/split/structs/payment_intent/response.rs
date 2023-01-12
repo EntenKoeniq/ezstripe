@@ -4,7 +4,9 @@ include!("automatic_payment_methods.rs");
 
 include!("last_payment_error.rs");
 
-include!("last_payment_method_options.rs");
+include!("next_action.rs");
+
+include!("payment_method_options.rs");
 
 include!("processing.rs");
 
@@ -14,7 +16,7 @@ include!("transfer_data.rs");
 
 /// Payment intent object from 01/08/2023
 /// 
-/// [Payment intent object](https://stripe.com/docs/api/payment_intents/create#payment_intent_object)
+/// [Payment intent object](https://stripe.com/docs/api/payment_intents/object)
 /// 
 /// MISSING DETAILS: `next_action`
 #[derive(Serialize, Deserialize, Debug)]
@@ -58,7 +60,7 @@ pub struct Response {
   /// 
   /// Refer to our docs to accept a payment and learn about how client_secret should be handled.
   pub client_secret: String,
-  /// ?
+  /// MISSING DOCUMENTATION
   pub confirmation_method: String,
   /// Time at which the object was created. Measured in seconds since the Unix epoch.
   pub created: i64,
@@ -84,7 +86,7 @@ pub struct Response {
   /// This can be useful for storing additional information about the object in a structured format.
   /// For more information, see the [documentation](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#storing-information-in-metadata).
   pub metadata: HashMap<String, String>,
-  //pub next_action: ?,
+  pub next_action: Option<NextAction>,
   /// The account (if any) for which the funds of the PaymentIntent are intended.
   /// See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
   pub on_behalf_of: Option<String>,
@@ -96,7 +98,7 @@ pub struct Response {
   pub payment_method_options: Option<PaymentMethodOptions>,
   /// The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
   pub payment_method_types: Vec<String>,
-  /// /// If present, this property tells you about the processing state of the payment.
+  /// If present, this property tells you about the processing state of the payment.
   pub processing: Option<Processing>,
   /// Email address that the receipt for the resulting payment will be sent to.
   /// If `receipt_email` is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
