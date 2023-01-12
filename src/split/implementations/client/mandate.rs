@@ -11,7 +11,7 @@ impl Client {
   ///     secret_key: "YOUR_SECRET_KEY".to_string()
   ///   };
   ///   
-  ///   let stripe_response = client.retrieve_mandate().send().await;
+  ///   let stripe_response = client.retrieve_mandate("ID_OF_MANDATE".to_string()).get().await;
   ///   
   ///   // ...
   /// }

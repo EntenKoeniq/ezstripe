@@ -7,7 +7,7 @@ impl Client {
   ///     secret_key: "YOUR_SECRET_KEY".to_string()
   ///   };
   ///   
-  ///   let stripe_response = client.retrieve_balance().send().await;
+  ///   let stripe_response = client.retrieve_balance().get().await;
   ///   
   ///   // ...
   /// }
