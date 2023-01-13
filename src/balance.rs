@@ -49,6 +49,7 @@ pub struct InstantAvailable {
   pub source_types: HashMap<String, u32>
 }
 
+/// Funds that are available for use.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct IssuingAvailable {
   /// Balance amount.
@@ -100,9 +101,8 @@ impl Response {
   }
 }
 
-/// MISSING DOCUMENTATION
+#[doc(hidden)]
 pub struct Info {
-  /// MISSING DOCUMENTATION
   pub secret_key: String
 }
 

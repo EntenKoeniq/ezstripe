@@ -119,11 +119,9 @@ impl Types {
   }
 }
 
-/// MISSING DOCUMENTATION
+#[doc(hidden)]
 pub struct Info {
-  /// MISSING DOCUMENTATION
   pub r#type: Types,
-  /// MISSING DOCUMENTATION
   pub secret_key: String
 }
 

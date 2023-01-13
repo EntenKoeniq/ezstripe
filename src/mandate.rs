@@ -186,11 +186,9 @@ impl Response {
   }
 }
 
-/// MISSING DOCUMENTATION
+#[doc(hidden)]
 pub struct Info {
-  /// MISSING DOCUMENTATION
   pub id: String,
-  /// MISSING DOCUMENTATION
   pub secret_key: String
 }
 

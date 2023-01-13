@@ -92,8 +92,6 @@ pub struct Response {
   /// ID of the payment method used in this PaymentIntent.
   pub payment_method: Option<String>,
   /// Payment-method-specific configuration for this SetupIntent.
-  /// 
-  /// ONLY `card` AND `link` ARE CURRENTLY SUPPORTED!
   pub payment_method_options: PaymentMethodOptions,
   /// The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
   pub payment_method_types: Vec<String>,
