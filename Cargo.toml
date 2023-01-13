@@ -2,8 +2,9 @@
 name = "ezstripe"
 version = "0.3.0"
 edition = "2021"
+authors = ["Nick I. A. <enten@koeniq.de>"]
 license = "MIT"
-keywords = ["ezstripe", "stripe", "payment", "payments"]
+keywords = ["ezstripe", "ez", "stripe", "api", "sdk", "payment", "payments"]
 description = "Use ezstripe to easily communicate with Stripe's API."
 repository = "https://github.com/xEntenKoeniqx/ezstripe"
 readme = "README.md"
