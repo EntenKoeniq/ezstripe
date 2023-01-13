@@ -148,7 +148,7 @@ impl Info {
       Ok(r) => r,
       Err(e) => {
         if log::log_enabled!(log::Level::Error) {
-          log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues)");
+          log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/EntenKoeniq/ezstripe/issues)");
           log::error!("{}", e);
         }
         return Err(("Body could not be unwrapped".to_string(), None));
@@ -166,7 +166,7 @@ impl Info {
         },
         Err(e) => {
           if log::log_enabled!(log::Level::Error) {
-            log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues)");
+            log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/EntenKoeniq/ezstripe/issues)");
             log::error!("{}", e);
           }
         }
@@ -200,7 +200,7 @@ impl Info {
       Ok(r) => r,
       Err(e) => {
         if log::log_enabled!(log::Level::Error) {
-          log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues)");
+          log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/EntenKoeniq/ezstripe/issues)");
           log::error!("{}", e);
         }
         return Err(("Body could not be unwrapped".to_string(), None));
@@ -222,7 +222,7 @@ impl Info {
         },
         Err(e) => {
           if log::log_enabled!(log::Level::Error) {
-            log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues)");
+            log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/EntenKoeniq/ezstripe/issues)");
             log::error!("{}", e);
           }
         }

@@ -16,7 +16,7 @@
       Docs
     </a>
     <span> | </span>
-    <a href="https://github.com/xEntenKoeniqx/ezstripe/tree/main/examples">
+    <a href="https://github.com/EntenKoeniq/ezstripe/tree/main/examples">
       Examples
     </a>
   </h4>

@@ -16,7 +16,7 @@
       Docs
     </a>
     <span> | </span>
-    <a href="https://github.com/xEntenKoeniqx/ezstripe/tree/main/examples">
+    <a href="https://github.com/EntenKoeniq/ezstripe/tree/main/examples">
       Examples
     </a>
   </h4>
@@ -24,7 +24,7 @@
 
 > **Warning** <br>
 > Up to version `1.0.0` a lot of the structure can change with each new version! <br>
-> Therefore, with every new version, pay attention to the changes in the changelogs on [Github](https://github.com/xEntenKoeniqx/ezstripe)!
+> Therefore, with every new version, pay attention to the changes in the changelogs on [Github](https://github.com/EntenKoeniq/ezstripe)!
 
 # Usage
 ### Installation

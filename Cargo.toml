@@ -6,7 +6,7 @@ authors = ["Nick-I. A. <enten@koeniq.de>"]
 license = "MIT"
 keywords = ["ezstripe", "stripe", "sdk", "payment", "payments"]
 description = "Use ezstripe to easily communicate with Stripe's API."
-repository = "https://github.com/xEntenKoeniqx/ezstripe"
+repository = "https://github.com/EntenKoeniq/ezstripe"
 readme = "README.md"
 
 [features]

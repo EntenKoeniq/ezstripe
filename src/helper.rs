@@ -3,7 +3,7 @@ pub fn value_to_response<T>(val: serde_json::Value) -> Option<T> where T : serde
     Ok(r) => return Some(r),
     Err(e) => {
       if log::log_enabled!(log::Level::Error) {
-        log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues)");
+        log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/EntenKoeniq/ezstripe/issues)");
         log::error!("{}", e);
       }
     }
@@ -17,7 +17,7 @@ pub fn value_to_response_list<T>(val: serde_json::Value) -> Option<Vec<T>>  wher
     Ok(r) => return Some(r),
     Err(e) => {
       if log::log_enabled!(log::Level::Error) {
-        log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues)");
+        log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/EntenKoeniq/ezstripe/issues)");
         log::error!("{}", e);
       }
     }

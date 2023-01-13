@@ -1,12 +1,12 @@
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsAcssDebit;
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsAffirm;
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsAfterpayClearpay;
 
@@ -46,7 +46,7 @@ pub struct PaymentMethodOptionsBacsDebit {
   pub setup_future_usage: Option<String>
 }
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsBancontact;
 
@@ -54,7 +54,7 @@ pub struct PaymentMethodOptionsBancontact;
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsBlik;
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsBoleto;
 
@@ -87,7 +87,7 @@ pub struct PaymentMethodOptionsCardMandateOptions {
   pub supported_types: Vec<String>
 }
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsCardInstallments;
 
@@ -96,7 +96,7 @@ pub struct PaymentMethodOptionsCardInstallments;
 pub struct PaymentMethodOptionsCard {
   /// Controls when the funds will be captured from the customer’s account.
   pub capture_method: Option<String>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub installments: Option<PaymentMethodOptionsCardInstallments>,
   /// Configuration options for setting up an eMandate for cards issued in India.
   pub mandate_options: Option<PaymentMethodOptionsCardMandateOptions>,
@@ -126,11 +126,11 @@ pub struct PaymentMethodOptionsCard {
   pub statement_descriptor_suffix_kanji: Option<String>,
 }
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsCardPresent;
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsCustomerBalance;
 
@@ -198,11 +198,11 @@ pub struct PaymentMethodOptionsIdeal {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsInteracPresent;
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsKlarna;
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsKombini;
 
@@ -222,7 +222,7 @@ pub struct PaymentMethodOptionsLink {
   pub setup_future_usage: Option<String>
 }
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsOxxo;
 
@@ -250,7 +250,7 @@ pub struct PaymentMethodOptionsPaynow {
   pub setup_future_usage: Option<String>
 }
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsPix;
 
@@ -266,30 +266,30 @@ pub struct PaymentMethodOptionsPromptpay {
   pub setup_future_usage: Option<String>
 }
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsSepaDebit;
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsSofort;
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsUsBankAccount;
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsWechatPay;
 
 /// Payment-method-specific configuration for this SetupIntent.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptions {
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub acss_debit: Option<PaymentMethodOptionsAcssDebit>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub affirm: Option<PaymentMethodOptionsAffirm>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub afterpay_clearpay: Option<PaymentMethodOptionsAfterpayClearpay>,
   /// If the PaymentIntent’s payment_method_types includes `alipay`, this hash contains the configurations that will be applied to each payment attempt of that type.
   pub alipay: Option<PaymentMethodOptionsAlipay>,
@@ -297,17 +297,17 @@ pub struct PaymentMethodOptions {
   pub au_becs_debit: Option<PaymentMethodOptionsAuBecsDebit>,
   /// If the PaymentIntent’s payment_method_types includes `bacs_debit`, this hash contains the configurations that will be applied to each payment attempt of that type.
   pub bacs_debit: Option<PaymentMethodOptionsBacsDebit>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub bancontact: Option<PaymentMethodOptionsBancontact>,
   /// If the PaymentIntent’s payment_method_types includes `blik`, this hash contains the configurations that will be applied to each payment attempt of that type.
   pub blik: Option<PaymentMethodOptionsBlik>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub boleto: Option<PaymentMethodOptionsBoleto>,
   /// If the SetupIntent’s payment_method_types includes `card`, this hash contains the configurations that will be applied to each setup attempt of that type.
   pub card: Option<PaymentMethodOptionsCard>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub card_present: Option<PaymentMethodOptionsCardPresent>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub customer_balance: Option<PaymentMethodOptionsCustomerBalance>,
   /// If the PaymentIntent’s payment_method_types includes `eps`, this hash contains the configurations that will be applied to each payment attempt of that type.
   pub eps: Option<PaymentMethodOptionsEps>,
@@ -321,28 +321,28 @@ pub struct PaymentMethodOptions {
   pub ideal: Option<PaymentMethodOptionsIdeal>,
   /// If the PaymentIntent’s payment_method_types includes `interac_present`, this hash contains the configurations that will be applied to each payment attempt of that type.
   pub interac_present: Option<PaymentMethodOptionsInteracPresent>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub klarna: Option<PaymentMethodOptionsKlarna>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub kombini: Option<PaymentMethodOptionsKombini>,
   /// If the SetupIntent’s payment_method_types includes `link`, this hash contains the configurations that will be applied to each setup attempt of that type.
   pub link: Option<PaymentMethodOptionsLink>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub oxxo: Option<PaymentMethodOptionsOxxo>,
   /// If the PaymentIntent’s payment_method_types includes `p24`, this hash contains the configurations that will be applied to each payment attempt of that type.
   pub p24: Option<PaymentMethodOptionsP24>,
   /// If the PaymentIntent’s payment_method_types includes `paynow`, this hash contains the configurations that will be applied to each payment attempt of that type.
   pub paynow: Option<PaymentMethodOptionsPaynow>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub pix: Option<PaymentMethodOptionsPix>,
   /// If the PaymentIntent’s payment_method_types includes `promptpay`, this hash contains the configurations that will be applied to each payment attempt of that type.
   pub promptpay: Option<PaymentMethodOptionsPromptpay>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub sepa_debit: Option<PaymentMethodOptionsSepaDebit>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub sofort: Option<PaymentMethodOptionsSofort>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub us_bank_account: Option<PaymentMethodOptionsUsBankAccount>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
+  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub wechat_pay: Option<PaymentMethodOptionsWechatPay>
 }
