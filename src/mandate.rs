@@ -210,9 +210,9 @@ impl Info {
     let body_response = match response.text().await {
       Ok(r) => r,
       Err(e) => {
-        if crate::get_debug() {
-          println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
-          println!("{}", e);
+        if log::log_enabled!(log::Level::Error) {
+          log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues)");
+          log::error!("{}", e);
         }
         return Err(("Body could not be unwrapped".to_string(), None));
       }
@@ -228,9 +228,9 @@ impl Info {
           }
         },
         Err(e) => {
-          if crate::get_debug() {
-            println!("[ezstripe]: {}Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues){}", "\x1b[0;31m", "\x1b[0m");
-            println!("{}", e);
+          if log::log_enabled!(log::Level::Error) {
+            log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/xEntenKoeniqx/ezstripe/issues)");
+            log::error!("{}", e);
           }
         }
       };

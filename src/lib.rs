@@ -11,37 +11,6 @@ pub mod payout;
 pub mod refund;
 pub mod error;
 
-#[doc(hidden)]
-pub static mut DEBUG: bool = false;
-#[doc(hidden)]
-pub fn get_debug() -> bool {
-  unsafe {
-    DEBUG
-  }
-}
-
-/// **(STRONGLY RECOMMENDED IN DEVELOPMENT)**
-/// 
-/// Writes errors (if any) to your console.
-/// 
-/// # Arguments
-/// 
-/// * `val` - "true" if you want to enable it, "false" otherwise. (default: false)
-/// 
-/// # Example
-/// ```
-/// fn main() {
-///   unsafe {
-///     ezstripe::set_debug(true);
-///   };
-/// 
-///   // ...
-/// }
-/// ```
-pub unsafe fn set_debug(val: bool) {
-  DEBUG = val;
-}
-
 include!("client.rs");
 
 /// Create an easy body format for API requests.
