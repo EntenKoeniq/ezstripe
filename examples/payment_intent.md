@@ -61,7 +61,7 @@ async fn main() {
   let stripe_response = client.create_payment_intent(stripe_body).send().await;
   if let Err((e_msg, e_info)) = stripe_response {
     if let Some(r) = e_info {
-      println!("{}: {} | {} | {}", e_msg, r.r#type.original_str(), r.code.original_str(), r.message);
+      println!("{}: {} | {} | {}", e_msg, r.r#type, r.code, r.message);
     } else { // Such an error only occurs when a request to Stripe failed
       println!("{}", e_msg);
     }
