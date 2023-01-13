@@ -2,7 +2,7 @@
 name = "ezstripe"
 version = "0.3.2"
 edition = "2021"
-authors = ["Nick-I. A. <enten@koeniq.de>"]
+authors = ["Nick-Ilhan Atamgüc <nickatamguec@outlook.com>"]
 license = "MIT"
 keywords = ["ezstripe", "stripe", "sdk", "payment", "payments"]
 description = "Use ezstripe to easily communicate with Stripe's API."
