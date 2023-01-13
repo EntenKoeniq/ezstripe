@@ -23,7 +23,7 @@ refund = []
 [dependencies]
 serde = { version = "1.0.152", features = ["derive"] }
 serde_json = "1.0.91"
-reqwest = { version = "0.11.13", features = ["json"] }
+reqwest = "0.11.13"
 
 [dev-dependencies]
 tokio = { version = "1.24.1", features = ["full"] }
