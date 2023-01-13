@@ -299,6 +299,7 @@ pub struct PaymentMethodOptions {
   pub bacs_debit: Option<PaymentMethodOptionsBacsDebit>,
   /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
   pub bancontact: Option<PaymentMethodOptionsBancontact>,
+  /// If the PaymentIntent’s payment_method_types includes `blik`, this hash contains the configurations that will be applied to each payment attempt of that type.
   pub blik: Option<PaymentMethodOptionsBlik>,
   /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/xEntenKoeniqx/ezstripe/pulls)**
   pub boleto: Option<PaymentMethodOptionsBoleto>,
