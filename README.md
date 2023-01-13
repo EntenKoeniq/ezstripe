@@ -96,8 +96,8 @@ This SDK for Stripe is still in a very early version, which is why there can be 
 The following is expected from version `1.0.0`: <br>
 Complete and stable ...
 
-- [ ] ... PaymentIntent (in progress)
-- [ ] ... SetupIntent
+- [ ] ... PaymentIntents (in progress)
+- [ ] ... SetupIntents
 - [ ] ... SetupAttempts
 - [X] ... Payouts
 - [X] ... Refunds
