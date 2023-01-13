@@ -8,7 +8,17 @@ description = "Use ezstripe to easily communicate with Stripe's API."
 repository = "https://github.com/xEntenKoeniqx/ezstripe"
 readme = "README.md"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[features]
+default = [
+  "balance",
+  "mandate",
+  "payout",
+  "refund"
+]
+balance = []
+mandate = []
+payout = []
+refund = []
 
 [dependencies]
 serde = { version = "1.0.152", features = ["derive"] }

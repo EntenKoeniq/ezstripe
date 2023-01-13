@@ -1,9 +1,13 @@
 #[doc(hidden)]
 pub mod helper;
+#[cfg(feature = "balance")]
 pub mod balance;
+#[cfg(feature = "mandate")]
 pub mod mandate;
 pub mod payment_intent;
+#[cfg(feature = "payout")]
 pub mod payout;
+#[cfg(feature = "refund")]
 pub mod refund;
 pub mod error;
 

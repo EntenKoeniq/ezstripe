@@ -36,6 +36,17 @@ ezstripe = "0.3.0"
 or
 `cargo add ezstripe`
 
+### Features
+All features are enabled by default, but you can only select the features you really need for your project.
+
+```toml
+# Cargo.toml
+[dependencies]
+ezstripe = { version = "0.3.0", default-features = false, features = ["balance"] }
+```
+
+List of all available features: "balance", "mandate", "payout", "refund"
+
 ### Example
 ```Rust
 // Required to use the `ezbody!` macro

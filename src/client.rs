@@ -7,13 +7,17 @@ pub struct Client {
   pub secret_key: String
 }
 
+#[cfg(feature = "balance")]
 include!("split/implementations/client/balance.rs");
 
+#[cfg(feature = "mandate")]
 include!("split/implementations/client/mandate.rs");
 
 include!("split/implementations/client/payment_intent.rs");
 
+#[cfg(feature = "payout")]
 include!("split/implementations/client/payout.rs");
 
+#[cfg(feature = "refund")]
 include!("split/implementations/client/refund.rs");
 
