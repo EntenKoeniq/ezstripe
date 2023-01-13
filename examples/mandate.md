@@ -28,15 +28,14 @@
 [dependencies]
 tokio = { version = "1.24.1", features = ["full"] }
 ezstripe = "0.3.0"
+env_logger = "0.10.0"
 ```
 
 ```Rust
 #[tokio::main]
 async fn main() {
-  // Enable debug to show possible errors in our console
-  unsafe {
-    ezstripe::set_debug(true);
-  };
+  // To show possible errors (recommended for development)
+  env_logger::init_from_env(env_logger::Env::default().filter_or("MY_LOG_LEVEL", "debug"));
 
   let client = ezstripe::Client {
     secret_key: "YOUR_SECRET_KEY".to_string()
