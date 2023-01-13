@@ -1,3 +1,30 @@
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsAcssDebit;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsAffirm;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsAfterpayClearpay;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsAlipay;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsAuBecsDebit;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsBacsDebit;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsBancontact;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsBlik;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsBoleto;
+
 /// Configuration options for setting up an eMandate for cards issued in India.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsCardMandateOptions {
@@ -27,13 +54,21 @@ pub struct PaymentMethodOptionsCardMandateOptions {
   pub supported_types: Vec<String>
 }
 
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsCardCardPresent;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsCardCustom;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsCardInstallments;
+
 /// If the SetupIntent’s payment_method_types includes `card`, this hash contains the configurations that will be applied to each setup attempt of that type.
-/// 
-/// MISSING DETAILS: `installments`, `network`, `setup_future_usage`, `statement_descriptor_suffix_kana` and `statement_descriptor_suffix_kanji`
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptionsCard {
   /// Controls when the funds will be captured from the customer’s account.
   pub capture_method: Option<String>,
+  pub installments: Option<PaymentMethodOptionsCardInstallments>,
   /// Configuration options for setting up an eMandate for cards issued in India.
   pub mandate_options: Option<PaymentMethodOptionsCardMandateOptions>,
   /// Selected network to process this SetupIntent on. Depends on the available networks of the card attached to the setup intent.
@@ -44,8 +79,41 @@ pub struct PaymentMethodOptionsCard {
   /// Permitted values include: `automatic` or `any`.
   /// If not provided, defaults to `automatic`.
   /// Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
-  pub request_three_d_secure: Option<String>
+  pub request_three_d_secure: String,
+  pub setup_future_usage: Option<String>,
+  pub statement_descriptor_suffix_kana: Option<String>,
+  pub statement_descriptor_suffix_kanji: Option<String>,
 }
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsCardPresent;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsCustomerBalance;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsEps;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsFpx;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsGiropay;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsGrabpay;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsIdeal;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsInteracPresent;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsKlarna;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsKombini;
 
 /// If the SetupIntent’s payment_method_types includes `link`, this hash contains the configurations that will be applied to each setup attempt of that type.
 #[derive(Serialize, Deserialize, Debug)]
@@ -63,17 +131,65 @@ pub struct PaymentMethodOptionsLink {
   pub setup_future_usage: Option<String>
 }
 
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsOxxo;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsP24;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsPaynow;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsPix;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsPromptpay;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsSepaDebit;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsSofort;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsUsBankAccount;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PaymentMethodOptionsWechatPay;
+
 /// Payment-method-specific configuration for this SetupIntent.
-/// 
-/// MISSING DETAILS: `acss_debit`, `blik`, `sepa_debit` and `us_bank_account`
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodOptions {
-  //pub acss_debit: ?,
-  //pub blik: ?,
+  pub acss_debit: Option<PaymentMethodOptionsAcssDebit>,
+  pub affirm: Option<PaymentMethodOptionsAffirm>,
+  pub afterpay_clearpay: Option<PaymentMethodOptionsAfterpayClearpay>,
+  pub alipay: Option<PaymentMethodOptionsAlipay>,
+  pub au_becs_debit: Option<PaymentMethodOptionsAuBecsDebit>,
+  pub bacs_debit: Option<PaymentMethodOptionsBacsDebit>,
+  pub bancontact: Option<PaymentMethodOptionsBancontact>,
+  pub blik: Option<PaymentMethodOptionsBlik>,
+  pub boleto: Option<PaymentMethodOptionsBoleto>,
   /// If the SetupIntent’s payment_method_types includes `card`, this hash contains the configurations that will be applied to each setup attempt of that type.
   pub card: Option<PaymentMethodOptionsCard>,
+  pub card_present: Option<PaymentMethodOptionsCardPresent>,
+  pub customer_balance: Option<PaymentMethodOptionsCustomerBalance>,
+  pub eps: Option<PaymentMethodOptionsEps>,
+  pub fpx: Option<PaymentMethodOptionsFpx>,
+  pub giropay: Option<PaymentMethodOptionsGiropay>,
+  pub grabpay: Option<PaymentMethodOptionsGrabpay>,
+  pub ideal: Option<PaymentMethodOptionsIdeal>,
+  pub interac_present: Option<PaymentMethodOptionsInteracPresent>,
+  pub klarna: Option<PaymentMethodOptionsKlarna>,
+  pub kombini: Option<PaymentMethodOptionsKombini>,
   /// If the SetupIntent’s payment_method_types includes `link`, this hash contains the configurations that will be applied to each setup attempt of that type.
   pub link: Option<PaymentMethodOptionsLink>,
-  //pub sepa_debit: ?,
-  //pub us_bank_account: ?
+  pub oxxo: Option<PaymentMethodOptionsOxxo>,
+  pub p24: Option<PaymentMethodOptionsP24>,
+  pub paynow: Option<PaymentMethodOptionsPaynow>,
+  pub pix: Option<PaymentMethodOptionsPix>,
+  pub sepa_debit: Option<PaymentMethodOptionsSepaDebit>,
+  pub sofort: Option<PaymentMethodOptionsSofort>,
+  pub us_bank_account: Option<PaymentMethodOptionsUsBankAccount>,
+  pub wechat_pay: Option<PaymentMethodOptionsWechatPay>
 }

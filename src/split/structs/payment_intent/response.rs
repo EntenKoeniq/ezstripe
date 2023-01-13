@@ -17,8 +17,6 @@ include!("transfer_data.rs");
 /// Payment intent object from 01/08/2023
 /// 
 /// [Payment intent object](https://stripe.com/docs/api/payment_intents/object)
-/// 
-/// MISSING DETAILS: `next_action`
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Response {
   /// Unique identifier for the object.
@@ -33,7 +31,7 @@ pub struct Response {
   /// Amount that can be captured from this PaymentIntent.
   pub amount_capturable: u32,
   /// Details about items included in the amount
-  pub amount_details: Option<AmountDetails>,
+  pub amount_details: AmountDetails,
   /// Amount that was collected by this PaymentIntent.
   pub amount_received: u32,
   /// ID of the Connect application that created the PaymentIntent.
@@ -86,6 +84,7 @@ pub struct Response {
   /// This can be useful for storing additional information about the object in a structured format.
   /// For more information, see the [documentation](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#storing-information-in-metadata).
   pub metadata: HashMap<String, String>,
+  /// If present, this property tells you what actions you need to take in order for your customer to fulfill a payment using the provided source.
   pub next_action: Option<NextAction>,
   /// The account (if any) for which the funds of the PaymentIntent are intended.
   /// See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
@@ -95,7 +94,7 @@ pub struct Response {
   /// Payment-method-specific configuration for this SetupIntent.
   /// 
   /// ONLY `card` AND `link` ARE CURRENTLY SUPPORTED!
-  pub payment_method_options: Option<PaymentMethodOptions>,
+  pub payment_method_options: PaymentMethodOptions,
   /// The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
   pub payment_method_types: Vec<String>,
   /// If present, this property tells you about the processing state of the payment.

@@ -1,9 +1,5 @@
-/// **Has to be tested! May crash as some values ​​may be null**
-/// 
 /// The payment error encountered in the previous PaymentIntent confirmation.
 /// It will be cleared if the PaymentIntent is later updated for any reason.
-/// 
-/// MISSING DETAILS: `payment_method`
 #[derive(Serialize, Deserialize, Debug)]
 pub struct LastPaymentError {
   /// For card errors, the ID of the failed charge.
@@ -20,7 +16,8 @@ pub struct LastPaymentError {
   /// If the error is parameter-specific, the parameter related to the error.
   /// For example, you can use this to display a message near the correct form field.
   pub param: Option<String>,
-  //pub payment_method: ?,
+  /// ID of the payment method used in this PaymentIntent.
+  pub payment_method: Option<String>,
   /// If the error is specific to the type of payment method, the payment method type that had a problem.
   /// This field is only populated for invoice-related errors.
   pub payment_method_type: Option<String>,
