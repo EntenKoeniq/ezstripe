@@ -4,6 +4,7 @@ pub mod helper;
 pub mod balance;
 #[cfg(feature = "mandate")]
 pub mod mandate;
+#[cfg(feature = "payment_intent")]
 pub mod payment_intent;
 #[cfg(feature = "payout")]
 pub mod payout;

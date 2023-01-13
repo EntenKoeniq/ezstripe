@@ -116,6 +116,7 @@ pub struct Info {
   /// For example, you can use this to display a message near the correct form field.
   pub param: String,
   /// The PaymentIntent object for errors returned on a request involving a PaymentIntent.
+  #[cfg(feature = "payment_intent")]
   pub payment_intent: Option<crate::payment_intent::Response>
 }
 
@@ -133,7 +134,9 @@ impl Info {
       Err(_) => return None
     };
 
+    #[cfg(feature = "payment_intent")]
     let payment_intent_json = json["payment_intent"].clone();
+    #[cfg(feature = "payment_intent")]
     let payment_intent = serde_json::from_value::<Option<crate::payment_intent::Response>>(payment_intent_json)
       .unwrap_or(None);
 
@@ -151,6 +154,7 @@ impl Info {
       code,
       message: json["message"].as_str().unwrap_or("").to_string(),
       param: json["param"].as_str().unwrap_or("").to_string(),
+      #[cfg(feature = "payment_intent")]
       payment_intent
     })
   }

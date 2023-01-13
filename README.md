@@ -42,10 +42,17 @@ All features are enabled by default, but you can only select the features you re
 ```toml
 # Cargo.toml
 [dependencies]
-ezstripe = { version = "0.3.0", default-features = false, features = ["balance"] }
+ezstripe = { version = "0.3.0", default-features = false, features = ["payment_intent", "refund"] }
 ```
 
-List of all available features: "balance", "mandate", "payout", "refund"
+List of all available features:
+- full
+- - Default. Same as without "default-features = false"
+- balance
+- mandate
+- payment_intent
+- payout
+- refund
 
 ### Example
 ```toml

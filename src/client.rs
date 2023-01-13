@@ -13,6 +13,7 @@ include!("split/implementations/client/balance.rs");
 #[cfg(feature = "mandate")]
 include!("split/implementations/client/mandate.rs");
 
+#[cfg(feature = "payment_intent")]
 include!("split/implementations/client/payment_intent.rs");
 
 #[cfg(feature = "payout")]

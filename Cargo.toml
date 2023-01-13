@@ -10,12 +10,15 @@ repository = "https://github.com/xEntenKoeniqx/ezstripe"
 readme = "README.md"
 
 [features]
-default = [
+default = ["full"]
+full = [
+  "payment_intent",
   "balance",
   "mandate",
   "payout",
   "refund"
 ]
+payment_intent = []
 balance = []
 mandate = []
 payout = []
