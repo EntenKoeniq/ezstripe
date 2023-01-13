@@ -27,7 +27,7 @@
 # Cargo.toml
 [dependencies]
 tokio = { version = "1.24.1", features = ["full"] }
-ezstripe = "0.3.1"
+ezstripe = "0.3.2"
 env_logger = "0.10.0"
 ```
 
