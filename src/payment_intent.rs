@@ -8,6 +8,7 @@ use serde::{ Serialize, Deserialize };
 
 include!("split/structs/payment_intent/response.rs");
 
+#[doc(hidden)]
 #[derive(PartialEq)]
 pub enum Types {
   CREATE(String),

@@ -66,6 +66,7 @@ impl Response {
   }
 }
 
+#[doc(hidden)]
 #[derive(PartialEq)]
 pub enum Types {
   CREATE(String),
