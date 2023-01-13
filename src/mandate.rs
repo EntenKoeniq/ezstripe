@@ -1,7 +1,5 @@
 use serde::{ Serialize, Deserialize };
 
-/// NO ATTRIBUTES AVAILABLE FROM STRIPE
-/// 
 /// If this is a Mandate accepted offline, this hash contains details about the offline acceptance.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct CustomerAcceptanceOffline;
@@ -28,8 +26,6 @@ pub struct CustomerAcceptance {
   pub r#type: String
 }
 
-/// NO ATTRIBUTES AVAILABLE FROM STRIPE
-/// 
 /// If this is a `multi_use` mandate, this hash contains details about the mandate.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct MultiUse;
@@ -76,7 +72,7 @@ pub struct PaymentMethodDetailsBlikOffSession {
   /// Frequency interval of each recurring payment.
   pub interval: String,
   /// Frequency indicator of each recurring payment.
-  pub interval_count: i64 // i64?
+  pub interval_count: u16
 }
 
 /// If this mandate is associated with a `blik` payment method, this hash contains mandate information specific to the `blik` payment method.
@@ -90,14 +86,10 @@ pub struct PaymentMethodDetailsBlik {
   pub r#type: String,
 }
 
-/// NO ATTRIBUTES AVAILABLE FROM STRIPE
-/// 
 /// If this mandate is associated with a `card` payment method, this hash contains mandate information specific to the `card` payment method.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodDetailsCard;
 
-/// NO ATTRIBUTES AVAILABLE FROM STRIPE
-/// 
 /// If this mandate is associated with a `link` payment method, this hash contains mandate information specific to the `link` payment method.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodDetailsLink;
@@ -111,8 +103,6 @@ pub struct PaymentMethodDetailsSepaDebit {
   pub url: String
 }
 
-/// NO ATTRIBUTES AVAILABLE FROM STRIPE
-///
 /// If this mandate is associated with a `us_bank_account` payment method, this hash contains mandate information specific to the `us_bank_account` payment method.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PaymentMethodDetailsUsBankAccount;

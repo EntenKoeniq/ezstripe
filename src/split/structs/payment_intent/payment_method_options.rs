@@ -77,7 +77,7 @@ pub struct PaymentMethodOptionsCardMandateOptions {
   /// For example, `interval=month` and `interval_count=3` indicates one payment every three months.
   /// Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).
   /// This parameter is optional when `interval=sporadic`.
-  pub interval_count: Option<String>,
+  pub interval_count: Option<u16>,
   /// Unique identifier for the mandate or subscription.
   pub reference: String,
   /// Start date of the mandate or subscription.
