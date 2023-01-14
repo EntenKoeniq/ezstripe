@@ -91,69 +91,18 @@ pub struct Response {
   pub issuing: Option<Issuing>
 }
 
-impl Response {
-  /// Get the complete Response as String.
-  pub fn to_string(&self) -> Result<String, ()> {
-    match serde_json::to_string(self) {
-      Ok(r) => Ok(r),
-      Err(_) => Err(())
-    }
-  }
-}
-
 #[doc(hidden)]
 pub struct Info {
   pub secret_key: String
 }
 
 impl Info {
-  /// Send a `get` request to Stripe's API.
+  /// Sends a "GET" request to Stripe's API.
   pub async fn get(&self) -> Result<Response, (String, Option<crate::error::Info>)> {
-    let request = reqwest::Client::new()
+    let crequest = reqwest::Client::new()
       .get("https://api.stripe.com/v1/balance")
       .basic_auth(&self.secret_key, None::<&str>)
-      .header("Content-Type", "application/x-www-form-urlencoded")
-      .send()
-      .await;
-    if request.is_err() {
-      return Err(("Request failed".to_string(), None));
-    }
-  
-    let response = request.unwrap();
-    let status = response.status();
-    let body_response = match response.text().await {
-      Ok(r) => r,
-      Err(e) => {
-        if log::log_enabled!(log::Level::Error) {
-          log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/EntenKoeniq/ezstripe/issues)");
-          log::error!("{}", e);
-        }
-        return Err(("Body could not be unwrapped".to_string(), None));
-      }
-    };
-
-    if status.is_success() {
-      match serde_json::from_str::<serde_json::Value>(&body_response) {
-        Ok(r) => {
-          if r["object"] == "balance" {
-            if let Some(r2) = crate::helper::value_to_response::<Response>(r) {
-              return Ok(r2);
-            }
-          }
-        },
-        Err(e) => {
-          if log::log_enabled!(log::Level::Error) {
-            log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/EntenKoeniq/ezstripe/issues)");
-            log::error!("{}", e);
-          }
-        }
-      };
-    } else {
-      if let Some(r) = crate::error::Info::create(status.as_u16(), &body_response) {
-        return Err(("Status is not success".to_string(), Some(r)));
-      }
-    }
-    
-    Err(("Something went wrong".to_string(), None))
+      .header("Content-Type", "application/x-www-form-urlencoded");
+    crate::helper::get_request::<Response>(crequest).await
   }
 }

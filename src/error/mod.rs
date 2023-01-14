@@ -158,12 +158,4 @@ impl Info {
       payment_intent
     })
   }
-
-  /// Get the complete Info as String.
-  pub fn to_string(&self) -> Result<String, ()> {
-    match serde_json::to_string(self) {
-      Ok(r) => Ok(r),
-      Err(_) => Err(())
-    }
-  }
 }

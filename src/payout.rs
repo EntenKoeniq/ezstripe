@@ -56,14 +56,20 @@ pub struct Response {
   pub r#type: String
 }
 
-impl Response {
-  /// Get the complete Response as String.
-  pub fn to_string(&self) -> Result<String, ()> {
-    match serde_json::to_string(self) {
-      Ok(r) => Ok(r),
-      Err(_) => Err(())
-    }
-  }
+/// Returns a list of all refunds you’ve previously created.
+/// The refunds are returned in sorted order, with the most recent refunds appearing first.
+/// For convenience, the 10 most recent refunds are always available by default on the charge object.
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct ResponseList {
+  /// String representing the object’s type.
+  /// Objects of the same type share the same value.
+  pub object: String,
+  /// The end of the requested URL of the API.
+  pub url: String,
+  /// If more than the data received now exists `true` otherwise `false`.
+  pub has_more: bool,
+  /// All received data.
+  pub data: Vec<Response>
 }
 
 #[doc(hidden)]
@@ -143,112 +149,66 @@ pub struct Info {
 }
 
 impl Info {
-  /// Send a `post` request to Stripe's API.
+  /// Sends a "POST" request to Stripe's API.
   pub async fn send(&self) -> Result<Response, (String, Option<crate::error::Info>)> {
-    if log::log_enabled!(log::Level::Warn) {
-      match self.r#type {
-        Types::RETRIEVE(_) => log::warn!("Please use the `get()` function for `RETRIEVE`"),
-        Types::LIST(_) => log::warn!("Please use the `get()` function for `LIST`"),
-        _ => ()
-      };
-    }
-
-    let request = self.r#type.create_send_request(&self.secret_key).send().await;
-    if request.is_err() {
-      return Err(("Request failed".to_string(), None));
-    }
-  
-    let response = request.unwrap();
-    let status = response.status();
-    let body_response = match response.text().await {
-      Ok(r) => r,
-      Err(e) => {
+    match self.r#type {
+      Types::RETRIEVE(_) => {
         if log::log_enabled!(log::Level::Error) {
-          log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/EntenKoeniq/ezstripe/issues)");
-          log::error!("{}", e);
+          log::error!("The selected type is incompatible with `send()`. Please use the `get()` function");
         }
-        return Err(("Body could not be unwrapped".to_string(), None));
-      }
+        return Err(("This function is incompatible with the selected Type".to_string(), None));
+      },
+      Types::LIST(_) => {
+        if log::log_enabled!(log::Level::Error) {
+          log::error!("The selected type is incompatible with `send()`. Please use the `get_list()` function");
+        }
+        return Err(("This function is incompatible with the selected Type".to_string(), None));
+      },
+      _ => ()
     };
 
-    if status.is_success() {
-      match serde_json::from_str::<serde_json::Value>(&body_response) {
-        Ok(r) => {
-          if r["object"] == "payout" {
-            if let Some(r2) = crate::helper::value_to_response::<Response>(r) {
-              return Ok(r2);
-            }
-          }
-        },
-        Err(e) => {
-          if log::log_enabled!(log::Level::Error) {
-            log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/EntenKoeniq/ezstripe/issues)");
-            log::error!("{}", e);
-          }
+    crate::helper::post_request::<Response>(self.r#type.create_send_request(&self.secret_key)).await
+  }
+  
+  /// Sends a "GET" request to Stripe's API.
+  pub async fn get(&self) -> Result<Response, (String, Option<crate::error::Info>)> {
+    match self.r#type {
+      Types::RETRIEVE(_) => (),
+      Types::LIST(_) => {
+        if log::log_enabled!(log::Level::Error) {
+          log::error!("The selected type is incompatible with `get()`. Please use the `get_list()` function");
         }
-      };
-    } else {
-      if let Some(r) = crate::error::Info::create(status.as_u16(), &body_response) {
-        return Err(("Status is not success".to_string(), Some(r)));
+        return Err(("This function is incompatible with the selected Type".to_string(), None));
+      },
+      _ => {
+        if log::log_enabled!(log::Level::Error) {
+          log::error!("The selected type is incompatible with `get()`. Please use the `send()` function");
+        }
+        return Err(("This function is incompatible with the selected Type".to_string(), None));
       }
-    }
+    };
     
-    Err(("Something went wrong".to_string(), None))
+    crate::helper::get_request::<Response>(self.r#type.create_get_request(&self.secret_key)).await
   }
 
-  /// Send a `get` request to Stripe's API.
-  pub async fn get(&self) -> Result<Vec<Response>, (String, Option<crate::error::Info>)> {
-    if log::log_enabled!(log::Level::Warn) {
-      match self.r#type {
-        Types::RETRIEVE(_) | Types::LIST(_) => (),
-        _ => log::warn!("Please use the `send()` function for types other than `RETRIEVE` or `LIST`")
-      };
-    }
-    
-    let request = self.r#type.create_get_request(&self.secret_key).send().await;
-    if request.is_err() {
-      return Err(("Request failed".to_string(), None));
-    }
-  
-    let response = request.unwrap();
-    let status = response.status();
-    let body_response = match response.text().await {
-      Ok(r) => r,
-      Err(e) => {
+  /// Sends a "GET" request to Stripe's API.
+  pub async fn get_list(&self) -> Result<ResponseList, (String, Option<crate::error::Info>)> {
+    match self.r#type {
+      Types::LIST(_) => (),
+      Types::RETRIEVE(_) => {
         if log::log_enabled!(log::Level::Error) {
-          log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/EntenKoeniq/ezstripe/issues)");
-          log::error!("{}", e);
+          log::error!("The selected type is incompatible with `get_list()`. Please use the `get()` function");
         }
-        return Err(("Body could not be unwrapped".to_string(), None));
+        return Err(("This function is incompatible with the selected Type".to_string(), None));
+      },
+      _ => {
+        if log::log_enabled!(log::Level::Error) {
+          log::error!("The selected type is incompatible with `get_list()`. Please use the `send()` function");
+        }
+        return Err(("This function is incompatible with the selected Type".to_string(), None));
       }
     };
-
-    if status.is_success() {
-      match serde_json::from_str::<serde_json::Value>(&body_response) {
-        Ok(r) => {
-          if r["object"] == "payout" {
-            if let Some(r2) = crate::helper::value_to_response::<Response>(r) {
-              return Ok(vec![r2]);
-            }
-          } else if r["object"] == "list" {
-            if let Some(r2) = crate::helper::value_to_response_list::<Response>(r) {
-              return Ok(r2);
-            }
-          }
-        },
-        Err(e) => {
-          if log::log_enabled!(log::Level::Error) {
-            log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/EntenKoeniq/ezstripe/issues)");
-            log::error!("{}", e);
-          }
-        }
-      };
-    } else {
-      if let Some(r) = crate::error::Info::create(status.as_u16(), &body_response) {
-        return Err(("Status is not success".to_string(), Some(r)));
-      }
-    }
     
-    Err(("Something went wrong".to_string(), None))
+    crate::helper::get_request::<ResponseList>(self.r#type.create_get_request(&self.secret_key)).await
   }
 }

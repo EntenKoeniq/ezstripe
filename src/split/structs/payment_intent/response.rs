@@ -128,13 +128,3 @@ pub struct Response {
   /// See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
   pub transfer_group: Option<String>
 }
-
-impl Response {
-  /// Get the complete Response as String.
-  pub fn to_string(&self) -> Result<String, ()> {
-    match serde_json::to_string(self) {
-      Ok(r) => Ok(r),
-      Err(_) => Err(())
-    }
-  }
-}

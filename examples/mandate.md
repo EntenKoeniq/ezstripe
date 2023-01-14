@@ -53,7 +53,7 @@ async fn main() {
   
   // No error, so let's unpack the answer
   let stripe_result = stripe_response.unwrap();
-
+  
   println!("{:?}", stripe_result);
 }
 ```
