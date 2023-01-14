@@ -19,12 +19,16 @@
     <a href="https://github.com/EntenKoeniq/ezstripe/tree/main/examples">
       Examples
     </a>
+    <span> | </span>
+    <a href="https://github.com/EntenKoeniq/ezstripe/blob/main/CHANGELOG.md">
+      Changelog
+    </a>
   </h4>
 </div>
 
 > **Warning** <br>
 > Up to version `1.0.0` a lot of the structure can change with each new version! <br>
-> Therefore, with every new version, pay attention to the changes in the changelogs on [Github](https://github.com/EntenKoeniq/ezstripe)!
+> Therefore, pay attention to the changes in the [changelog on Github](https://github.com/EntenKoeniq/ezstripe/blob/main/CHANGELOG.md) with every new version!
 
 # Usage
 ### Installation
