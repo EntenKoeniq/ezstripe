@@ -1,6 +1,6 @@
 /// The payment error encountered in the previous PaymentIntent confirmation.
 /// It will be cleared if the PaymentIntent is later updated for any reason.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct LastPaymentError {
   /// For card errors, the ID of the failed charge.
   pub charge: Option<String>,

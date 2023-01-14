@@ -5,7 +5,7 @@ use serde::{ Serialize, Deserialize };
 /// Refunds object from 01/12/2023
 /// 
 /// [Refunds object](https://stripe.com/docs/api/refunds/object)
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Response {
   /// Unique identifier for the object.
   pub id: String,

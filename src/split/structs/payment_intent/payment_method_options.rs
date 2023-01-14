@@ -1,17 +1,17 @@
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsAcssDebit;
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsAffirm;
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsAfterpayClearpay;
 
 /// If the PaymentIntent’s payment_method_types includes `alipay`, this hash contains the configurations that will be applied to each payment attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsAlipay {
   /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
   /// 
@@ -23,7 +23,7 @@ pub struct PaymentMethodOptionsAlipay {
 }
 
 /// If the PaymentIntent’s payment_method_types includes `au_becs_debit`, this hash contains the configurations that will be applied to each payment attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsAuBecsDebit {
   /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
   /// 
@@ -35,7 +35,7 @@ pub struct PaymentMethodOptionsAuBecsDebit {
 }
 
 /// If the PaymentIntent’s payment_method_types includes `bacs_debit`, this hash contains the configurations that will be applied to each payment attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsBacsDebit {
   /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
   /// 
@@ -47,19 +47,19 @@ pub struct PaymentMethodOptionsBacsDebit {
 }
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsBancontact;
 
 /// If the PaymentIntent’s payment_method_types includes `blik`, this hash contains the configurations that will be applied to each payment attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsBlik;
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsBoleto;
 
 /// Configuration options for setting up an eMandate for cards issued in India.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsCardMandateOptions {
   /// Amount to be charged for future payments.
   pub amount: u32,
@@ -88,11 +88,11 @@ pub struct PaymentMethodOptionsCardMandateOptions {
 }
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsCardInstallments;
 
 /// If the SetupIntent’s payment_method_types includes `card`, this hash contains the configurations that will be applied to each setup attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsCard {
   /// Controls when the funds will be captured from the customer’s account.
   pub capture_method: Option<String>,
@@ -127,15 +127,15 @@ pub struct PaymentMethodOptionsCard {
 }
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsCardPresent;
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsCustomerBalance;
 
 /// If the PaymentIntent’s payment_method_types includes `eps`, this hash contains the configurations that will be applied to each payment attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsEps {
   /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
   /// 
@@ -147,7 +147,7 @@ pub struct PaymentMethodOptionsEps {
 }
 
 /// If the PaymentIntent’s payment_method_types includes `fpx`, this hash contains the configurations that will be applied to each payment attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsFpx {
   /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
   /// 
@@ -159,7 +159,7 @@ pub struct PaymentMethodOptionsFpx {
 }
 
 /// If the PaymentIntent’s payment_method_types includes `giropay`, this hash contains the configurations that will be applied to each payment attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsGiropay {
   /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
   /// 
@@ -171,7 +171,7 @@ pub struct PaymentMethodOptionsGiropay {
 }
 
 /// If the PaymentIntent’s payment_method_types includes `grabpay`, this hash contains the configurations that will be applied to each payment attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsGrabpay {
   /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
   /// 
@@ -183,7 +183,7 @@ pub struct PaymentMethodOptionsGrabpay {
 }
 
 /// If the PaymentIntent’s payment_method_types includes `ideal`, this hash contains the configurations that will be applied to each payment attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsIdeal {
   /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
   /// 
@@ -195,19 +195,19 @@ pub struct PaymentMethodOptionsIdeal {
 }
 
 /// If the PaymentIntent’s payment_method_types includes `interac_present`, this hash contains the configurations that will be applied to each payment attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsInteracPresent;
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsKlarna;
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsKombini;
 
 /// If the SetupIntent’s payment_method_types includes `link`, this hash contains the configurations that will be applied to each setup attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsLink {
   /// Controls when the funds will be captured from the customer’s account.
   pub capture_method: Option<String>,
@@ -223,11 +223,11 @@ pub struct PaymentMethodOptionsLink {
 }
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsOxxo;
 
 /// If the PaymentIntent’s payment_method_types includes `p24`, this hash contains the configurations that will be applied to each payment attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsP24 {
   /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
   /// 
@@ -239,7 +239,7 @@ pub struct PaymentMethodOptionsP24 {
 }
 
 /// If the PaymentIntent’s payment_method_types includes `paynow`, this hash contains the configurations that will be applied to each payment attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsPaynow {
   /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
   /// 
@@ -251,11 +251,11 @@ pub struct PaymentMethodOptionsPaynow {
 }
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsPix;
 
 /// If the PaymentIntent’s payment_method_types includes `promptpay`, this hash contains the configurations that will be applied to each payment attempt of that type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsPromptpay {
   /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
   /// 
@@ -267,23 +267,23 @@ pub struct PaymentMethodOptionsPromptpay {
 }
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsSepaDebit;
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsSofort;
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsUsBankAccount;
 
 /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsWechatPay;
 
 /// Payment-method-specific configuration for this SetupIntent.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptions {
   /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
   pub acss_debit: Option<PaymentMethodOptionsAcssDebit>,

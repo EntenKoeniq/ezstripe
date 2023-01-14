@@ -1,11 +1,11 @@
 use serde::{ Serialize, Deserialize };
 
 /// If this is a Mandate accepted offline, this hash contains details about the offline acceptance.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct CustomerAcceptanceOffline;
 
 /// If this is a Mandate accepted online, this hash contains details about the online acceptance.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct CustomerAcceptanceOnline {
   /// The IP address from which the Mandate was accepted by the customer.
   pub ip_address: String,
@@ -14,7 +14,7 @@ pub struct CustomerAcceptanceOnline {
 }
 
 /// Details about the customer’s acceptance of the mandate.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct CustomerAcceptance {
   /// The time at which the customer accepted the Mandate.
   pub accepted_at: i64,
@@ -27,11 +27,11 @@ pub struct CustomerAcceptance {
 }
 
 /// If this is a `multi_use` mandate, this hash contains details about the mandate.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct MultiUse;
 
 /// If this mandate is associated with a `acss_debit` payment method, this hash contains mandate information specific to the `acss_debit` payment method.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodDetailsAcssDebit {
   /// List of Stripe products where this mandate can be selected automatically.
   pub default_for: Vec<String>,
@@ -45,14 +45,14 @@ pub struct PaymentMethodDetailsAcssDebit {
 }
 
 /// If this mandate is associated with a `au_becs_debit` payment method, this hash contains mandate information specific to the `au_becs_debit` payment method.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodDetailsAuBecsDebit {
   /// The URL of the mandate. This URL generally contains sensitive information about the customer and should be shared with them exclusively.
   pub url: String
 }
 
 /// If this mandate is associated with a `bacs_debit` payment method, this hash contains mandate information specific to the `bacs_debit` payment method.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodDetailsBacsDebit {
   /// The status of the mandate on the Bacs network. Can be one of `pending`, `revoked`, `refused`, or `accepted`.
   pub network_status: String,
@@ -63,7 +63,7 @@ pub struct PaymentMethodDetailsBacsDebit {
 }
 
 /// Details for off-session mandates.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodDetailsBlikOffSession {
   /// Amount of each recurring payment.
   pub amount: u32,
@@ -76,7 +76,7 @@ pub struct PaymentMethodDetailsBlikOffSession {
 }
 
 /// If this mandate is associated with a `blik` payment method, this hash contains mandate information specific to the `blik` payment method.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodDetailsBlik {
   /// Date at which the mandate expires.
   pub expires_after: i64,
@@ -87,15 +87,15 @@ pub struct PaymentMethodDetailsBlik {
 }
 
 /// If this mandate is associated with a `card` payment method, this hash contains mandate information specific to the `card` payment method.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodDetailsCard;
 
 /// If this mandate is associated with a `link` payment method, this hash contains mandate information specific to the `link` payment method.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodDetailsLink;
 
 /// If this mandate is associated with a `sepa_debit` payment method, this hash contains mandate information specific to the `sepa_debit` payment method.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodDetailsSepaDebit {
   /// The unique reference of the mandate.
   pub reference: String,
@@ -104,11 +104,11 @@ pub struct PaymentMethodDetailsSepaDebit {
 }
 
 /// If this mandate is associated with a `us_bank_account` payment method, this hash contains mandate information specific to the `us_bank_account` payment method.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodDetailsUsBankAccount;
 
 /// Additional mandate information specific to the payment method type.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodDetails {
   /// If this mandate is associated with a `acss_debit` payment method, this hash contains mandate information specific to the `acss_debit` payment method.
   pub acss_debit: Option<PaymentMethodDetailsAcssDebit>,
@@ -131,7 +131,7 @@ pub struct PaymentMethodDetails {
 }
 
 /// If this is a `single_use` mandate, this hash contains details about the mandate.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct SingleUse {
   /// On a single use mandate, the amount of the payment.
   pub amount: u32,
@@ -142,7 +142,7 @@ pub struct SingleUse {
 /// Mandate object from 01/12/2023
 /// 
 /// [Mandate object](https://stripe.com/docs/api/mandates/object)
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Response {
   /// Unique identifier for the object.
   pub id: String,
@@ -184,7 +184,7 @@ pub struct Info {
 
 impl Info {
   /// Send a `get` request to Stripe's API.
-  pub async fn get(&self) -> Result<Vec<Response>, (String, Option<crate::error::Info>)> {
+  pub async fn get(&self) -> Result<Response, (String, Option<crate::error::Info>)> {
     let request = reqwest::Client::new()
       .get(format!("https://api.stripe.com/v1/mandates/{}", self.id))
       .basic_auth(&self.secret_key, None::<&str>)
@@ -213,7 +213,7 @@ impl Info {
         Ok(r) => {
           if r["object"] == "mandate" {
             if let Some(r2) = crate::helper::value_to_response::<Response>(r) {
-              return Ok(vec![r2]);
+              return Ok(r2);
             }
           }
         },

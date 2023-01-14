@@ -1,7 +1,7 @@
 use serde::{ Serialize, Deserialize };
 
 /// A list of possible HTTP errors.
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub enum HTTPCodes {
   /// Something went wrong.
   None,
@@ -68,7 +68,7 @@ include!("codes_enum.rs");
 /// All available error types from 01/08/2023
 /// 
 /// [Official Stripe error types list](https://stripe.com/docs/api/errors)
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "snake_case")]
 pub enum Types {
   /// MISSING DOCUMENTATION
@@ -100,7 +100,7 @@ impl std::fmt::Display for Types {
 }
 
 /// All the important information about the error from Stripe.
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Info {
   /// The HTTP response status code.
   pub http_code: HTTPCodes,

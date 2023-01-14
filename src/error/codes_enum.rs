@@ -1,7 +1,7 @@
 /// All available error codes from 01/08/2023
 /// 
 /// [Official Stripe error code list](https://stripe.com/docs/error-codes)
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "snake_case")]
 pub enum Codes {
   None,

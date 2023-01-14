@@ -1,5 +1,5 @@
 /// Shipping address.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct ShippingAddress {
   /// City, district, suburb, town, or village.
   pub city: Option<String>,
@@ -16,7 +16,7 @@ pub struct ShippingAddress {
 }
 
 /// Shipping information for this PaymentIntent.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Shipping {
   /// Shipping address.
   pub address: ShippingAddress,

@@ -4,7 +4,7 @@ use serde::{ Serialize, Deserialize };
 
 /// Funds that are available to be transferred or paid out, whether automatically by Stripe or explicitly via the [Transfers API](https://stripe.com/docs/api/balance#transfers) or [Payouts API](https://stripe.com/docs/api/balance#payouts).
 /// The available balance for each currency and payment type can be found in the `source_types` property.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Available {
   /// Balance amount.
   pub amount: u32,
@@ -16,7 +16,7 @@ pub struct Available {
 
 /// Funds that are not yet available in the balance, due to the 7-day rolling pay cycle.
 /// The pending balance for each currency, and for each payment type, can be found in the `source_types` property.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Pending {
   /// Balance amount.
   pub amount: u32,
@@ -28,7 +28,7 @@ pub struct Pending {
 
 /// Funds held due to negative balances on connected Custom accounts.
 /// The connect reserve balance for each currency and payment type can be found in the `source_types` property.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct ConnectReserved {
   /// Balance amount.
   pub amount: u32,
@@ -39,7 +39,7 @@ pub struct ConnectReserved {
 }
 
 /// Funds that can be paid out using Instant Payouts.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct InstantAvailable {
   /// Balance amount.
   pub amount: u32,
@@ -50,7 +50,7 @@ pub struct InstantAvailable {
 }
 
 /// Funds that are available for use.
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct IssuingAvailable {
   /// Balance amount.
   pub amount: u32,
@@ -61,7 +61,7 @@ pub struct IssuingAvailable {
 }
 
 /// Funds that can be spent on your [Issued Cards](https://stripe.com/docs/api/balance/balance_object#issuing/cards).
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Issuing {
   /// Funds that are available for use.
   pub available: Vec<IssuingAvailable>
@@ -70,7 +70,7 @@ pub struct Issuing {
 /// Balance object from 01/12/2023
 /// 
 /// [Balance object](https://stripe.com/docs/api/balance/balance_object)
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Response {
   /// String representing the object’s type. Objects of the same type share the same value.
   pub object: String, // Value is "balance"
@@ -108,7 +108,7 @@ pub struct Info {
 
 impl Info {
   /// Send a `get` request to Stripe's API.
-  pub async fn get(&self) -> Result<Vec<Response>, (String, Option<crate::error::Info>)> {
+  pub async fn get(&self) -> Result<Response, (String, Option<crate::error::Info>)> {
     let request = reqwest::Client::new()
       .get("https://api.stripe.com/v1/balance")
       .basic_auth(&self.secret_key, None::<&str>)
@@ -137,7 +137,7 @@ impl Info {
         Ok(r) => {
           if r["object"] == "balance" {
             if let Some(r2) = crate::helper::value_to_response::<Response>(r) {
-              return Ok(vec![r2]);
+              return Ok(r2);
             }
           }
         },
