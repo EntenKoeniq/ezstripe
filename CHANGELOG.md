@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.1 (01/15/2023)
+- Removed
+- - Duplicate function with different name.
+- Updated
+- - `payment_intent::Response::NextAction::r#type` is now `String`.
+- - `payment_intent::Response::ProcessingCard::customer_notification` is now `Option<ProcessingCardCustomerNotification>`.
+- - `payment_intent::Response::TransferData::amount` is now `u32`.
+- Some documentation improvements and more...
+
 ## 0.4.0 (01/15/2023)
 - Performance improvements
 - - 5 threads executed the `retrieve_balance()` and `create_payment_intent()` functions 20 times:
