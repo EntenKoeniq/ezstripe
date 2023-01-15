@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.4.0 (01/15/2023)
+- Performance improvements
+- - 5 threads executed the `retrieve_balance()` and `create_payment_intent()` functions 20 times:
+- - - 0.4.0: ~11.5s
+- - - 0.3.2: ~15.68s
+- Added
+- - `Client::new("SECRET_KEY")` to create new clients instead of initializing them.
+- - `ResponseList` struct for `list_payment_intent()`, `list_payout()` and `list_refund()`.
+- - `get_list()` which return the new `ResponseList` for all `Types::LIST`.
+- - `Clone` attribute for `Response`.
+- Updated
+- - LICENSE
+- Some documentation improvements and more...
+
 ## 0.3.2 (01/13/2023)
 - LICENSE and Authors updated.
 - Changed Github username (from "xEntenKoeniqx" to "EntenKoeniq").
