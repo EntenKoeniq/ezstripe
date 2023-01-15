@@ -172,7 +172,7 @@ impl Info<'_> {
       _ => ()
     };
 
-    crate::helper::post_request::<Response>(self.r#type.create_send_request(self.reqwest_client, &self.secret_key)).await
+    crate::helper::make_reqwest::<Response>(self.r#type.create_send_request(self.reqwest_client, &self.secret_key)).await
   }
   
   /// Sends a "GET" request to Stripe's API.
@@ -193,7 +193,7 @@ impl Info<'_> {
       }
     };
     
-    crate::helper::get_request::<Response>(self.r#type.create_get_request(self.reqwest_client, &self.secret_key)).await
+    crate::helper::make_reqwest::<Response>(self.r#type.create_get_request(self.reqwest_client, &self.secret_key)).await
   }
 
   /// Sends a "GET" request to Stripe's API.
@@ -214,6 +214,6 @@ impl Info<'_> {
       }
     };
     
-    crate::helper::get_request::<ResponseList>(self.r#type.create_get_request(self.reqwest_client, &self.secret_key)).await
+    crate::helper::make_reqwest::<ResponseList>(self.r#type.create_get_request(self.reqwest_client, &self.secret_key)).await
   }
 }
