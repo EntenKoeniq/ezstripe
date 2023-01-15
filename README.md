@@ -126,7 +126,14 @@ Complete and stable ...
 
 <details>
   <summary>Source code</summary>
-  
+
+```toml
+# Config.toml
+[dependencies]
+tokio = { version = "1.24.1", features = ["full"] }
+ezstripe = "0.4.0"
+```
+
 ```Rust
 #[macro_use] extern crate ezstripe;
 
@@ -172,12 +179,19 @@ async fn main() {
 
 | [ezstripe](https://crates.io/crates/ezstripe) | #0 | #1 | #2 | #3 | #4 | #5 | AVG |
 | ------- | --- | --- | --- | --- | --- | --- | --- |
-| First run | 6.26s | 6.38s | 6.38s | 6.43s | 6.19s | 6.39s | 6.34s |
-| Second run | 6.43s | 6.28s | 6.48s | 6.56s | 6.27s | 6.39s | 6.40s |
-| Third run | 6.27s | 6.26s | 6.38s | 6.24s | 6.28s | 6.36s | 6.30s |
+| First run | 6.26s | 6.39s | 6.33s | 6.56s | 6.51s | 6.22s | 6.38s |
+| Second run | 6.39s | 6.47s | 6.33s | 6.44s | 6.29s | 6.39s | 6.39s |
+| Third run | 6.40s | 6.42s | 6.34s | 6.44s | 6.31s | 6.29s | 6.37s |
 
 <details>
   <summary>Source code</summary>
+
+```toml
+# Config.toml
+[dependencies]
+tokio = { version = "1.24.1", features = ["full"] }
+async-stripe = { version = "0.15.0", features = ["runtime-async-std-surf"] }
+```
   
 ```Rust
 use stripe::{
@@ -200,9 +214,7 @@ fn create_thread(num: u16) {
 
     for _ in 0..20 {
       let payment_intent = {
-        let mut create_intent = CreatePaymentIntent::new(1000, Currency::USD);
-        create_intent.amount = 1500;
-        create_intent.currency = Currency::EUR;
+        let mut create_intent = CreatePaymentIntent::new(1500, Currency::EUR);
         create_intent.payment_method_types = Some(vec!["card".to_string()]);
         create_intent.capture_method = Some(PaymentIntentCaptureMethod::Manual);
 
@@ -231,11 +243,11 @@ async fn main() {
 
 | [async-stripe](https://crates.io/crates/async-stripe) | #0 | #1 | #2 | #3 | #4 | #5 | AVG |
 | ------- | --- | --- | --- | --- | --- | --- | --- |
-| First run | 6.43s | 6.31s | 6.36s | 6.32s | 6.49s | 6.34s | 6.38s |
-| Second run | 6.52s | 6.56s | 6.45s | 6.75s | 6.54s | 6.48s | 6.55s |
-| Third run | 6.40s | 6.45s | 6.46s | 6.50s | 6.47s | 6.45s | 6.46s |
+| First run | 6.57s | 6.37s | 6.56s | 6.31s | 6.65s | 6.39s | 6.48s |
+| Second run | 6.53s | 6.63s | 6.42s | 6.36s | 6.75s | 6.58s | 6.55s |
+| Third run | 6.58s | 6.55s | 6.52s | 6.43s | 6.46s | 6.62s | 6.53s |
 
 Performance result
 | [ezstripe 0.4.0](https://crates.io/crates/ezstripe) | [async-stripe 0.15.0](https://crates.io/crates/async-stripe) |
 | --- | --- |
-| 100% | 98.29% |
+| 100% | 97.85% |
