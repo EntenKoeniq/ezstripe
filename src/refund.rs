@@ -127,9 +127,11 @@ impl Types {
   }
 }
 
-#[doc(hidden)]
+/// This structure contains all the data for a request to Stripe's API.
 pub struct Info {
+  /// The type of request to Stripe.
   pub r#type: Types,
+  /// Stripe's API secret key.
   pub secret_key: String
 }
 
@@ -139,15 +141,15 @@ impl Info {
     match self.r#type {
       Types::RETRIEVE(_) => {
         if log::log_enabled!(log::Level::Error) {
-          log::error!("The selected type is incompatible with `send()`. Please use the `get()` function");
+          log::error!("The selected type is not compatible with `send()`. Please use the `get()` function");
         }
-        return Err(("This function is incompatible with the selected Type".to_string(), None));
+        return Err(("This function is not compatible with the selected type".to_string(), None));
       },
       Types::LIST(_) => {
         if log::log_enabled!(log::Level::Error) {
-          log::error!("The selected type is incompatible with `send()`. Please use the `get_list()` function");
+          log::error!("The selected type is not compatible with `send()`. Please use the `get_list()` function");
         }
-        return Err(("This function is incompatible with the selected Type".to_string(), None));
+        return Err(("This function is not compatible with the selected type".to_string(), None));
       },
       _ => ()
     };
@@ -161,15 +163,15 @@ impl Info {
       Types::RETRIEVE(_) => (),
       Types::LIST(_) => {
         if log::log_enabled!(log::Level::Error) {
-          log::error!("The selected type is incompatible with `get()`. Please use the `get_list()` function");
+          log::error!("The selected type is not compatible with `get()`. Please use the `get_list()` function");
         }
-        return Err(("This function is incompatible with the selected Type".to_string(), None));
+        return Err(("This function is not compatible with the selected type".to_string(), None));
       },
       _ => {
         if log::log_enabled!(log::Level::Error) {
-          log::error!("The selected type is incompatible with `get()`. Please use the `send()` function");
+          log::error!("The selected type is not compatible with `get()`. Please use the `send()` function");
         }
-        return Err(("This function is incompatible with the selected Type".to_string(), None));
+        return Err(("This function is not compatible with the selected type".to_string(), None));
       }
     };
     
@@ -182,15 +184,15 @@ impl Info {
       Types::LIST(_) => (),
       Types::RETRIEVE(_) => {
         if log::log_enabled!(log::Level::Error) {
-          log::error!("The selected type is incompatible with `get_list()`. Please use the `get()` function");
+          log::error!("The selected type is not compatible with `get_list()`. Please use the `get()` function");
         }
-        return Err(("This function is incompatible with the selected Type".to_string(), None));
+        return Err(("This function is not compatible with the selected type".to_string(), None));
       },
       _ => {
         if log::log_enabled!(log::Level::Error) {
-          log::error!("The selected type is incompatible with `get_list()`. Please use the `send()` function");
+          log::error!("The selected type is not compatible with `get_list()`. Please use the `send()` function");
         }
-        return Err(("This function is incompatible with the selected Type".to_string(), None));
+        return Err(("This function is not compatible with the selected type".to_string(), None));
       }
     };
     

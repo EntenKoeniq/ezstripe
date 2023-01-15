@@ -91,8 +91,9 @@ pub struct Response {
   pub issuing: Option<Issuing>
 }
 
-#[doc(hidden)]
+/// This structure contains all the data for a request to Stripe's API.
 pub struct Info {
+  /// Stripe's API secret key.
   pub secret_key: String
 }
 

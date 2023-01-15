@@ -166,9 +166,11 @@ pub struct Response {
   pub single_use: Option<String> // Possible
 }
 
-#[doc(hidden)]
+/// This structure contains all the data for a request to Stripe's API.
 pub struct Info {
+  /// Unique identifier of the object.
   pub id: String,
+  /// Stripe's API secret key.
   pub secret_key: String
 }
 
