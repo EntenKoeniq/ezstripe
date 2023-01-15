@@ -24,7 +24,7 @@ pub struct NextActionRedirectToUrl {
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct NextAction {
   /// Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.
-  pub r#type: Option<String>,
+  pub r#type: String,
   /// Contains instructions for processing off session recurring payments with Indian issued cards.
   pub card_await_notification: Option<NextActionCardAwaitNotification>,
   /// Contains instructions for authenticating a payment by redirecting your customer to another page or application.
