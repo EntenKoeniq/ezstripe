@@ -19,6 +19,14 @@
     <a href="https://github.com/EntenKoeniq/ezstripe/tree/main/examples">
       Examples
     </a>
+    <span> | </span>
+    <a href="https://github.com/EntenKoeniq/ezstripe/blob/main/CHANGELOG.md">
+      Changelog
+    </a>
+    <span> | </span>
+    <a href="https://github.com/EntenKoeniq/ezstripe/blob/main/BENCHMARKS.md">
+      Benchmarks
+    </a>
   </h4>
 </div>
 
