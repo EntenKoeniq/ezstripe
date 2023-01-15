@@ -9,9 +9,7 @@ impl Client {
   /// 
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   // Returns: String("amount=1500;currency=eur;payment_method_types[]=card;capture_method=manual;")
   ///   let stripe_body = ezbody!(
@@ -27,7 +25,8 @@ impl Client {
   pub fn create_refund(&self, body: String) -> crate::refund::Info {
     crate::refund::Info {
       r#type: crate::refund::Types::CREATE(body),
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 
@@ -39,9 +38,7 @@ impl Client {
   /// ```
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   let stripe_response = client.retrieve_refund("REFUND_ID".to_string()).get().await;
   ///   
@@ -51,7 +48,8 @@ impl Client {
   pub fn retrieve_refund(&self, id: String) -> crate::refund::Info {
     crate::refund::Info {
       r#type: crate::refund::Types::RETRIEVE(id),
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 
@@ -64,9 +62,7 @@ impl Client {
   /// ```
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   let stripe_response = client.update_refund("REFUND_ID".to_string(), "metadata[order_id]=2;".to_string()).send().await;
   ///   
@@ -76,7 +72,8 @@ impl Client {
   pub fn update_refund(&self, id: String, body: String) -> crate::refund::Info {
     crate::refund::Info {
       r#type: crate::refund::Types::UPDATE(id, body),
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 
@@ -88,9 +85,7 @@ impl Client {
   /// ```
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   let stripe_response = client.list_refund("limit=3;".to_string()).get().await;
   ///   
@@ -100,7 +95,8 @@ impl Client {
   pub fn list_refund(&self, body: String) -> crate::refund::Info {
     crate::refund::Info {
       r#type: crate::refund::Types::LIST(body),
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 
@@ -112,9 +108,7 @@ impl Client {
   /// ```
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   let stripe_response = client.cancel_refund("REFUND_ID".to_string()).send().await;
   ///   
@@ -124,7 +118,8 @@ impl Client {
   pub fn cancel_refund(&self, id: String) -> crate::refund::Info {
     crate::refund::Info {
       r#type: crate::refund::Types::CANCEL(id),
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 
@@ -137,9 +132,7 @@ impl Client {
   /// ```
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   let stripe_response = client.reverse_refund("REFUND_ID".to_string(), None).get().await;
   ///   
@@ -149,7 +142,8 @@ impl Client {
   pub fn reverse_refund(&self, id: String, body: Option<String>) -> crate::refund::Info {
     crate::refund::Info {
       r#type: crate::refund::Types::REVERSE(id, body.unwrap_or(String::default())),
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 }

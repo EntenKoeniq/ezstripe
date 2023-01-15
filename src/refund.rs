@@ -73,8 +73,8 @@ const REFUND_URL: &str = "https://api.stripe.com/v1/refunds";
 
 #[doc(hidden)]
 impl Types {
-  pub fn create_send_request(&self, secret: &str)-> reqwest::RequestBuilder {
-    let mut result = reqwest::Client::new()
+  pub fn create_send_request(&self, client: &reqwest::Client, secret: &str)-> reqwest::RequestBuilder {
+    let mut result = client
       .post(self._get_url())
       .basic_auth(secret, None::<&str>)
       .header("Content-Type", "application/x-www-form-urlencoded");
@@ -86,8 +86,8 @@ impl Types {
     result
   }
 
-  pub fn create_get_request(&self, secret: &str)-> reqwest::RequestBuilder {
-    let mut result = reqwest::Client::new()
+  pub fn create_get_request(&self, client: &reqwest::Client, secret: &str)-> reqwest::RequestBuilder {
+    let mut result = client
       .get(self._get_url())
       .basic_auth(secret, None::<&str>)
       .header("Content-Type", "application/x-www-form-urlencoded");
@@ -128,14 +128,17 @@ impl Types {
 }
 
 /// This structure contains all the data for a request to Stripe's API.
-pub struct Info {
+pub struct Info<'a> {
   /// The type of request to Stripe.
   pub r#type: Types,
   /// Stripe's API secret key.
-  pub secret_key: String
+  pub secret_key: String,
+  // A reference to the `reqwest::Client` reusable.
+  #[doc(hidden)]
+  pub reqwest_client: &'a reqwest::Client
 }
 
-impl Info {
+impl Info<'_> {
   /// Sends a "POST" request to Stripe's API.
   pub async fn send(&self) -> Result<Response, (String, Option<crate::error::Info>)> {
     match self.r#type {
@@ -154,7 +157,7 @@ impl Info {
       _ => ()
     };
 
-    crate::helper::post_request::<Response>(self.r#type.create_send_request(&self.secret_key)).await
+    crate::helper::post_request::<Response>(self.r#type.create_send_request(self.reqwest_client, &self.secret_key)).await
   }
 
   /// Sends a "GET" request to Stripe's API.
@@ -175,7 +178,7 @@ impl Info {
       }
     };
     
-    crate::helper::get_request::<Response>(self.r#type.create_get_request(&self.secret_key)).await
+    crate::helper::get_request::<Response>(self.r#type.create_get_request(self.reqwest_client, &self.secret_key)).await
   }
 
   /// Sends a "GET" request to Stripe's API.
@@ -196,6 +199,6 @@ impl Info {
       }
     };
     
-    crate::helper::get_request::<ResponseList>(self.r#type.create_get_request(&self.secret_key)).await
+    crate::helper::get_request::<ResponseList>(self.r#type.create_get_request(self.reqwest_client, &self.secret_key)).await
   }
 }

@@ -40,9 +40,7 @@ async fn main() {
   // To show possible errors (recommended for development)
   env_logger::init_from_env(env_logger::Env::default().filter_or("MY_LOG_LEVEL", "debug"));
 
-  let client = ezstripe::Client {
-    secret_key: "YOUR_SECRET_KEY".to_string()
-  };
+  let client = ezstripe::Client::new("SECRET_KEY");
 
   // Returns: String("amount=1500;currency=eur;")
   let stripe_body = ezbody!(

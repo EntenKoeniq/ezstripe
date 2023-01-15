@@ -9,9 +9,7 @@ impl Client {
   /// 
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   // Returns: String("amount=1500;currency=eur;payment_method_types[]=card;capture_method=manual;")
   ///   let stripe_body = ezbody!(
@@ -29,7 +27,8 @@ impl Client {
   pub fn create_payment_intent(&self, body: String) -> crate::payment_intent::Info {
     crate::payment_intent::Info {
       r#type: crate::payment_intent::Types::CREATE(body),
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 
@@ -41,9 +40,7 @@ impl Client {
   /// ```
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   let stripe_response = client.retrieve_payment_intent("PAYMENT_INTENT_ID".to_string()).get().await;
   ///   
@@ -53,7 +50,8 @@ impl Client {
   pub fn retrieve_payment_intent(&self, id: String) -> crate::payment_intent::Info {
     crate::payment_intent::Info {
       r#type: crate::payment_intent::Types::RETRIEVE(id),
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 
@@ -66,9 +64,7 @@ impl Client {
   /// ```
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   let stripe_response = client.confirm_payment_intent("PAYMENT_INTENT_ID".to_string(), None).send().await;
   ///   
@@ -78,7 +74,8 @@ impl Client {
   pub fn confirm_payment_intent(&self, id: String, body: Option<String>) -> crate::payment_intent::Info {
     crate::payment_intent::Info {
       r#type: crate::payment_intent::Types::CONFIRM(id, body.unwrap_or(String::default())),
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 
@@ -91,9 +88,7 @@ impl Client {
   /// ```
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   let stripe_response = client.cancel_payment_intent("PAYMENT_INTENT_ID".to_string(), None).send().await;
   ///   
@@ -103,7 +98,8 @@ impl Client {
   pub fn cancel_payment_intent(&self, id: String, body: Option<String>) -> crate::payment_intent::Info {
     crate::payment_intent::Info {
       r#type: crate::payment_intent::Types::CANCEL(id, body.unwrap_or(String::default())),
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 
@@ -116,9 +112,7 @@ impl Client {
   /// ```
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   let stripe_response = client.update_payment_intent("PAYMENT_INTENT_ID".to_string(), "metadata[order_id]=2;".to_string()).send().await;
   ///   
@@ -128,7 +122,8 @@ impl Client {
   pub fn update_payment_intent(&self, id: String, body: String) -> crate::payment_intent::Info {
     crate::payment_intent::Info {
       r#type: crate::payment_intent::Types::UPDATE(id, body),
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 
@@ -140,9 +135,7 @@ impl Client {
   /// ```
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   let stripe_response = client.capture_payment_intent("PAYMENT_INTENT_ID".to_string()).send().await;
   ///   
@@ -152,7 +145,8 @@ impl Client {
   pub fn capture_payment_intent(&self, id: String) -> crate::payment_intent::Info {
     crate::payment_intent::Info {
       r#type: crate::payment_intent::Types::CAPTURE(id),
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 
@@ -164,9 +158,7 @@ impl Client {
   /// ```
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   let stripe_response = client.list_payment_intent("limit=3;".to_string()).get().await;
   ///   
@@ -176,7 +168,8 @@ impl Client {
   pub fn list_payment_intent(&self, body: String) -> crate::payment_intent::Info {
     crate::payment_intent::Info {
       r#type: crate::payment_intent::Types::LIST(body),
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 }

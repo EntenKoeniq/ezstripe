@@ -3,9 +3,7 @@ impl Client {
   /// ```
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   let stripe_response = client.retrieve_balance().get().await;
   ///   
@@ -14,7 +12,8 @@ impl Client {
   /// ```
   pub fn retrieve_balance(&self) -> crate::balance::Info {
     crate::balance::Info {
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 }

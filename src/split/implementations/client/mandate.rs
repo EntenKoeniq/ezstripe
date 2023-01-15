@@ -7,9 +7,7 @@ impl Client {
   /// ```
   /// #[tokio::main]
   /// async fn main() {
-  ///   let client = ezstripe::Client {
-  ///     secret_key: "YOUR_SECRET_KEY".to_string()
-  ///   };
+  ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
   ///   let stripe_response = client.retrieve_mandate("ID_OF_MANDATE".to_string()).get().await;
   ///   
@@ -19,7 +17,8 @@ impl Client {
   pub fn retrieve_mandate(&self, id: String) -> crate::mandate::Info {
     crate::mandate::Info {
       id,
-      secret_key: self.secret_key.clone()
+      secret_key: self.secret_key.clone(),
+      reqwest_client: &self.reqwest_client
     }
   }
 }
