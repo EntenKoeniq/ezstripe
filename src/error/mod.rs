@@ -19,7 +19,8 @@ pub enum HTTPCodes {
   NotFound,
   /// The request conflicts with another request (perhaps due to using the same idempotent key).
   Conflict,
-  /// Too many requests hit the API too quickly. We recommend an exponential backoff of your requests.
+  /// Too many requests hit the API too quickly.
+  /// We recommend an exponential backoff of your requests.
   TooManyRequests,
   /// Something went wrong on Stripe's end. (These are rare.)
   ServerError(u16)
@@ -71,11 +72,12 @@ include!("codes_enum.rs");
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "snake_case")]
 pub enum Types {
-  /// MISSING DOCUMENTATION
+  /// No error type.
   None,
   /// API errors cover any other type of problem (e.g., a temporary problem with Stripe's servers), and are extremely uncommon.
   ApiError,
-  /// Card errors are the most common type of error you should expect to handle. They result when the user enters a card that can't be charged for some reason.
+  /// Card errors are the most common type of error you should expect to handle.
+  /// They result when the user enters a card that can't be charged for some reason.
   CardError,
   /// Idempotency errors occur when an Idempotency-Key is re-used on a request that does not match the first request's API endpoint and parameters.
   IdempotencyError,
@@ -120,8 +122,8 @@ pub struct Info {
   pub payment_intent: Option<crate::payment_intent::Response>
 }
 
+#[doc(hidden)]
 impl Info {
-  #[doc(hidden)]
   pub fn create(status: u16, json_text: &str) -> Option<Self> {
     let json = match serde_json::from_str::<serde_json::Value>(json_text) {
       Ok(r) => {

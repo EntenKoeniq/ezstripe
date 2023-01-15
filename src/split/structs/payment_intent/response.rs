@@ -21,7 +21,8 @@ include!("transfer_data.rs");
 pub struct Response {
   /// Unique identifier for the object.
   pub id: String,
-  /// String representing the object’s type. Objects of the same type share the same value.
+  /// String representing the object’s type.
+  /// Objects of the same type share the same value.
   pub object: String,
   /// Amount intended to be collected by this PaymentIntent.
   /// A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).
@@ -60,9 +61,11 @@ pub struct Response {
   pub client_secret: String,
   /// MISSING DOCUMENTATION
   pub confirmation_method: String,
-  /// Time at which the object was created. Measured in seconds since the Unix epoch.
+  /// Time at which the object was created.
+  /// Measured in seconds since the Unix epoch.
   pub created: i64,
-  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
+  /// Must be a [supported currency](https://stripe.com/docs/currencies).
   pub currency: String,
   /// ID of the Customer this PaymentIntent belongs to, if one exists.
   ///
@@ -70,11 +73,13 @@ pub struct Response {
   ///
   /// If present in combination with [setup_future_usage](https://stripe.com/docs/api/errors#payment_intent_object-setup_future_usage), this PaymentIntent’s payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.
   pub customer: Option<String>,
-  /// An arbitrary string attached to the object. Often useful for displaying to users.
+  /// An arbitrary string attached to the object.
+  /// Often useful for displaying to users.
   pub description: Option<String>,
   /// ID of the invoice that created this PaymentIntent, if it exists.
   pub invoice: Option<String>,
-  /// The payment error encountered in the previous PaymentIntent confirmation. It will be cleared if the PaymentIntent is later updated for any reason.
+  /// The payment error encountered in the previous PaymentIntent confirmation.
+  /// It will be cleared if the PaymentIntent is later updated for any reason.
   pub last_payment_error: Option<LastPaymentError>,
   /// The latest charge created by this payment intent.
   pub latest_charge: Option<String>,

@@ -63,7 +63,9 @@ pub struct PaymentMethodOptionsBoleto;
 pub struct PaymentMethodOptionsCardMandateOptions {
   /// Amount to be charged for future payments.
   pub amount: u32,
-  /// One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.
+  /// One of `fixed` or `maximum`.
+  /// If `fixed`, the `amount` param refers to the exact amount to be charged in future payments.
+  /// If `maximum`, the amount charged can be up to the value passed for the `amount` param.
   pub amount_type: String,
   /// A description of the mandate or subscription that is meant to be displayed to the customer.
   pub description: Option<String>,
@@ -71,7 +73,8 @@ pub struct PaymentMethodOptionsCardMandateOptions {
   /// If not provided, the mandate will be active until canceled.
   /// If provided, end date should be after start date.
   pub end_date: Option<i64>,
-  /// Specifies payment frequency. One of `day`, `week`, `month`, `year`, or `sporadic`.
+  /// Specifies payment frequency.
+  /// One of `day`, `week`, `month`, `year`, or `sporadic`.
   pub interval: String,
   /// The number of intervals between payments.
   /// For example, `interval=month` and `interval_count=3` indicates one payment every three months.
@@ -83,7 +86,8 @@ pub struct PaymentMethodOptionsCardMandateOptions {
   /// Start date of the mandate or subscription.
   /// Start date should not be lesser than yesterday.
   pub start_date: i64,
-  /// Specifies the type of mandates supported. Possible values are `india`.
+  /// Specifies the type of mandates supported.
+  /// Possible values are `india`.
   pub supported_types: Vec<String>
 }
 
@@ -100,7 +104,8 @@ pub struct PaymentMethodOptionsCard {
   pub installments: Option<PaymentMethodOptionsCardInstallments>,
   /// Configuration options for setting up an eMandate for cards issued in India.
   pub mandate_options: Option<PaymentMethodOptionsCardMandateOptions>,
-  /// Selected network to process this SetupIntent on. Depends on the available networks of the card attached to the setup intent.
+  /// Selected network to process this SetupIntent on.
+  /// Depends on the available networks of the card attached to the setup intent.
   /// Can be only set confirm-time.
   pub network: Option<String>,
   /// We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication).
@@ -118,9 +123,11 @@ pub struct PaymentMethodOptionsCard {
   pub setup_future_usage: Option<String>,
   /// Provides information about a card payment that customers see on their statements.
   /// Concatenated with the Kana prefix (shortened Kana descriptor) or Kana statement descriptor that’s set on the account to form the complete statement descriptor.
-  /// Maximum 22 characters. On card statements, the concatenation of both prefix and suffix (including separators) will appear truncated to 22 characters.
+  /// Maximum 22 characters.
+  /// On card statements, the concatenation of both prefix and suffix (including separators) will appear truncated to 22 characters.
   pub statement_descriptor_suffix_kana: Option<String>,
-  /// Provides information about a card payment that customers see on their statements. Concatenated with the Kanji prefix (shortened Kanji descriptor) or Kanji statement descriptor that’s set on the account to form the complete statement descriptor.
+  /// Provides information about a card payment that customers see on their statements.
+  /// Concatenated with the Kanji prefix (shortened Kanji descriptor) or Kanji statement descriptor that’s set on the account to form the complete statement descriptor.
   /// Maximum 17 characters.
   /// On card statements, the concatenation of both prefix and suffix (including separators) will appear truncated to 17 characters.
   pub statement_descriptor_suffix_kanji: Option<String>,

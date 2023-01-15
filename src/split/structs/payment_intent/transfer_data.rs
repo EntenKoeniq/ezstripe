@@ -1,4 +1,5 @@
-/// The data with which to automatically create a Transfer when the payment is finalized. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
+/// The data with which to automatically create a Transfer when the payment is finalized.
+/// See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct TransferData {
   ///Amount intended to be collected by this PaymentIntent.

@@ -21,29 +21,36 @@ pub struct Response {
   pub automatic: bool,
   /// ID of the balance transaction that describes the impact of this payout on your account balance.
   pub balance_transaction: String,
-  /// Time at which the object was created. Measured in seconds since the Unix epoch.
+  /// Time at which the object was created.
+  /// Measured in seconds since the Unix epoch.
   pub created: i64,
-  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
+  /// Must be a [supported currency](https://stripe.com/docs/currencies).
   pub currency: String,
-  /// An arbitrary string attached to the object. Often useful for displaying to users.
+  /// An arbitrary string attached to the object.
+  /// Often useful for displaying to users.
   pub description: String,
   /// ID of the bank account or card the payout was sent to.
   pub destination: String,
   /// If the payout failed or was canceled, this will be the ID of the balance transaction that reversed the initial balance transaction, and puts the funds from the failed payout back in your balance.
   pub failure_balance_transaction: Option<String>,
-  /// Error code explaining reason for payout failure if available. See [Types of payout failures](https://stripe.com/docs/api#payout_failures) for a list of failure codes.
+  /// Error code explaining reason for payout failure if available.
+  /// See [Types of payout failures](https://stripe.com/docs/api#payout_failures) for a list of failure codes.
   pub failure_code: Option<String>,
   /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
   pub livemode: bool,
-  /// Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+  /// Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object.
+  /// This can be useful for storing additional information about the object in a structured format.
   pub metadata: HashMap<String, String>,
-  /// The method used to send this payout, which can be standard or instant. instant is only supported for payouts to debit cards. (See [Instant payouts for marketplaces](https://stripe.com/blog/instant-payouts-for-marketplaces) for more information.)
+  /// The method used to send this payout, which can be standard or instant.
+  /// instant is only supported for payouts to debit cards. (See [Instant payouts for marketplaces](https://stripe.com/blog/instant-payouts-for-marketplaces) for more information.)
   pub method: String,
   /// If the payout reverses another, this is the ID of the original payout.
   pub original_payout: Option<String>,
   /// If the payout was reversed, this is the ID of the payout that reverses this payout.
   pub reversed_by: Option<String>,
-  /// The source balance this payout came from. One of `card`, `fpx`, or `bank_account`.
+  /// The source balance this payout came from.
+  /// One of `card`, `fpx`, or `bank_account`.
   pub source_type: String,
   /// Extra information about a payout to be displayed on the user’s bank statement.
   pub statement_descriptor: Option<String>,

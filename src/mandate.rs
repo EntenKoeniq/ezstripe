@@ -22,7 +22,8 @@ pub struct CustomerAcceptance {
   pub offline: Option<CustomerAcceptanceOffline>,
   /// If this is a Mandate accepted online, this hash contains details about the online acceptance.
   pub online: Option<CustomerAcceptanceOnline>,
-  /// The type of customer acceptance information included with the Mandate. One of `online` or `offline`.
+  /// The type of customer acceptance information included with the Mandate.
+  /// One of `online` or `offline`.
   pub r#type: String
 }
 
@@ -47,14 +48,16 @@ pub struct PaymentMethodDetailsAcssDebit {
 /// If this mandate is associated with a `au_becs_debit` payment method, this hash contains mandate information specific to the `au_becs_debit` payment method.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodDetailsAuBecsDebit {
-  /// The URL of the mandate. This URL generally contains sensitive information about the customer and should be shared with them exclusively.
+  /// The URL of the mandate.
+  /// This URL generally contains sensitive information about the customer and should be shared with them exclusively.
   pub url: String
 }
 
 /// If this mandate is associated with a `bacs_debit` payment method, this hash contains mandate information specific to the `bacs_debit` payment method.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodDetailsBacsDebit {
-  /// The status of the mandate on the Bacs network. Can be one of `pending`, `revoked`, `refused`, or `accepted`.
+  /// The status of the mandate on the Bacs network.
+  /// Can be one of `pending`, `revoked`, `refused`, or `accepted`.
   pub network_status: String,
   /// The unique reference identifying the mandate on the Bacs network.
   pub reference: String,
@@ -99,7 +102,8 @@ pub struct PaymentMethodDetailsLink;
 pub struct PaymentMethodDetailsSepaDebit {
   /// The unique reference of the mandate.
   pub reference: String,
-  /// The URL of the mandate. This URL generally contains sensitive information about the customer and should be shared with them exclusively.
+  /// The URL of the mandate.
+  /// This URL generally contains sensitive information about the customer and should be shared with them exclusively.
   pub url: String
 }
 
@@ -124,7 +128,9 @@ pub struct PaymentMethodDetails {
   pub link: Option<PaymentMethodDetailsLink>,
   /// If this mandate is associated with a `sepa_debit` payment method, this hash contains mandate information specific to the `sepa_debit` payment method.
   pub sepa_debit: Option<PaymentMethodDetailsSepaDebit>,
-  /// The type of the payment method associated with this mandate. An additional hash is included on `payment_method_details` with a name matching this value. It contains mandate information specific to the payment method.
+  /// The type of the payment method associated with this mandate.
+  /// An additional hash is included on `payment_method_details` with a name matching this value.
+  /// It contains mandate information specific to the payment method.
   pub r#type: String,
   /// If this mandate is associated with a `us_bank_account` payment method, this hash contains mandate information specific to the `us_bank_account` payment method.
   pub us_bank_account: Option<PaymentMethodDetailsUsBankAccount>
@@ -146,7 +152,8 @@ pub struct SingleUse {
 pub struct Response {
   /// Unique identifier for the object.
   pub id: String,
-  /// String representing the object’s type. Objects of the same type share the same value.
+  /// String representing the object’s type.
+  /// Objects of the same type share the same value.
   pub object: String, // mandate
   /// Details about the customer’s acceptance of the mandate.
   pub customer_acceptance: CustomerAcceptance,

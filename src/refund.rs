@@ -18,11 +18,14 @@ pub struct Response {
   pub balance_transaction: Option<String>,
   /// ID of the charge that was refunded.
   pub charge: String,
-  /// Time at which the object was created. Measured in seconds since the Unix epoch.
+  /// Time at which the object was created.
+  /// Measured in seconds since the Unix epoch.
   pub created: i64,
-  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
+  /// Must be a [supported currency](https://stripe.com/docs/currencies).
   pub currency: String,
-  /// Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+  /// Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object.
+  /// This can be useful for storing additional information about the object in a structured format.
   pub metadata: HashMap<String, String>,
   /// ID of the PaymentIntent that was refunded.
   pub payment_intent: String,
@@ -35,9 +38,12 @@ pub struct Response {
   /// See the Connect documentation for details.
   pub source_transfer_reversal: Option<String>,
   /// Status of the refund.
-  /// For credit card refunds, this can be `pending`, `succeeded`, or `failed`. For other types of refunds, it can be `pending`, `requires_action`, `succeeded`, `failed`, or `canceled`. Refer to our refunds documentation for more details.
+  /// For credit card refunds, this can be `pending`, `succeeded`, or `failed`.
+  /// For other types of refunds, it can be `pending`, `requires_action`, `succeeded`, `failed`, or `canceled`.
+  /// Refer to our refunds documentation for more details.
   pub status: String,
-  /// If the accompanying transfer was reversed, the transfer reversal object. Only applicable if the charge was created using the destination parameter.
+  /// If the accompanying transfer was reversed, the transfer reversal object.
+  /// Only applicable if the charge was created using the destination parameter.
   pub transfer_reversal: Option<String>
 }
 
