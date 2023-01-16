@@ -1,10 +1,28 @@
 /// Contains instructions for authenticating a payment by redirecting your customer to Alipay App or website.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct NextActionAlipayHandleRedirect;
+pub struct NextActionAlipayHandleRedirect {
+  /// The native data to be used with Alipay SDK you must redirect your customer to in order to authenticate the payment in an Android App.
+  pub native_data: Option<String>,
+  /// The native URL you must redirect your customer to in order to authenticate the payment in an iOS App.
+  pub native_url: Option<String>,
+  /// If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.
+  pub return_url: String,
+  /// The URL you must redirect your customer to in order to authenticate the payment.
+  pub url: String
+}
 
 /// Contains Boleto details necessary for the customer to complete the payment.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct NextActionBoletoDisplayDetails;
+pub struct NextActionBoletoDisplayDetails {
+  /// The timestamp after which the boleto expires.
+  pub expires_at: i64,
+  /// The URL to the hosted boleto voucher page, which allows customers to view the boleto voucher.
+  pub hosted_voucher_url: String,
+  /// The boleto number.
+  pub number: String,
+  /// The URL to the downloadable boleto voucher PDF.
+  pub pdf: String
+}
 
 /// Contains instructions for processing off session recurring payments with Indian issued cards.
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -18,8 +36,23 @@ pub struct NextActionCardAwaitNotification {
 }
 
 /// Contains the bank transfer details necessary for the customer to complete the payment.
+/// 
+/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct NextActionDisplayBankTransferInstructions;
+pub struct NextActionDisplayBankTransferInstructions {
+  /// The remaining amount that needs to be transferred to complete the payment.
+  pub amount_remaining: u32,
+  /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+  pub currency: String,
+  //pub financial_addresses: ?,
+  /// A link to a hosted page that guides your customer through completing the transfer.
+  pub hosted_instructions_url: String,
+  /// A string identifying this payment.
+  /// Instruct your customer to include this code in the reference or memo field of their bank transfer.
+  pub reference: String,
+  /// Type of bank transfer
+  pub r#type: String
+}
 
 /// Contains Konbini details necessary for the customer to complete the payment.
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -27,19 +60,55 @@ pub struct NextActionKonbiniDisplayDetails;
 
 /// Contains OXXO details necessary for the customer to complete the payment.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct NextActionOxxoDisplayDetails;
+pub struct NextActionOxxoDisplayDetails {
+  /// The timestamp after which the OXXO voucher expires.
+  pub expires_after: i64,
+  /// The URL for the hosted OXXO voucher page, which allows customers to view and print an OXXO voucher.
+  pub hosted_voucher_url: String,
+  /// OXXO reference number.
+  pub number: String
+}
 
 /// The field that contains PayNow QR code info
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct NextActionPaynowDisplayQrCode;
+pub struct NextActionPaynowDisplayQrCode {
+  /// The raw data string used to generate QR code, it should be used together with QR code library.
+  pub data: String,
+  /// The URL to the hosted PayNow instructions page, which allows customers to view the PayNow QR code.
+  pub hosted_instructions_url: String,
+  /// The image_url_png string used to render QR code
+  pub image_url_png: String,
+  /// The image_url_svg string used to render QR code
+  pub image_url_svg: String
+}
 
 /// The field that contains Pix QR code info
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct NextActionPixDisplayQrCode;
+pub struct NextActionPixDisplayQrCode {
+  /// The raw data string used to generate QR code, it should be used together with QR code library.
+  pub data: String,
+  /// The date (unix timestamp) when the PIX expires.
+  pub expires_at: i64,
+  /// The URL to the hosted pix instructions page, which allows customers to view the pix QR code.
+  pub hosted_instructions_url: String,
+  /// The image_url_png string used to render png QR code
+  pub image_url_png: String,
+  /// The image_url_svg string used to render svg QR code
+  pub image_url_svg: String
+}
 
 /// The field that contains PromptPay QR code info
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct NextActionPromptpayDisplayQrCode;
+pub struct NextActionPromptpayDisplayQrCode {
+  /// The raw data string used to generate QR code, it should be used together with QR code library.
+  pub data: String,
+  /// The URL to the hosted PromptPay instructions page, which allows customers to view the PromptPay QR code.
+  pub hosted_instructions_url: String,
+  /// The PNG path used to render the QR code, can be used as the source in an HTML img tag
+  pub image_url_png: String,
+  /// The SVG path used to render the QR code, can be used as the source in an HTML img tag
+  pub image_url_svg: String
+}
 
 /// Contains instructions for authenticating a payment by redirecting your customer to another page or application.
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -57,19 +126,56 @@ pub struct NextActionUseStripeSdk;
 
 /// Contains details describing microdeposits verification flow.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct NextActionVerifyWithMicrodeposits;
+pub struct NextActionVerifyWithMicrodeposits {
+  /// The timestamp when the microdeposits are expected to land.
+  pub arrival_date: i64,
+  /// The URL for the hosted verification page, which allows customers to verify their bank account.
+  pub hosted_verification_url: String,
+  /// The type of the microdeposit sent to the customer.
+  /// Used to distinguish between different verification methods.
+  pub microdeposit_type: String
+}
 
 /// The field that contains WeChat Pay QR code info
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct NextActionWechatPayDisplayQrCode;
+pub struct NextActionWechatPayDisplayQrCode {
+  /// The data being used to generate QR code
+  pub data: String,
+  /// The URL to the hosted WeChat Pay instructions page, which allows customers to view the WeChat Pay QR code.
+  pub hosted_instructions_url: String,
+  /// The base64 image data for a pre-generated QR code
+  pub image_data_url: String,
+  /// The image_url_png string used to render QR code
+  pub image_url_png: String,
+  /// The image_url_svg string used to render QR code
+  pub image_url_svg: String
+}
 
 /// Info required for android app to app redirect
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct NextActionWechatPayRedirectToAndrodApp;
+pub struct NextActionWechatPayRedirectToAndrodApp {
+  /// app_id is the APP ID registered on WeChat open platform
+  pub app_id: String,
+  /// nonce_str is a random string
+  pub monce_str: String,
+  /// package is static value
+  pub package: String,
+  /// an unique merchant ID assigned by WeChat Pay
+  pub partner_id: String,
+  /// an unique trading ID assigned by WeChat Pay
+  pub prepay_id: String,
+  /// A signature
+  pub sign: String,
+  /// Specifies the current time in epoch format
+  pub timestamp: String
+}
 
 /// Info required for iOS app to app redirect
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct NextActionWechatPayRedirectToIosApp;
+pub struct NextActionWechatPayRedirectToIosApp {
+  /// An universal link that redirect to WeChat Pay app
+  pub native_url: String
+}
 
 /// If present, this property tells you what actions you need to take in order for your customer to fulfill a payment using the provided source.
 #[derive(Serialize, Deserialize, Clone, Debug)]
