@@ -1,14 +1,70 @@
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// Additional fields for Mandate creation
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsAcssDebit;
+pub struct PaymentMethodOptionsAcssDebitMandateOptions {
+  /// A URL for custom mandate text
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub custom_mandate_url: Option<String>,
+  /// Description of the interval.
+  /// Only required if the ‘payment_schedule’ parameter is ‘interval’ or ‘combined’.
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub interval_description: Option<String>,
+  /// Payment schedule for the mandate.
+  pub payment_schedule: String,
+  /// Transaction type of the mandate.
+  pub transaction_type: String
+}
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// If the PaymentIntent’s payment_method_types includes `acss_debit`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsAffirm;
+pub struct PaymentMethodOptionsAcssDebit {
+  /// Additional fields for Mandate creation
+  #[serde(skip_serializing_if = "Option::is_none")]
+  mandate_options: Option<PaymentMethodOptionsAcssDebitMandateOptions>,
+  /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+  /// 
+  /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+  /// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+  /// 
+  /// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub setup_future_usage: Option<String>,
+  /// Bank account verification method.
+  pub verification_method: String
+}
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// If the PaymentIntent’s payment_method_types includes `affirm`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsAfterpayClearpay;
+pub struct PaymentMethodOptionsAffirm {
+  /// Controls when the funds will be captured from the customer’s account.
+  pub capture_method: String,
+  /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+  /// 
+  /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+  /// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+  /// 
+  /// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub setup_future_usage: Option<String>
+}
+
+/// If the PaymentIntent’s payment_method_types includes `afterpay_clearpay`, this hash contains the configurations that will be applied to each payment attempt of that type.
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct PaymentMethodOptionsAfterpayClearpay {
+  pub capture_method: String,
+  /// Order identifier shown to the customer in Afterpay’s online portal.
+  /// We recommend using a value that helps you answer any questions a customer might have about the payment.
+  /// The identifier is limited to 128 characters and may contain only letters, digits, underscores, backslashes and dashes.
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub reference: Option<String>,
+  /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+  /// 
+  /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+  /// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+  /// 
+  /// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub setup_future_usage: Option<String>
+}
 
 /// If the PaymentIntent’s payment_method_types includes `alipay`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -49,17 +105,64 @@ pub struct PaymentMethodOptionsBacsDebit {
   pub setup_future_usage: Option<String>
 }
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// If the PaymentIntent’s payment_method_types includes `bancontact`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsBancontact;
+pub struct PaymentMethodOptionsBancontact {
+  /// Preferred language of the Bancontact authorization page that the customer is redirected to.
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub preferred_language: Option<String>,
+  /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+  /// 
+  /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+  /// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+  /// 
+  /// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub setup_future_usage: Option<String>
+}
 
 /// If the PaymentIntent’s payment_method_types includes `blik`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsBlik;
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// If the PaymentIntent’s payment_method_types includes `boleto`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsBoleto;
+pub struct PaymentMethodOptionsBoleto {
+  pub expires_after_days: u16,
+  /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+  /// 
+  /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+  /// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+  /// 
+  /// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub setup_future_usage: Option<String>
+}
+
+/// Installment plan selected for this PaymentIntent.
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct PaymentMethodOptionsCardInstallmentsPlan {
+  /// For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.
+  pub count: u16,
+  /// For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.
+  /// One of `month`.
+  pub interval: String,
+  /// Type of installment plan, one of `fixed_count`.
+  pub r#type: String
+}
+
+/// Installment details for this payment (Mexico only).
+/// 
+/// For more information, see the [installments integration guide](https://stripe.com/docs/payments/installments).
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct PaymentMethodOptionsCardInstallments {
+  /// Installment plans that may be selected for this PaymentIntent.
+  pub available_plans: Vec<PaymentMethodOptionsCardInstallmentsPlan>,
+  /// Whether Installments are enabled for this PaymentIntent.
+  pub enabled: bool,
+  /// Installment plan selected for this PaymentIntent.
+  pub plan: PaymentMethodOptionsCardInstallmentsPlan
+}
 
 /// Configuration options for setting up an eMandate for cards issued in India.
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -97,17 +200,15 @@ pub struct PaymentMethodOptionsCardMandateOptions {
   pub supported_types: Vec<String>
 }
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
-#[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsCardInstallments;
-
 /// If the SetupIntent’s payment_method_types includes `card`, this hash contains the configurations that will be applied to each setup attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsCard {
   /// Controls when the funds will be captured from the customer’s account.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub capture_method: Option<String>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// Installment details for this payment (Mexico only).
+  /// 
+  /// For more information, see the [installments integration guide](https://stripe.com/docs/payments/installments).
   #[serde(skip_serializing_if = "Option::is_none")]
   pub installments: Option<PaymentMethodOptionsCardInstallments>,
   /// Configuration options for setting up an eMandate for cards issued in India.
@@ -146,13 +247,53 @@ pub struct PaymentMethodOptionsCard {
   pub statement_descriptor_suffix_kanji: Option<String>,
 }
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// If the PaymentIntent’s payment_method_types includes `card_present`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsCardPresent;
+pub struct PaymentMethodOptionsCardPresent {
+  /// Controls when the funds will be captured from the customer’s account.
+  pub capture_method: String,
+  /// Request ability to capture this payment beyond the standard [authorization validity window](https://stripe.com/docs/terminal/features/extended-authorizations#authorization-validity)
+  pub request_extended_authorization: bool,
+  /// Request ability to [increment](https://stripe.com/docs/terminal/features/incremental-authorizations) this PaymentIntent if the combination of MCC and card brand is eligible.
+  /// Check [incremental_authorization_supported](https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported) in the [Confirm](https://stripe.com/docs/api/payment_intents/confirm) response to verify support.
+  pub request_incremental_authorization_support: bool
+}
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// Configuration for eu_bank_transfer
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsCustomerBalance;
+pub struct PaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer {
+  /// The desired country code of the bank account information.
+  /// Permitted values include: `DE`, `ES`, `FR`, `IE`, or `NL`.
+  pub country: String
+}
+
+/// Configuration for the bank transfer funding type, if the `funding_type` is set to `bank_transfer`.
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct PaymentMethodOptionsCustomerBalanceBankTransfer {
+  /// Configuration for eu_bank_transfer
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub eu_bank_transfer: Option<PaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer>
+}
+
+/// If the PaymentIntent’s payment_method_types includes `customer_balance`, this hash contains the configurations that will be applied to each payment attempt of that type.
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct PaymentMethodOptionsCustomerBalance {
+  /// Configuration for the bank transfer funding type, if the `funding_type` is set to `bank_transfer`.
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub bank_tranfer: Option<PaymentMethodOptionsCustomerBalanceBankTransfer>,
+  /// The funding method type to be used when there are not enough funds in the customer balance.
+  /// Permitted values include: `bank_transfer`.
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub funding_type: Option<String>,
+  /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+  /// 
+  /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+  /// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+  /// 
+  /// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub setup_future_usage: Option<String>
+}
 
 /// If the PaymentIntent’s payment_method_types includes `eps`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -223,13 +364,39 @@ pub struct PaymentMethodOptionsIdeal {
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsInteracPresent;
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// If the PaymentIntent’s payment_method_types includes `klarna`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsKlarna;
+pub struct PaymentMethodOptionsKlarna {
+  /// Controls when the funds will be captured from the customer’s account.
+  pub capture_method: String
+}
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// If the PaymentIntent’s payment_method_types includes `konbini`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsKombini;
+pub struct PaymentMethodOptionsKonbini {
+  /// An optional 10 to 11 digit numeric-only string determining the confirmation code at applicable convenience stores.
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub confirmation_number: Option<String>,
+  /// The number of calendar days (between 1 and 60) after which Konbini payment instructions will expire.
+  /// For example, if a PaymentIntent is confirmed with Konbini and `expires_after_days` set to 2 on Monday JST, the instructions will expire on Wednesday 23:59:59 JST.
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub expires_after_days: Option<u16>,
+  /// The timestamp at which the Konbini payment instructions will expire.
+  /// Only one of `expires_after_days` or `expires_at` may be set.
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub expires_at: Option<i64>,
+  /// A product descriptor of up to 22 characters, which will appear to customers at the convenience store.
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub product_description: Option<String>,
+  /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+  /// 
+  /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+  /// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+  /// 
+  /// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub setup_future_usage: Option<String>
+}
 
 /// If the SetupIntent’s payment_method_types includes `link`, this hash contains the configurations that will be applied to each setup attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -250,9 +417,21 @@ pub struct PaymentMethodOptionsLink {
   pub setup_future_usage: Option<String>
 }
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// If the PaymentIntent’s payment_method_types includes `oxxo`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsOxxo;
+pub struct PaymentMethodOptionsOxxo {
+  /// The number of calendar days before an OXXO invoice expires.
+  /// For example, if you create an OXXO invoice on Monday and you set expires_after_days to 2, the OXXO invoice will expire on Wednesday at 23:59 America/Mexico_City time.
+  pub expires_after_days: u16,
+  /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+  /// 
+  /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+  /// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+  /// 
+  /// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub setup_future_usage: Option<String>
+}
 
 /// If the PaymentIntent’s payment_method_types includes `p24`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -280,9 +459,22 @@ pub struct PaymentMethodOptionsPaynow {
   pub setup_future_usage: Option<String>
 }
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// If the PaymentIntent’s payment_method_types includes `pix`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsPix;
+pub struct PaymentMethodOptionsPix {
+  /// The number of seconds (between 10 and 1209600) after which Pix payment will expire.
+  pub expires_after_seconds: u32,
+  /// The timestamp at which the Pix expires.
+  pub expires_at: i64,
+  /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+  /// 
+  /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+  /// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+  /// 
+  /// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub setup_future_usage: Option<String>
+}
 
 /// If the PaymentIntent’s payment_method_types includes `promptpay`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -297,32 +489,92 @@ pub struct PaymentMethodOptionsPromptpay {
   pub setup_future_usage: Option<String>
 }
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// Additional fields for Mandate creation
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsSepaDebit;
+pub struct PaymentMethodOptionsSepaDebitMandateOptions;
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// If the PaymentIntent’s `payment_method_types` includes sepa_debit, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsSofort;
+pub struct PaymentMethodOptionsSepaDebit {
+  /// Additional fields for Mandate creation
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub mandata_options: Option<PaymentMethodOptionsSepaDebitMandateOptions>,
+  /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+  /// 
+  /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+  /// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+  /// 
+  /// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub setup_future_usage: Option<String>
+}
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// If the PaymentIntent’s payment_method_types includes `sofort`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsUsBankAccount;
+pub struct PaymentMethodOptionsSofort {
+  /// Preferred language of the SOFORT authorization page that the customer is redirected to.
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub preferred_language: Option<String>,
+  /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+  /// 
+  /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+  /// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+  /// 
+  /// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub setup_future_usage: Option<String>
+}
 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+/// Additional fields for Financial Connections Session creation
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct PaymentMethodOptionsWechatPay;
+pub struct PaymentMethodOptionsUsBankAccountFinancialConnections {
+  /// The list of permissions to request. The payment_method permission must be included.
+  pub permissions: Vec<String>
+}
+
+/// If the PaymentIntent’s payment_method_types includes `us_bank_account`, this hash contains the configurations that will be applied to each payment attempt of that type.
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct PaymentMethodOptionsUsBankAccount {
+  /// Additional fields for Financial Connections Session creation
+  pub financial_connections: PaymentMethodOptionsUsBankAccountFinancialConnections,
+  /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+  /// 
+  /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+  /// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+  /// 
+  /// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub setup_future_usage: Option<String>
+}
+
+/// If the PaymentIntent’s payment_method_types includes `wechat_pay`, this hash contains the configurations that will be applied to each payment attempt of that type.
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct PaymentMethodOptionsWechatPay {
+  /// The app ID registered with WeChat Pay. Only required when client is ios or android.
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub app_id: Option<String>,
+  /// The client type that the end customer will pay from
+  pub client: String,
+  /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
+  /// 
+  /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
+  /// If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.
+  /// 
+  /// When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub setup_future_usage: Option<String>
+}
 
 /// Payment-method-specific configuration for this SetupIntent.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptions {
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `acss_debit`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub acss_debit: Option<PaymentMethodOptionsAcssDebit>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `affirm`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub affirm: Option<PaymentMethodOptionsAffirm>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `afterpay_clearpay`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub afterpay_clearpay: Option<PaymentMethodOptionsAfterpayClearpay>,
   /// If the PaymentIntent’s payment_method_types includes `alipay`, this hash contains the configurations that will be applied to each payment attempt of that type.
@@ -334,22 +586,22 @@ pub struct PaymentMethodOptions {
   /// If the PaymentIntent’s payment_method_types includes `bacs_debit`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub bacs_debit: Option<PaymentMethodOptionsBacsDebit>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `bancontact`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub bancontact: Option<PaymentMethodOptionsBancontact>,
   /// If the PaymentIntent’s payment_method_types includes `blik`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub blik: Option<PaymentMethodOptionsBlik>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `boleto`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub boleto: Option<PaymentMethodOptionsBoleto>,
   /// If the SetupIntent’s payment_method_types includes `card`, this hash contains the configurations that will be applied to each setup attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub card: Option<PaymentMethodOptionsCard>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `card_present`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub card_present: Option<PaymentMethodOptionsCardPresent>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `customer_balance`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub customer_balance: Option<PaymentMethodOptionsCustomerBalance>,
   /// If the PaymentIntent’s payment_method_types includes `eps`, this hash contains the configurations that will be applied to each payment attempt of that type.
@@ -370,16 +622,16 @@ pub struct PaymentMethodOptions {
   /// If the PaymentIntent’s payment_method_types includes `interac_present`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub interac_present: Option<PaymentMethodOptionsInteracPresent>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `klarna`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub klarna: Option<PaymentMethodOptionsKlarna>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `konbini`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
-  pub kombini: Option<PaymentMethodOptionsKombini>,
+  pub konbini: Option<PaymentMethodOptionsKonbini>,
   /// If the SetupIntent’s payment_method_types includes `link`, this hash contains the configurations that will be applied to each setup attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub link: Option<PaymentMethodOptionsLink>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `oxxo`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub oxxo: Option<PaymentMethodOptionsOxxo>,
   /// If the PaymentIntent’s payment_method_types includes `p24`, this hash contains the configurations that will be applied to each payment attempt of that type.
@@ -388,22 +640,22 @@ pub struct PaymentMethodOptions {
   /// If the PaymentIntent’s payment_method_types includes `paynow`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub paynow: Option<PaymentMethodOptionsPaynow>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `pix`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub pix: Option<PaymentMethodOptionsPix>,
   /// If the PaymentIntent’s payment_method_types includes `promptpay`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub promptpay: Option<PaymentMethodOptionsPromptpay>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `sepa_debit`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub sepa_debit: Option<PaymentMethodOptionsSepaDebit>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `sofort`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub sofort: Option<PaymentMethodOptionsSofort>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `us_bank_account`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub us_bank_account: Option<PaymentMethodOptionsUsBankAccount>,
-  /// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
+  /// If the PaymentIntent’s payment_method_types includes `wechat_pay`, this hash contains the configurations that will be applied to each payment attempt of that type.
   #[serde(skip_serializing_if = "Option::is_none")]
   pub wechat_pay: Option<PaymentMethodOptionsWechatPay>
 }

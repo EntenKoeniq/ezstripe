@@ -1,7 +1,3 @@
-//! The response details are incomplete!
-//! 
-//! Help us to complete the response details on [Github](https://github.com/EntenKoeniq/ezstripe/pulls) <3
-
 use std::collections::HashMap;
 
 use serde::{ Serialize, Deserialize };
