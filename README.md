@@ -7,27 +7,9 @@
 </div>
 
 <div align="center">
-  <h4>
-    <a href="https://crates.io/crates/ezstripe">
-      Crate
-    </a>
-    <span> | </span>
-    <a href="https://docs.rs/ezstripe/latest/ezstripe/">
-      Docs
-    </a>
-    <span> | </span>
-    <a href="https://github.com/EntenKoeniq/ezstripe/tree/main/examples">
-      Examples
-    </a>
-    <span> | </span>
-    <a href="https://github.com/EntenKoeniq/ezstripe/blob/main/CHANGELOG.md">
-      Changelog
-    </a>
-    <span> | </span>
-    <a href="https://github.com/EntenKoeniq/ezstripe/blob/main/BENCHMARKS.md">
-      Benchmarks
-    </a>
-  </h4>
+
+  [![CRATESIO]][CRATESIO_URL] [![DOCS]][DOCS_URL] [![EXAMPLES]][EXAMPLES_URL] [![CHANGELOG]][CHANGELOG_URL] [![BENCHMARKS]][BENCHMARKS_URL]
+  
 </div>
 
 > **Warning** <br>
@@ -116,3 +98,14 @@ Complete and stable ...
 - [ ] ... Disputes
 - [ ] ... Charges
 - [X] ... Balance
+
+[CRATESIO]: https://img.shields.io/badge/crates.io-ezstripe-B7410E?style=flat-square&logo=rust
+[CRATESIO_URL]: https://crates.io/crate/ezstripe
+[DOCS]: https://img.shields.io/badge/docs-latest-343434?style=flat-square&logo=read-the-docs&logoColor=fff
+[DOCS_URL]: https://docs.rs/ezstripe/latest/ezstripe/
+[EXAMPLES]: https://img.shields.io/badge/examples-latest-343434?style=flat-square&logo=bookstack&logoColor=fff
+[EXAMPLES_URL]: https://github.com/EntenKoeniq/ezstripe/tree/main/examples
+[CHANGELOG]: https://img.shields.io/badge/changelog-latest-343434?style=flat-square&logo=react-hook-form&logoColor=fff
+[CHANGELOG_URL]: https://github.com/EntenKoeniq/ezstripe/blob/main/CHANGELOG.md
+[BENCHMARKS]: https://img.shields.io/badge/benchmarks-0.4.0-ffd73c?style=flat-square&logo=speedtest
+[BENCHMARKS_URL]: https://github.com/EntenKoeniq/ezstripe/blob/main/BENCHMARKS.md
