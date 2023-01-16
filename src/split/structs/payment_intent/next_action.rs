@@ -36,16 +36,89 @@ pub struct NextActionCardAwaitNotification {
   pub customer_approval_required: bool
 }
 
+/// An IBAN-based FinancialAddress
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct NextActionDisplayBankTransferInstructionsFinancialAddressesIban {
+  /// The name of the person or business that owns the bank account
+  pub account_holder_name: String,
+  /// The BIC/SWIFT code of the account.
+  pub bic: String,
+  /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+  pub country: String,
+  /// The IBAN of the account.
+  pub iban: String
+}
+
+/// An account number and sort code-based FinancialAddress
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct NextActionDisplayBankTransferInstructionsFinancialAddressesSortCode {
+  /// The name of the person or business that owns the bank account
+  pub account_holder_name: String,
+  /// The account number
+  pub account_number: String,
+  /// The six-digit sort code
+  pub sort_code: String
+}
+
+/// A SPEI-based FinancialAddress
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct NextActionDisplayBankTransferInstructionsFinancialAddressesSpei {
+  /// The three-digit bank code
+  pub bank_code: String,
+  ///The short banking institution name
+  pub bank_name: String,
+  /// The CLABE number
+  pub clabe: String
+}
+
+/// A Zengin-based FinancialAddress
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct NextActionDisplayBankTransferInstructionsFinancialAddressesZengin {
+  /// The account holder name
+  pub account_holder_name: String,
+  /// The account number
+  pub account_number: String,
+  /// The bank account type. In Japan, this can only be `futsu` or `toza`.
+  pub account_type: String,
+  /// The bank code of the account
+  pub bank_code: String,
+  /// The bank name of the account
+  pub bank_name: String,
+  /// The branch code of the account
+  pub branch_code: String,
+  /// The branch name of the account
+  pub branch_name: String
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct NextActionDisplayBankTransferInstructionsFinancialAddresses {
+  /// An IBAN-based FinancialAddress
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub iban: Option<NextActionDisplayBankTransferInstructionsFinancialAddressesIban>,
+  /// An account number and sort code-based FinancialAddress
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub sort_code: Option<NextActionDisplayBankTransferInstructionsFinancialAddressesSortCode>,
+  /// A SPEI-based FinancialAddress
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub spei: Option<NextActionDisplayBankTransferInstructionsFinancialAddressesSpei>,
+  /// The payment networks supported by this FinancialAddress
+  pub supported_networks: String,
+  /// The type of financial address
+  pub r#type: String,
+  /// A Zengin-based FinancialAddress
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub zengin: Option<NextActionDisplayBankTransferInstructionsFinancialAddressesZengin>
+}
+
 /// Contains the bank transfer details necessary for the customer to complete the payment.
-/// 
-/// **HELP US TO COMPLETE THE CONTENT ON [GITHUB](https://github.com/EntenKoeniq/ezstripe/pulls)**
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct NextActionDisplayBankTransferInstructions {
   /// The remaining amount that needs to be transferred to complete the payment.
   pub amount_remaining: u32,
   /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
   pub currency: String,
-  //pub financial_addresses: ?,
+  /// A list of financial addresses that can be used to fund the customer balance
+  pub financial_addresses: Option<NextActionDisplayBankTransferInstructionsFinancialAddresses>,
   /// A link to a hosted page that guides your customer through completing the transfer.
   pub hosted_instructions_url: String,
   /// A string identifying this payment.

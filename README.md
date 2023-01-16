@@ -93,7 +93,7 @@ This SDK for Stripe is still in a very early version, which is why there can be 
 The following is expected from version `1.0.0`: <br>
 Complete and stable ...
 
-- [ ] ... PaymentIntents
+- [X] ... PaymentIntents
 - All `Payment_method_types` except the following must be error checked by people in the countries that offer them, if possible: `bancontact`, `card_present`, `klarna`, `wechat_pay`, `sofort`, `card`, `alipay` , `eps` , `giropay`, `ideal`, `link` and `p24`
 - [ ] ... SetupIntents
 - [ ] ... SetupAttempts

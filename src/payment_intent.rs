@@ -4,9 +4,7 @@ use serde::{ Serialize, Deserialize };
 
 include!("split/structs/payment_intent/response.rs");
 
-/// Returns a list of all refunds you’ve previously created.
-/// The refunds are returned in sorted order, with the most recent refunds appearing first.
-/// For convenience, the 10 most recent refunds are always available by default on the charge object.
+/// Returns a list of PaymentIntents.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct ResponseList {
   /// String representing the object’s type.
