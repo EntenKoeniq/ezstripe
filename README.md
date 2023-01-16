@@ -54,14 +54,18 @@ async fn main() {
   // To show possible errors (recommended for development)
   env_logger::init_from_env(env_logger::Env::default().filter_or("MY_LOG_LEVEL", "debug"));
 
+  // We need a client to make requests
   let client = ezstripe::Client::new("SECRET_KEY");
   
-  // Returns: String("amount=1500;currency=eur;payment_method_types[]=card;capture_method=manual;")
+  // Create a body for the request
   let stripe_body = ezbody!(
       "amount" => 1500,
       "currency" => "eur",
       "payment_method_types[]" => "card",
-      "capture_method" => "manual"
+      "payment_method_types[]" => "sofort",
+      "capture_method" => "automatic",
+      "shipping[name]" => "Your Name",
+      "shipping[address][city]" => "Test"
     );
   
   // Now send a request to Stripe's API
