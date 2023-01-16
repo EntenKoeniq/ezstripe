@@ -36,7 +36,8 @@ pub struct PaymentMethodOptionsAcssDebit {
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsAffirm {
   /// Controls when the funds will be captured from the customer’s account.
-  pub capture_method: String,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub capture_method: Option<String>,
   /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
   /// 
   /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
@@ -50,7 +51,9 @@ pub struct PaymentMethodOptionsAffirm {
 /// If the PaymentIntent’s payment_method_types includes `afterpay_clearpay`, this hash contains the configurations that will be applied to each payment attempt of that type.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsAfterpayClearpay {
-  pub capture_method: String,
+  /// Controls when the funds will be captured from the customer’s account.
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub capture_method: Option<String>,
   /// Order identifier shown to the customer in Afterpay’s online portal.
   /// We recommend using a value that helps you answer any questions a customer might have about the payment.
   /// The identifier is limited to 128 characters and may contain only letters, digits, underscores, backslashes and dashes.
@@ -251,7 +254,8 @@ pub struct PaymentMethodOptionsCard {
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsCardPresent {
   /// Controls when the funds will be captured from the customer’s account.
-  pub capture_method: String,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub capture_method: Option<String>,
   /// Request ability to capture this payment beyond the standard [authorization validity window](https://stripe.com/docs/terminal/features/extended-authorizations#authorization-validity)
   pub request_extended_authorization: bool,
   /// Request ability to [increment](https://stripe.com/docs/terminal/features/incremental-authorizations) this PaymentIntent if the combination of MCC and card brand is eligible.
@@ -368,7 +372,8 @@ pub struct PaymentMethodOptionsInteracPresent;
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodOptionsKlarna {
   /// Controls when the funds will be captured from the customer’s account.
-  pub capture_method: String
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub capture_method: Option<String>,
 }
 
 /// If the PaymentIntent’s payment_method_types includes `konbini`, this hash contains the configurations that will be applied to each payment attempt of that type.
@@ -554,7 +559,8 @@ pub struct PaymentMethodOptionsWechatPay {
   #[serde(skip_serializing_if = "Option::is_none")]
   pub app_id: Option<String>,
   /// The client type that the end customer will pay from
-  pub client: String,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub client: Option<String>,
   /// Indicates that you intend to make future payments with this PaymentIntent’s payment method.
   /// 
   /// Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent’s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.

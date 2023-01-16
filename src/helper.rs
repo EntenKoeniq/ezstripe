@@ -21,6 +21,10 @@ pub async fn make_reqwest<T>(request: reqwest::RequestBuilder) -> Result<T, (Str
     match serde_json::from_str::<T>(&body_response) {
       Ok(r) => return Ok(r),
       Err(e) => {
+        // This can be useful when we expected something like a string, but Stripe doesn't give us that value
+        if log::log_enabled!(log::Level::Debug) {
+          log::debug!("\n{}", &body_response);
+        }
         if log::log_enabled!(log::Level::Error) {
           log::error!("Discovered errors! Send us this error so we can fix it (https://github.com/EntenKoeniq/ezstripe/issues)");
           log::error!("{}", e);
