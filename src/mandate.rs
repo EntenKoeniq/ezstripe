@@ -19,8 +19,10 @@ pub struct CustomerAcceptance {
   /// The time at which the customer accepted the Mandate.
   pub accepted_at: i64,
   /// If this is a Mandate accepted offline, this hash contains details about the offline acceptance.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub offline: Option<CustomerAcceptanceOffline>,
   /// If this is a Mandate accepted online, this hash contains details about the online acceptance.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub online: Option<CustomerAcceptanceOnline>,
   /// The type of customer acceptance information included with the Mandate.
   /// One of `online` or `offline`.
@@ -115,24 +117,32 @@ pub struct PaymentMethodDetailsUsBankAccount;
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct PaymentMethodDetails {
   /// If this mandate is associated with a `acss_debit` payment method, this hash contains mandate information specific to the `acss_debit` payment method.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub acss_debit: Option<PaymentMethodDetailsAcssDebit>,
   /// If this mandate is associated with a `au_becs_debit` payment method, this hash contains mandate information specific to the `au_becs_debit` payment method.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub au_becs_debit: Option<PaymentMethodDetailsAuBecsDebit>,
   /// If this mandate is associated with a `bacs_debit` payment method, this hash contains mandate information specific to the `bacs_debit` payment method.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub bacs_debit: Option<PaymentMethodDetailsBacsDebit>,
   /// If this mandate is associated with a `blik` payment method, this hash contains mandate information specific to the `blik` payment method.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub blik: Option<PaymentMethodDetailsBlik>,
   /// If this mandate is associated with a `card` payment method, this hash contains mandate information specific to the `card` payment method.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub card: Option<PaymentMethodDetailsCard>,
   /// If this mandate is associated with a `link` payment method, this hash contains mandate information specific to the `link` payment method.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub link: Option<PaymentMethodDetailsLink>,
   /// If this mandate is associated with a `sepa_debit` payment method, this hash contains mandate information specific to the `sepa_debit` payment method.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub sepa_debit: Option<PaymentMethodDetailsSepaDebit>,
   /// The type of the payment method associated with this mandate.
   /// An additional hash is included on `payment_method_details` with a name matching this value.
   /// It contains mandate information specific to the payment method.
   pub r#type: String,
   /// If this mandate is associated with a `us_bank_account` payment method, this hash contains mandate information specific to the `us_bank_account` payment method.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub us_bank_account: Option<PaymentMethodDetailsUsBankAccount>
 }
 
@@ -160,6 +170,7 @@ pub struct Response {
   /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
   pub livemode: bool,
   /// If this is a `multi_use` mandate, this hash contains details about the mandate.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub multi_use: Option<MultiUse>,
   /// ID of the payment method associated with this mandate.
   pub payment_method: String,
@@ -170,6 +181,7 @@ pub struct Response {
   /// The type of the mandate.
   pub r#type: String,
   /// If this is a `single_use` mandate, this hash contains details about the mandate.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub single_use: Option<String> // Possible
 }
 

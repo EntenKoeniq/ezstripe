@@ -2,9 +2,9 @@
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct NextActionAlipayHandleRedirect {
   /// The native data to be used with Alipay SDK you must redirect your customer to in order to authenticate the payment in an Android App.
-  pub native_data: Option<String>,
+  pub native_data: String,
   /// The native URL you must redirect your customer to in order to authenticate the payment in an iOS App.
-  pub native_url: Option<String>,
+  pub native_url: String,
   /// If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.
   pub return_url: String,
   /// The URL you must redirect your customer to in order to authenticate the payment.
@@ -29,10 +29,11 @@ pub struct NextActionBoletoDisplayDetails {
 pub struct NextActionCardAwaitNotification {
   /// The time that payment will be attempted.
   /// If customer approval is required, they need to provide approval before this time.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub charge_attempt_at: Option<i64>,
   /// For payments greater than INR 15000, the customer must provide explicit approval of the payment with their bank.
   /// For payments of lower amount, no customer action is required.
-  pub customer_approval_required: Option<bool>
+  pub customer_approval_required: bool
 }
 
 /// Contains the bank transfer details necessary for the customer to complete the payment.
@@ -114,9 +115,9 @@ pub struct NextActionPromptpayDisplayQrCode {
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct NextActionRedirectToUrl {
   /// If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.
-  pub return_url: Option<String>,
+  pub return_url: String,
   /// The URL you must redirect your customer to in order to authenticate the payment.
-  pub url: Option<String>
+  pub url: String
 }
 
 /// When confirming a PaymentIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows.
@@ -181,36 +182,51 @@ pub struct NextActionWechatPayRedirectToIosApp {
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct NextAction {
   /// Contains instructions for authenticating a payment by redirecting your customer to Alipay App or website.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub alipay_handle_redirect: Option<NextActionAlipayHandleRedirect>,
   /// Contains Boleto details necessary for the customer to complete the payment.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub boleto_display_details: Option<NextActionBoletoDisplayDetails>,
   /// Contains instructions for processing off session recurring payments with Indian issued cards.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub card_await_notification: Option<NextActionCardAwaitNotification>,
   /// Contains the bank transfer details necessary for the customer to complete the payment.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub display_bank_transfer_instructions: Option<NextActionDisplayBankTransferInstructions>,
   /// Contains Konbini details necessary for the customer to complete the payment.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub konbini_display_details: Option<NextActionKonbiniDisplayDetails>,
   /// Contains OXXO details necessary for the customer to complete the payment.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub oxxo_display_details: Option<NextActionOxxoDisplayDetails>,
   /// The field that contains PayNow QR code info
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub paynow_display_qr_code: Option<NextActionPaynowDisplayQrCode>,
   /// The field that contains Pix QR code info
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub pix_display_qr_code: Option<NextActionPixDisplayQrCode>,
   /// The field that contains PromptPay QR code info
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub promptpay_display_qr_code: Option<NextActionPromptpayDisplayQrCode>,
   /// Contains instructions for authenticating a payment by redirecting your customer to another page or application.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub redirect_to_url: Option<NextActionRedirectToUrl>,
   /// Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.
   pub r#type: String,
   /// When confirming a PaymentIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows.
   /// The shape of the contents is subject to change and is only intended to be used by Stripe.js.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub use_stripe_sdk: Option<NextActionUseStripeSdk>,
   /// Contains details describing microdeposits verification flow.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub verify_with_microdeposits: Option<NextActionVerifyWithMicrodeposits>,
   /// The field that contains WeChat Pay QR code info
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub wechat_pay_display_qr_code: Option<NextActionWechatPayDisplayQrCode>,
   /// Info required for android app to app redirect
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub wechat_pay_redirect_to_android_app: Option<NextActionWechatPayRedirectToAndrodApp>,
   /// Info required for iOS app to app redirect
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub wechat_pay_redirect_to_ios_app: Option<NextActionWechatPayRedirectToIosApp>
 }

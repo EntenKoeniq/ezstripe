@@ -33,9 +33,11 @@ pub struct Response {
   /// ID of the bank account or card the payout was sent to.
   pub destination: String,
   /// If the payout failed or was canceled, this will be the ID of the balance transaction that reversed the initial balance transaction, and puts the funds from the failed payout back in your balance.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub failure_balance_transaction: Option<String>,
   /// Error code explaining reason for payout failure if available.
   /// See [Types of payout failures](https://stripe.com/docs/api#payout_failures) for a list of failure codes.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub failure_code: Option<String>,
   /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
   pub livemode: bool,
@@ -46,13 +48,16 @@ pub struct Response {
   /// instant is only supported for payouts to debit cards. (See [Instant payouts for marketplaces](https://stripe.com/blog/instant-payouts-for-marketplaces) for more information.)
   pub method: String,
   /// If the payout reverses another, this is the ID of the original payout.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub original_payout: Option<String>,
   /// If the payout was reversed, this is the ID of the payout that reverses this payout.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub reversed_by: Option<String>,
   /// The source balance this payout came from.
   /// One of `card`, `fpx`, or `bank_account`.
   pub source_type: String,
   /// Extra information about a payout to be displayed on the user’s bank statement.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub statement_descriptor: Option<String>,
   /// Current status of the payout: `paid`, `pending`, `in_transit`, `canceled` or `failed`.
   /// A payout is `pending` until it is submitted to the bank, when it becomes `in_transit`.

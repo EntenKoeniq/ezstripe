@@ -90,10 +90,13 @@ pub struct Response {
   pub pending: Vec<Pending>,
   /// Funds held due to negative balances on connected Custom accounts.
   /// The connect reserve balance for each currency and payment type can be found in the `source_types` property.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub connect_reserved: Option<Vec<ConnectReserved>>,
   /// Funds that can be paid out using Instant Payouts.
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub instant_available: Option<Vec<InstantAvailable>>,
   /// Funds that can be spent on your [Issued Cards](https://stripe.com/docs/api/balance/balance_object#issuing/cards).
+  #[serde(skip_serializing_if = "Option::is_none")]
   pub issuing: Option<Issuing>
 }
 
