@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.2](https://github.com/EntenKoeniq/ezstripe/compare/0.4.1...0.4.2) (01/16/2023)
+- All PaymentIntent structures completed.
+- Updated
+- - `README.md`.
+- - `CHANGELOG.md`.
+- Added
+- - `#[serde(skip_serializing_if = "Option::is_none")]`.
+- - Missing `payment_intent::NextAction` members.
+- Fixed
+- - Typo and renamed `kombini` to `konbini`.
+- Some documentation improvements and more...
+
 ## [0.4.1](https://github.com/EntenKoeniq/ezstripe/compare/0.4.0...0.4.1) (01/15/2023)
 - Removed
 - - Duplicate function with different name.
