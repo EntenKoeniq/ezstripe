@@ -100,7 +100,7 @@ Complete and stable ...
 - [X] ... Balance
 
 [CRATESIO]: https://img.shields.io/badge/crates.io-ezstripe-B7410E?style=flat-square&logo=rust
-[CRATESIO_URL]: https://crates.io/crate/ezstripe
+[CRATESIO_URL]: https://crates.io/crates/ezstripe
 [DOCS]: https://img.shields.io/badge/docs-latest-343434?style=flat-square&logo=read-the-docs&logoColor=fff
 [DOCS_URL]: https://docs.rs/ezstripe/latest/ezstripe/
 [EXAMPLES]: https://img.shields.io/badge/examples-latest-343434?style=flat-square&logo=bookstack&logoColor=fff
