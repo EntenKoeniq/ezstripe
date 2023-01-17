@@ -20,7 +20,8 @@ full = [
   "payout",
   "refund"
 ]
-balance = []
+balance = ["balance_transaction"]
+balance_transaction = []
 dispute = []
 mandate = []
 payment_intent = []

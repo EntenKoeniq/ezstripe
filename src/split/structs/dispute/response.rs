@@ -1,5 +1,3 @@
-include!("balance_transaction.rs");
-
 include!("evidence.rs");
 
 /// Dispute object from 01/17/2023
@@ -14,7 +12,7 @@ pub struct Response {
   /// Disputed amount. Usually the amount of the charge, but can differ (usually because of currency fluctuation or because only part of the order is disputed).
   pub amount: u32,
   /// List of zero, one, or two balance transactions that show funds withdrawn and reinstated to your Stripe account as a result of this dispute.
-  pub balance_transactions: Vec<BalanceTransaction>,
+  pub balance_transactions: Vec<crate::balance_transaction::Response>,
   /// ID of the charge that was disputed.
   pub charge: String,
   /// Time at which the object was created. Measured in seconds since the Unix epoch.

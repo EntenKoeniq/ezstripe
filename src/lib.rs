@@ -2,6 +2,8 @@
 pub mod helper;
 #[cfg(feature = "balance")]
 pub mod balance;
+#[cfg(feature = "balance_transaction")]
+pub mod balance_transaction;
 #[cfg(feature = "dispute")]
 pub mod dispute;
 #[cfg(feature = "mandate")]

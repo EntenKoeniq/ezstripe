@@ -13,6 +13,9 @@ pub struct Client {
 #[cfg(feature = "balance")]
 include!("split/implementations/client/balance.rs");
 
+#[cfg(feature = "balance_transaction")]
+include!("split/implementations/client/balance_transaction.rs");
+
 #[cfg(feature = "dispute")]
 include!("split/implementations/client/dispute.rs");
 

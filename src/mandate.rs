@@ -2,15 +2,11 @@ use serde::{ Serialize, Deserialize };
 
 include!("split/structs/mandate/response.rs");
 
-/// This structure contains all the data for a request to Stripe's API.
+#[doc(hidden)]
 pub struct Info<'a> {
-  /// Unique identifier of the object.
-  pub id: String,
-  /// Stripe's API secret key.
   pub secret_key: String,
-  // A reference to the `reqwest::Client` reusable.
-  #[doc(hidden)]
-  pub reqwest_client: &'a reqwest::Client
+  pub reqwest_client: &'a reqwest::Client,
+  pub id: String
 }
 
 impl Info<'_> {

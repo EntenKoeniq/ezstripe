@@ -70,14 +70,10 @@ impl Types {
   }
 }
 
-/// This structure contains all the data for a request to Stripe's API.
+#[doc(hidden)]
 pub struct Info<'a> {
-  /// The type of request to Stripe.
   pub r#type: Types,
-  /// Stripe's API secret key.
   pub secret_key: String,
-  // A reference to the `reqwest::Client` reusable.
-  #[doc(hidden)]
   pub reqwest_client: &'a reqwest::Client
 }
 

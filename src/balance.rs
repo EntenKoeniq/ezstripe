@@ -4,12 +4,9 @@ use serde::{ Serialize, Deserialize };
 
 include!("split/structs/balance/response.rs");
 
-/// This structure contains all the data for a request to Stripe's API.
+#[doc(hidden)]
 pub struct Info<'a> {
-  /// Stripe's API secret key.
   pub secret_key: String,
-  // A reference to the `reqwest::Client` reusable.
-  #[doc(hidden)]
   pub reqwest_client: &'a reqwest::Client
 }
 

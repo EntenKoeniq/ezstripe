@@ -1,6 +1,6 @@
 /// Detailed breakdown of fees (in cents) paid for this transaction.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct BalanceTransactionFeeDetails {
+pub struct FeeDetails {
   /// Amount of the fee, in cents.
   pub amount: u32,
   /// ID of the Connect application that earned the fee.
@@ -18,7 +18,7 @@ pub struct BalanceTransactionFeeDetails {
 /// Balance transactions represent funds moving through your Stripe account.
 /// They're created for every type of transaction that comes into or flows out of your Stripe account balance.
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct BalanceTransaction {
+pub struct Response {
   /// Unique identifier for the object.
   pub id: String,
   /// String representing the object’s type. Objects of the same type share the same value.
@@ -39,7 +39,7 @@ pub struct BalanceTransaction {
   /// Fees (in cents) paid for this transaction.
   pub fee: u32,
   /// Detailed breakdown of fees (in cents) paid for this transaction.
-  pub fee_details: Vec<BalanceTransactionFeeDetails>,
+  pub fee_details: Vec<FeeDetails>,
   /// Net amount of the transaction, in cents.
   pub net: u32,
   /// [Learn more](https://stripe.com/docs/reports/reporting-categories) about how reporting categories can help you understand balance transactions from an accounting perspective.
