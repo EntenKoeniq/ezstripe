@@ -36,7 +36,7 @@ macro_rules! ezbody {
       let mut result = String::new();
 
       $(
-        result += format!("{}={};", $k, $v).as_str();
+        result += stringify!("{}={};", $k, $v);
       )*
 
       result
