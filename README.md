@@ -107,6 +107,11 @@ A list of currently supported and planned features.
 - [X] Refunds
 - [ ] Tokens
 
+# License
+I spent hours writing the code and creating each member of a struct. So please respect my time and work.
+
+This project is licensed under [MIT license](https://github.com/EntenKoeniq/ezstripe/blob/main/LICENSE).
+
 [CRATESIO]: https://img.shields.io/badge/crates.io-ezstripe-B7410E?style=flat-square&logo=rust
 [CRATESIO_URL]: https://crates.io/crates/ezstripe
 [DOCS]: https://img.shields.io/badge/docs-latest-343434?style=flat-square&logo=read-the-docs&logoColor=fff
