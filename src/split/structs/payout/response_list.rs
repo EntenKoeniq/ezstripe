@@ -1,0 +1,14 @@
+/// Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent you.
+/// The payouts are returned in sorted order, with the most recently created payouts appearing first.
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct ResponseList {
+  /// String representing the object’s type.
+  /// Objects of the same type share the same value.
+  pub object: String,
+  /// The end of the requested URL of the API.
+  pub url: String,
+  /// If more than the data received now exists `true` otherwise `false`.
+  pub has_more: bool,
+  /// All received data.
+  pub data: Vec<Response>
+}
