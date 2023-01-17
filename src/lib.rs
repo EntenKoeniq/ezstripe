@@ -36,7 +36,7 @@ macro_rules! ezbody {
       let mut result = String::new();
 
       $(
-        result += stringify!("{}={};", $k, $v);
+        result += concat!($k, '=', $v, ';');
       )*
 
       result

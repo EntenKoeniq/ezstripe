@@ -7,31 +7,17 @@
 </div>
 
 <div align="center">
-  <h4>
-    <a href="https://crates.io/crates/ezstripe">
-      Crate
-    </a>
-    <span> | </span>
-    <a href="https://docs.rs/ezstripe/latest/ezstripe/">
-      Docs
-    </a>
-    <span> | </span>
-    <a href="https://github.com/EntenKoeniq/ezstripe/tree/main/examples">
-      Examples
-    </a>
-    <span> | </span>
-    <a href="https://github.com/EntenKoeniq/ezstripe/blob/main/CHANGELOG.md">
-      Changelog
-    </a>
-    <span> | </span>
-    <a href="https://github.com/EntenKoeniq/ezstripe/blob/main/BENCHMARKS.md">
-      Benchmarks
-    </a>
-  </h4>
+
+  [![CRATESIO]][CRATESIO_URL] [![DOCS]][DOCS_URL] [![EXAMPLES]][EXAMPLES_URL] [![CHANGELOG]][CHANGELOG_URL] [![BENCHMARKS]][BENCHMARKS_URL]
+  
 </div>
 
 # Benchmarks
 Here are simple benchmark results on other dependencies with source code so you can try it yourself.
+
+> **Note** <br>
+> When testing, make sure that enough threads are free.
+> It was tested on Windows 11 with 2x 8GB DDR4 memory and an i5-11400 by first running async-stripe and then ezstripe.
 
 <b>Description:</b> 6 threads and each thread created a payment intent 20 times.
 <br>
@@ -64,7 +50,10 @@ fn create_thread(num: u16) {
         "amount" => 1500,
         "currency" => "eur",
         "payment_method_types[]" => "card",
-        "capture_method" => "manual"
+        "payment_method_types[]" => "sofort",
+        "capture_method" => "automatic",
+        "shipping[name]" => "Your Name",
+        "shipping[address][city]" => "Test"
       );
 
       let stripe_response = client.create_payment_intent(stripe_body).send().await.unwrap();
@@ -92,9 +81,9 @@ async fn main() {
 
 | [ezstripe](https://crates.io/crates/ezstripe) | #0 | #1 | #2 | #3 | #4 | #5 | AVG |
 | ------- | --- | --- | --- | --- | --- | --- | --- |
-| First run | 6.26s | 6.39s | 6.33s | 6.56s | 6.51s | 6.22s | 6.38s |
-| Second run | 6.39s | 6.47s | 6.33s | 6.44s | 6.29s | 6.39s | 6.39s |
-| Third run | 6.40s | 6.42s | 6.34s | 6.44s | 6.31s | 6.29s | 6.37s |
+| First run | 7.25s | 7.18s | 7.25s | 7.38s | 7.21s | 7.18s | 7.24s |
+| Second run | 7.12s | 7.24s | 7.18s | 7.35s | 7.22s | 7.25s | 7.23s |
+| Third run | 7.26s | 7.11s | 7.31s | 7.22s | 7.28s | 7.10s | 7.21s |
 
 <details>
   <summary>Source code</summary>
@@ -112,7 +101,9 @@ use stripe::{
   CreatePaymentIntent,
   Currency,
   PaymentIntent,
-  PaymentIntentCaptureMethod
+  PaymentIntentCaptureMethod,
+  CreatePaymentIntentShipping,
+  CreatePaymentIntentShippingAddress
 };
 
 
@@ -128,8 +119,25 @@ fn create_thread(num: u16) {
     for _ in 0..20 {
       let payment_intent = {
         let mut create_intent = CreatePaymentIntent::new(1500, Currency::EUR);
-        create_intent.payment_method_types = Some(vec!["card".to_string()]);
-        create_intent.capture_method = Some(PaymentIntentCaptureMethod::Manual);
+        create_intent.payment_method_types = Some(vec![
+          "card".to_string(),
+          "sofort".to_string()
+        ]);
+        create_intent.capture_method = Some(PaymentIntentCaptureMethod::Automatic);
+        create_intent.shipping = Some(CreatePaymentIntentShipping {
+          address: CreatePaymentIntentShippingAddress {
+            city: Some("Test".to_string()),
+            country: None,
+            line1: None,
+            line2: None,
+            postal_code: None,
+            state: None
+          },
+          carrier: None,
+          name: "Your Name".to_string(),
+          phone: None,
+          tracking_number: None
+        });
 
         PaymentIntent::create(&client, create_intent).await.unwrap()
       };
@@ -156,11 +164,22 @@ async fn main() {
 
 | [async-stripe](https://crates.io/crates/async-stripe) | #0 | #1 | #2 | #3 | #4 | #5 | AVG |
 | ------- | --- | --- | --- | --- | --- | --- | --- |
-| First run | 6.57s | 6.37s | 6.56s | 6.31s | 6.65s | 6.39s | 6.48s |
-| Second run | 6.53s | 6.63s | 6.42s | 6.36s | 6.75s | 6.58s | 6.55s |
-| Third run | 6.58s | 6.55s | 6.52s | 6.43s | 6.46s | 6.62s | 6.53s |
+| First run | 7.18s | 7.44s | 7.40s | 7.49s | 7.18s | 7.20s | 7.32s |
+| Second run | 7.37s | 7.65s | 7.47s | 7.23s | 7.37s | 7.35s | 7.41s |
+| Third run | 7.27s | 7.31s | 7.20s | 7.22s | 7.38s | 7.21s | 7.27s |
 
 Performance result
 | [ezstripe 0.4.0](https://crates.io/crates/ezstripe) | [async-stripe 0.15.0](https://crates.io/crates/async-stripe) |
 | --- | --- |
-| 100% | 97.85% |
+| 100% | 98.63% |
+
+[CRATESIO]: https://img.shields.io/badge/crates.io-ezstripe-B7410E?style=flat-square&logo=rust
+[CRATESIO_URL]: https://crates.io/crates/ezstripe
+[DOCS]: https://img.shields.io/badge/docs-latest-343434?style=flat-square&logo=read-the-docs&logoColor=fff
+[DOCS_URL]: https://docs.rs/ezstripe/latest/ezstripe/
+[EXAMPLES]: https://img.shields.io/badge/examples-latest-343434?style=flat-square&logo=bookstack&logoColor=fff
+[EXAMPLES_URL]: https://github.com/EntenKoeniq/ezstripe/tree/main/examples
+[CHANGELOG]: https://img.shields.io/badge/changelog-latest-343434?style=flat-square&logo=react-hook-form&logoColor=fff
+[CHANGELOG_URL]: https://github.com/EntenKoeniq/ezstripe/blob/main/CHANGELOG.md
+[BENCHMARKS]: https://img.shields.io/badge/benchmarks-0.4.3pre-ffd73c?style=flat-square&logo=speedtest
+[BENCHMARKS_URL]: https://github.com/EntenKoeniq/ezstripe/blob/main/BENCHMARKS.md
