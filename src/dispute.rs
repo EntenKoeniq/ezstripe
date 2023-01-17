@@ -168,7 +168,7 @@ pub struct Evidence {
   pub uncategorized_text: Option<String>
 }
 
-/// Payout object from 01/17/2023
+/// Dispute object from 01/17/2023
 /// 
 /// [Dispute object](https://stripe.com/docs/api/disputes/object)
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -210,8 +210,7 @@ pub struct Response {
   pub status: String
 }
 
-/// Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent you.
-/// The payouts are returned in sorted order, with the most recently created payouts appearing first.
+/// Returns a list of your disputes.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct ResponseList {
   /// String representing the object’s type.
