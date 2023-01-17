@@ -3,7 +3,6 @@
 ## [0.5.0](https://github.com/EntenKoeniq/ezstripe/compare/0.4.2...0.5.0) (01/17/2023)
 - Updated
 - - `ezbody!` (Performance increase up to +40%).
-- - `README.md`, `BENCHMARKS.md` and all examples.
 - Added
 - - Support for `Disputes`.
 - - Feature `dispute`.
@@ -12,9 +11,6 @@
 
 ## [0.4.2](https://github.com/EntenKoeniq/ezstripe/compare/0.4.1...0.4.2) (01/16/2023)
 - All PaymentIntent structures completed.
-- Updated
-- - `README.md`.
-- - `CHANGELOG.md`.
 - Added
 - - `#[serde(skip_serializing_if = "Option::is_none")]`.
 - - Missing `payment_intent::NextAction` members.
@@ -46,14 +42,18 @@
 - Some documentation improvements and more...
 
 ## [0.3.2](https://github.com/EntenKoeniq/ezstripe/compare/0.3.1...0.3.2) (01/13/2023)
-- LICENSE and Authors updated.
-- Changed Github username (from "xEntenKoeniqx" to "EntenKoeniq").
-- Changed repository URL (from ".../xEntenKoeniqx/ezstripe" to "../EntenKoeniq/ezstripe").
+- Updated
+- - LICENSE.
+- - Authors.
+- Changed
+- - Repository URL (from ".../xEntenKoeniqx/ezstripe" to "../EntenKoeniq/ezstripe").
 
 ## [0.3.1](https://github.com/EntenKoeniq/ezstripe/compare/0.3.0...0.3.1) (01/13/2023)
-- Added optional features.
-- Removed debug and replaced with [log](https://crates.io/crates/log) crate.
-- Removed unused "json" feature for [reqwest](https://crates.io/crates/reqwest) crate.
+- Added
+- - Optional features.
+- Removed
+- - Debug and replaced with [log](https://crates.io/crates/log) crate.
+- - Unused "json" feature for [reqwest](https://crates.io/crates/reqwest) crate.
 - Some documentation improvements, bug fixes and more...
 
 ## [0.3.0](https://github.com/EntenKoeniq/ezstripe/compare/0.2.2...0.3.0) (01/12/2023)
@@ -63,7 +63,7 @@
 - PaymentIntent
 - - Changed some values ​​to `Option<>` or from to normal.
 - - Added `next_action` to response details.
-- Added and completed
+- Added
 - - Balance API.
 - - Payout API.
 - - Refund API.
