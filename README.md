@@ -35,7 +35,7 @@ All features are enabled by default, but you can only select the features you re
 ezstripe = { version = "0.5.0", default-features = false, features = ["payment_intent", "refund"] }
 ```
 
-[Check all available features](https://github.com/EntenKoeniq/ezstripe/blob/main/Cargo.toml#L12..L26)
+[Check all available features](https://github.com/EntenKoeniq/ezstripe/blob/main/Cargo.toml#L12..L27)
 
 ### Example
 ```toml
