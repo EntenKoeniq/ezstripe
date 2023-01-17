@@ -173,6 +173,11 @@ Performance result
 | --- | --- |
 | 100% | 98.63% |
 
+Build time
+| [ezstripe 0.5.0](https://crates.io/crates/ezstripe) | [async-stripe 0.15.0](https://crates.io/crates/async-stripe) |
+| --- | --- |
+| 36s | 4m 17s |
+
 [CRATESIO]: https://img.shields.io/badge/crates.io-ezstripe-B7410E?style=flat-square&logo=rust
 [CRATESIO_URL]: https://crates.io/crates/ezstripe
 [DOCS]: https://img.shields.io/badge/docs-latest-343434?style=flat-square&logo=read-the-docs&logoColor=fff
