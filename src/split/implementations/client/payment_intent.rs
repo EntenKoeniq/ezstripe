@@ -160,7 +160,7 @@ impl Client {
   /// async fn main() {
   ///   let client = ezstripe::Client::new("SECRET_KEY");
   ///   
-  ///   let stripe_response = client.list_payment_intent("limit=3;".to_string()).get().await;
+  ///   let stripe_response = client.list_payment_intent("limit=3;".to_string()).get_list().await;
   ///   
   ///   // ...
   /// }

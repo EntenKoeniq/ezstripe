@@ -12,15 +12,17 @@ readme = "README.md"
 [features]
 default = ["full"]
 full = [
-  "payment_intent",
   "balance",
+  "dispute",
   "mandate",
+  "payment_intent",
   "payout",
   "refund"
 ]
-payment_intent = []
 balance = []
+dispute = []
 mandate = []
+payment_intent = []
 payout = []
 refund = []
 

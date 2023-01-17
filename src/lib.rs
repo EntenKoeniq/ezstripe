@@ -2,6 +2,8 @@
 pub mod helper;
 #[cfg(feature = "balance")]
 pub mod balance;
+#[cfg(feature = "dispute")]
+pub mod dispute;
 #[cfg(feature = "mandate")]
 pub mod mandate;
 #[cfg(feature = "payment_intent")]
