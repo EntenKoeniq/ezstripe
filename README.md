@@ -88,20 +88,24 @@ async fn main() {
 ```
 
 # Status
-This SDK for Stripe is still in a very early version, which is why there can be many changes with each update.
+A list of currently supported and planned features.
 
-The following is expected from version `1.0.0`: <br>
-Completed ...
-
-- [X] ... PaymentIntents
-- [ ] ... SetupIntents
-- [ ] ... SetupAttempts
-- [X] ... Payouts
-- [X] ... Refunds
-- [X] ... Mandates
-- [X] ... Disputes
-- [ ] ... Charges
-- [X] ... Balance
+<b>[CORE RESOURCES](https://stripe.com/docs/api)</b>
+- [X] Balance
+- [ ] Balance Transactions
+- [ ] Charges
+- [ ] Customers
+- [X] Disputes
+- [ ] Events
+- [ ] Files
+- [ ] File Links
+- [X] Mandates
+- [X] PaymentIntents
+- [ ] SetupIntents
+- [ ] SetupAttempts
+- [X] Payouts
+- [X] Refunds
+- [ ] Tokens
 
 [CRATESIO]: https://img.shields.io/badge/crates.io-ezstripe-B7410E?style=flat-square&logo=rust
 [CRATESIO_URL]: https://crates.io/crates/ezstripe
