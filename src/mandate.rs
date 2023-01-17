@@ -16,6 +16,7 @@ impl Info<'_> {
       .get(format!("https://api.stripe.com/v1/mandates/{}", self.id))
       .basic_auth(&self.secret_key, None::<&str>)
       .header("Content-Type", "application/x-www-form-urlencoded");
+    
     crate::helper::make_reqwest::<Response>(crequest).await
   }
 }

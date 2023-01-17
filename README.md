@@ -21,7 +21,7 @@
 ```toml
 # Cargo.toml
 [dependencies]
-ezstripe = "0.5.0"
+ezstripe = "0.6.0"
 ```
 or
 `cargo add ezstripe`
@@ -32,16 +32,16 @@ All features are enabled by default, but you can only select the features you re
 ```toml
 # Cargo.toml
 [dependencies]
-ezstripe = { version = "0.5.0", default-features = false, features = ["payment_intent", "refund"] }
+ezstripe = { version = "0.6.0", default-features = false, features = ["payment_intent", "refund"] }
 ```
 
-[Check all available features](https://github.com/EntenKoeniq/ezstripe/blob/main/Cargo.toml#L12..L28)
+[Check all available features](https://github.com/EntenKoeniq/ezstripe/blob/main/Cargo.toml#L13..L29)
 
 ### Example
 ```toml
 # Cargo.toml
 [dependencies]
-ezstripe = "0.5.0"
+ezstripe = "0.6.0"
 env_logger = "0.10.0" # Optional
 ```
 
