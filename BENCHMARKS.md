@@ -30,7 +30,7 @@ Here are simple benchmark results on other dependencies with source code so you 
 # Config.toml
 [dependencies]
 tokio = { version = "1.24.1", features = ["full"] }
-ezstripe = "0.4.0"
+ezstripe = "0.5.0"
 ```
 
 ```Rust
@@ -169,7 +169,7 @@ async fn main() {
 | Third run | 7.27s | 7.31s | 7.20s | 7.22s | 7.38s | 7.21s | 7.27s |
 
 Performance result
-| [ezstripe 0.4.0](https://crates.io/crates/ezstripe) | [async-stripe 0.15.0](https://crates.io/crates/async-stripe) |
+| [ezstripe 0.5.0](https://crates.io/crates/ezstripe) | [async-stripe 0.15.0](https://crates.io/crates/async-stripe) |
 | --- | --- |
 | 100% | 98.63% |
 
@@ -181,5 +181,5 @@ Performance result
 [EXAMPLES_URL]: https://github.com/EntenKoeniq/ezstripe/tree/main/examples
 [CHANGELOG]: https://img.shields.io/badge/changelog-latest-343434?style=flat-square&logo=react-hook-form&logoColor=fff
 [CHANGELOG_URL]: https://github.com/EntenKoeniq/ezstripe/blob/main/CHANGELOG.md
-[BENCHMARKS]: https://img.shields.io/badge/benchmarks-0.4.3pre-ffd73c?style=flat-square&logo=speedtest
+[BENCHMARKS]: https://img.shields.io/badge/benchmarks-0.5.0-ffd73c?style=flat-square&logo=speedtest
 [BENCHMARKS_URL]: https://github.com/EntenKoeniq/ezstripe/blob/main/BENCHMARKS.md

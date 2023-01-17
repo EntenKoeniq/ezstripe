@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.5.0](https://github.com/EntenKoeniq/ezstripe/compare/0.4.2...0.5.ß) (01/17/2023)
+- Updated
+- - `ezbody!` (Performance increase up to +40%).
+- - `README.md`, `BENCHMARKS.md` and all examples.
+- Added
+- - Support for `Disputes`.
+- - Feature `dispute`.
+- Fixed
+- - Documentations (Some examples have `get()` instead of `get_list()`).
+
 ## [0.4.2](https://github.com/EntenKoeniq/ezstripe/compare/0.4.1...0.4.2) (01/16/2023)
 - All PaymentIntent structures completed.
 - Updated

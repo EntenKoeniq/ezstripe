@@ -17,7 +17,7 @@
 # Cargo.toml
 [dependencies]
 tokio = { version = "1.24.1", features = ["full"] }
-ezstripe = "0.4.2"
+ezstripe = "0.5.0"
 env_logger = "0.10.0"
 ```
 
@@ -67,5 +67,5 @@ async fn main() {
 [EXAMPLES_URL]: https://github.com/EntenKoeniq/ezstripe/tree/main/examples
 [CHANGELOG]: https://img.shields.io/badge/changelog-latest-343434?style=flat-square&logo=react-hook-form&logoColor=fff
 [CHANGELOG_URL]: https://github.com/EntenKoeniq/ezstripe/blob/main/CHANGELOG.md
-[BENCHMARKS]: https://img.shields.io/badge/benchmarks-0.4.3pre-ffd73c?style=flat-square&logo=speedtest
+[BENCHMARKS]: https://img.shields.io/badge/benchmarks-0.5.0-ffd73c?style=flat-square&logo=speedtest
 [BENCHMARKS_URL]: https://github.com/EntenKoeniq/ezstripe/blob/main/BENCHMARKS.md
