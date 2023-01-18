@@ -16,8 +16,8 @@
 Here are simple benchmark results on other dependencies with source code so you can try it yourself.
 
 > **Note** <br>
-> When testing, make sure that enough threads are free.
-> It was tested on Windows 11 with 2x 8GB DDR4 memory and an i5-11400 by first running async-stripe and then ezstripe.
+> This is just a simple comparison with other SDKs! Please respect the work of the other SDKs that took a lot of time and work! <br>
+> Feel free to share your results with us along with your hardware here on [Github](https://github.com/EntenKoeniq/ezstripe/discussions)!
 
 <b>Description:</b> 6 threads and each thread created a payment intent 20 times.
 <br>
