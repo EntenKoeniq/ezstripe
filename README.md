@@ -10,6 +10,8 @@
 
   [![CRATESIO]][CRATESIO_URL] [![DOCS]][DOCS_URL] [![EXAMPLES]][EXAMPLES_URL] [![CHANGELOG]][CHANGELOG_URL] [![BENCHMARKS]][BENCHMARKS_URL]
   
+ <img src="https://discordapp.com/api/guilds/1065101892914511953/widget.png?style=banner2" alt="Discord Shield" />
+ 
 </div>
 
 # Usage
