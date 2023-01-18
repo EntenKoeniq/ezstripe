@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.1](https://github.com/EntenKoeniq/ezstripe/compare/0.6.0...0.6.1) (01/18/2023)
+- Added
+- - Missing error types.
+
 ## [0.6.0](https://github.com/EntenKoeniq/ezstripe/compare/0.5.0...0.6.0) (01/17/2023)
 - Added
 - - Support for `BalanceTransactions`.
