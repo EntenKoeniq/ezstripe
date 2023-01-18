@@ -9,15 +9,13 @@
 <div align="center">
 
   [![CRATESIO]][CRATESIO_URL] [![DOCS]][DOCS_URL] [![EXAMPLES]][EXAMPLES_URL] [![CHANGELOG]][CHANGELOG_URL] [![BENCHMARKS]][BENCHMARKS_URL]
+ 
+  <a href="https://discord.gg/VjQQZRU22F"><img src="https://discordapp.com/api/guilds/1065101892914511953/widget.png?style=shield" alt="Your our discord" /></a>
   
 </div>
 
 # Benchmarks
 Here are simple benchmark results on other dependencies with source code so you can try it yourself.
-
-> **Note** <br>
-> This is just a simple comparison with other SDKs! Please respect the work of the other SDKs that took a lot of time and work! <br>
-> Feel free to share your results with us along with your hardware here on [Github](https://github.com/EntenKoeniq/ezstripe/discussions)!
 
 <b>Description:</b> 6 threads and each thread created a payment intent 20 times.
 <br>
@@ -30,7 +28,7 @@ Here are simple benchmark results on other dependencies with source code so you 
 # Config.toml
 [dependencies]
 tokio = { version = "1.24.1", features = ["full"] }
-ezstripe = "0.5.0"
+ezstripe = { path = "./../ezstripe-master" }
 ```
 
 ```Rust
@@ -79,11 +77,11 @@ async fn main() {
 </details>
 
 
-| [ezstripe](https://crates.io/crates/ezstripe) | #0 | #1 | #2 | #3 | #4 | #5 | AVG |
+| [ezstripe 0.6.0](https://crates.io/crates/ezstripe) | #0 | #1 | #2 | #3 | #4 | #5 | AVG |
 | ------- | --- | --- | --- | --- | --- | --- | --- |
-| First run | 7.25s | 7.18s | 7.25s | 7.38s | 7.21s | 7.18s | 7.24s |
-| Second run | 7.12s | 7.24s | 7.18s | 7.35s | 7.22s | 7.25s | 7.23s |
-| Third run | 7.26s | 7.11s | 7.31s | 7.22s | 7.28s | 7.10s | 7.21s |
+| First run | 7.25s | 7.43s | 7.20s | 7.33s | 7.03s | 7.21s | 7.24s |
+| Second run | 7.10s | 7.13s | 7.08s | 7.14s | 6.99s | 7.13s | 7.10s |
+| Third run | 7.13s | 7.13s | 7.35s | 7.21s | 7.01s | 7.05s | 7.15s |
 
 <details>
   <summary>Source code</summary>
@@ -92,7 +90,7 @@ async fn main() {
 # Config.toml
 [dependencies]
 tokio = { version = "1.24.1", features = ["full"] }
-async-stripe = { version = "0.15.0", features = ["runtime-async-std-surf"] }
+async-stripe = { path = "./../async-stripe-master", features = ["runtime-async-std-surf"] }
 ```
   
 ```Rust
@@ -162,21 +160,26 @@ async fn main() {
 ```
 </details>
 
-| [async-stripe](https://crates.io/crates/async-stripe) | #0 | #1 | #2 | #3 | #4 | #5 | AVG |
+| [async-stripe 0.16.0](https://crates.io/crates/async-stripe) | #0 | #1 | #2 | #3 | #4 | #5 | AVG |
 | ------- | --- | --- | --- | --- | --- | --- | --- |
-| First run | 7.18s | 7.44s | 7.40s | 7.49s | 7.18s | 7.20s | 7.32s |
-| Second run | 7.37s | 7.65s | 7.47s | 7.23s | 7.37s | 7.35s | 7.41s |
-| Third run | 7.27s | 7.31s | 7.20s | 7.22s | 7.38s | 7.21s | 7.27s |
+| First run | 7.46 | 7.40s | 7.20s | 7.49s | 7.06s | 7.25s | 7.31s |
+| Second run | 7.23s | 7.15s | 7.25s | 7.05s | 7.05s | 7.09s | 7.14s |
+| Third run | 7.45s | 7.30s | 7.17s | 7.16s | 7.63s | 7.43s | 7.36s |
 
 Performance result
-| [ezstripe 0.5.0](https://crates.io/crates/ezstripe) | [async-stripe 0.15.0](https://crates.io/crates/async-stripe) |
+| [ezstripe 0.6.0](https://crates.io/crates/ezstripe) | [async-stripe 0.16.0](https://crates.io/crates/async-stripe) |
 | --- | --- |
-| 100% | 98.63% |
+| 100% | 98.34% |
 
 Build time
-| [ezstripe 0.5.0](https://crates.io/crates/ezstripe) | [async-stripe 0.15.0](https://crates.io/crates/async-stripe) |
+| [ezstripe 0.6.0](https://crates.io/crates/ezstripe) | [async-stripe 0.16.0](https://crates.io/crates/async-stripe) |
 | --- | --- |
-| 36s | 4m 17s |
+| 43s | 4m 19s |
+
+ File size comparison
+| [ezstripe 0.6.0](https://crates.io/crates/ezstripe) | [async-stripe 0.16.0](https://crates.io/crates/async-stripe) |
+| --- | --- |
+| 4.546 KB | 11.661 KB |
 
 [CRATESIO]: https://img.shields.io/badge/crates.io-ezstripe-B7410E?style=flat-square&logo=rust
 [CRATESIO_URL]: https://crates.io/crates/ezstripe
@@ -186,5 +189,5 @@ Build time
 [EXAMPLES_URL]: https://github.com/EntenKoeniq/ezstripe/tree/main/examples
 [CHANGELOG]: https://img.shields.io/badge/changelog-latest-343434?style=flat-square&logo=react-hook-form&logoColor=fff
 [CHANGELOG_URL]: https://github.com/EntenKoeniq/ezstripe/blob/main/CHANGELOG.md
-[BENCHMARKS]: https://img.shields.io/badge/benchmarks-0.5.0-ffd73c?style=flat-square&logo=speedtest
+[BENCHMARKS]: https://img.shields.io/badge/benchmarks-0.6.0-ffd73c?style=flat-square&logo=speedtest
 [BENCHMARKS_URL]: https://github.com/EntenKoeniq/ezstripe/blob/main/BENCHMARKS.md

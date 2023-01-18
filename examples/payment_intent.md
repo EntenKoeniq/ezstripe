@@ -9,6 +9,8 @@
 <div align="center">
 
   [![CRATESIO]][CRATESIO_URL] [![DOCS]][DOCS_URL] [![EXAMPLES]][EXAMPLES_URL] [![CHANGELOG]][CHANGELOG_URL] [![BENCHMARKS]][BENCHMARKS_URL]
+ 
+  <a href="https://discord.gg/VjQQZRU22F"><img src="https://discordapp.com/api/guilds/1065101892914511953/widget.png?style=shield" alt="Your our discord" /></a>
   
 </div>
 
@@ -67,5 +69,5 @@ async fn main() {
 [EXAMPLES_URL]: https://github.com/EntenKoeniq/ezstripe/tree/main/examples
 [CHANGELOG]: https://img.shields.io/badge/changelog-latest-343434?style=flat-square&logo=react-hook-form&logoColor=fff
 [CHANGELOG_URL]: https://github.com/EntenKoeniq/ezstripe/blob/main/CHANGELOG.md
-[BENCHMARKS]: https://img.shields.io/badge/benchmarks-0.5.0-ffd73c?style=flat-square&logo=speedtest
+[BENCHMARKS]: https://img.shields.io/badge/benchmarks-0.6.0-ffd73c?style=flat-square&logo=speedtest
 [BENCHMARKS_URL]: https://github.com/EntenKoeniq/ezstripe/blob/main/BENCHMARKS.md
