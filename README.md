@@ -12,10 +12,6 @@
   
 </div>
 
-> **Warning** <br>
-> Up to version `1.0.0` a lot of the structure can change with each new version! <br>
-> Therefore, pay attention to the changes in the [changelog on Github](https://github.com/EntenKoeniq/ezstripe/blob/main/CHANGELOG.md) with every new version!
-
 # Usage
 ### Installation
 ```toml
@@ -106,6 +102,12 @@ A list of currently supported and planned features.
 - [X] Payouts
 - [X] Refunds
 - [ ] Tokens
+
+# Contributing
+> **Note** <br>
+> We don't bring in code from other projects! I ask you to respect the projects of others and the time invested and not to copy anything! No Struct! No Line!
+
+Interested in contributing to this SDK? Github offers you the possibility to create [pull requests](https://github.com/EntenKoeniq/ezstripe/pulls) where you can contribute your work to improve the experience with [ezstripe](https://github.com/EntenKoeniq/ezstripe)!
 
 # License
 I spent hours writing the code and creating each member of a struct. So please respect my time and work.
