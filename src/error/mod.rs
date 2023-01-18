@@ -74,15 +74,21 @@ include!("codes_enum.rs");
 pub enum Types {
   /// No error type.
   None,
+  /// Failure to connect to Stripe's API.
+  ApiConnectionError,
   /// API errors cover any other type of problem (e.g., a temporary problem with Stripe's servers), and are extremely uncommon.
   ApiError,
+  /// Failure to properly authenticate yourself in the request.
+  AuthenticationError,
   /// Card errors are the most common type of error you should expect to handle.
   /// They result when the user enters a card that can't be charged for some reason.
   CardError,
   /// Idempotency errors occur when an Idempotency-Key is re-used on a request that does not match the first request's API endpoint and parameters.
   IdempotencyError,
   /// Invalid request errors arise when your request has invalid parameters.
-  InvalidRequestError
+  InvalidRequestError,
+  /// Too many requests hit the API too quickly.
+  RateLimitError
 }
 
 impl std::fmt::Display for Types {
