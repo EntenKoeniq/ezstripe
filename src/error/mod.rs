@@ -128,9 +128,8 @@ pub struct Info {
   pub payment_intent: Option<crate::payment_intent::Response>
 }
 
-#[doc(hidden)]
 impl Info {
-  pub fn create(status: u16, json_text: &str) -> Option<Self> {
+  pub(crate) fn create(status: u16, json_text: &str) -> Option<Self> {
     let json = match serde_json::from_str::<serde_json::Value>(json_text) {
       Ok(r) => {
         if r["error"].is_null() {

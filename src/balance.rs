@@ -4,10 +4,9 @@ use serde::{ Serialize, Deserialize };
 
 include!("split/structs/balance/response.rs");
 
-#[doc(hidden)]
 pub struct Info<'a> {
-  pub secret_key: String,
-  pub reqwest_client: &'a reqwest::Client
+  pub(crate) secret_key: String,
+  pub(crate) reqwest_client: &'a reqwest::Client
 }
 
 impl Info<'_> {

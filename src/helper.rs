@@ -1,5 +1,5 @@
 /// Make a request with [reqwest](https://crates.io/crates/reqwest).
-pub async fn make_reqwest<T>(request: reqwest::RequestBuilder) -> Result<T, (String, Option<crate::error::Info>)> where T : serde::de::DeserializeOwned {
+pub(crate) async fn make_reqwest<T>(request: reqwest::RequestBuilder) -> Result<T, (String, Option<crate::error::Info>)> where T : serde::de::DeserializeOwned {
   let response = match request.send().await {
       Ok(r) => r,
       Err(_) => return Err(("Request failed".to_string(), None))

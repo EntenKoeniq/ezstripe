@@ -4,32 +4,16 @@ include!("split/structs/balance_transaction/response.rs");
 
 include!("split/structs/balance_transaction/response_list.rs");
 
-#[doc(hidden)]
 #[derive(PartialEq)]
-pub enum Types {
+pub(crate) enum Types {
   RETRIEVE(String),
   LIST(String)
 }
 
-#[doc(hidden)]
 const BALANCE_TRANSACTION_URL: &str = "https://api.stripe.com/v1/balance_transactions";
 
-#[doc(hidden)]
 impl Types {
-  pub fn create_send_request(&self, client: &reqwest::Client, secret: &str)-> reqwest::RequestBuilder {
-    let mut result = client
-      .post(self._get_url())
-      .basic_auth(secret, None::<&str>)
-      .header("Content-Type", "application/x-www-form-urlencoded");
-    
-    if let Some(r) = self._get_body() {
-      result = result.body(r);
-    }
-
-    result
-  }
-
-  pub fn create_get_request(&self, client: &reqwest::Client, secret: &str)-> reqwest::RequestBuilder {
+  pub(crate) fn create_get_request(&self, client: &reqwest::Client, secret: &str)-> reqwest::RequestBuilder {
     let mut result = client
       .get(self._get_url())
       .basic_auth(secret, None::<&str>)
@@ -63,11 +47,10 @@ impl Types {
   }
 }
 
-#[doc(hidden)]
 pub struct Info<'a> {
-  pub r#type: Types,
-  pub secret_key: String,
-  pub reqwest_client: &'a reqwest::Client
+  pub(crate) r#type: Types,
+  pub(crate) secret_key: String,
+  pub(crate) reqwest_client: &'a reqwest::Client
 }
 
 impl Info<'_> {

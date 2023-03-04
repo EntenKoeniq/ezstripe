@@ -2,11 +2,10 @@ use serde::{ Serialize, Deserialize };
 
 include!("split/structs/mandate/response.rs");
 
-#[doc(hidden)]
 pub struct Info<'a> {
-  pub secret_key: String,
-  pub reqwest_client: &'a reqwest::Client,
-  pub id: String
+  pub(crate) secret_key: String,
+  pub(crate) reqwest_client: &'a reqwest::Client,
+  pub(crate) id: String
 }
 
 impl Info<'_> {

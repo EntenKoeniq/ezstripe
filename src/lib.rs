@@ -1,5 +1,4 @@
-#[doc(hidden)]
-pub mod helper;
+pub(crate) mod helper;
 #[cfg(feature = "balance")]
 pub mod balance;
 #[cfg(feature = "balance_transaction")]

@@ -30,8 +30,8 @@ refund = []
 
 [dependencies]
 serde = { version = "1.0.152", features = ["derive"] }
-serde_json = "1.0.91"
-reqwest = "0.11.13"
+serde_json = "1.0.93"
+reqwest = "0.11.14"
 log = "0.4.17"
 
 [dev-dependencies]
